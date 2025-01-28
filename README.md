@@ -1,2 +1,2 @@
 # carrybee-dev
-devlopment phrase
+devlopment phase
