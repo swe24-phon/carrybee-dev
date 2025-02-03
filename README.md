@@ -11,6 +11,30 @@ This project lasts for 4 weeks, which includes planning, diagram drawing, Figma 
 # Structure 🏔
 
 ### Usage 🛠
+## Set up the enviroment:
+
+$ docker-compose up --build
+
+Check that containers are running
+
+$  docker ps -a 
+
+Open new terminal to run Prisma migrations ( Database name: carry_bee)
+
+$ docker exec -it backend npx prisma migrate dev --name init
+
+Connect to PostgreSQL inside the db container
+
+$ docker exec -it db psql -U carry_bee
+
+To check if the backend is running:
+
+docker logs backend
+
+Check if it's listening on port 3000:
+
+curl http://localhost:3000
+
 
 ### Test 🌊
 
