@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +20,9 @@
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
     "postgis": "^1.0.5",
-    "prisma": "^6.3.0",
     "stripe": "^17.6.0"
+  },
+  "devDependencies": {
+    "prisma": "^6.3.0"
   }
 }
