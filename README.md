@@ -37,6 +37,16 @@ $ npm install
 
 $ node index.js
 
+(if above commands do not work try:)
+
+$ cd app
+
+$ npm install
+
+$ npm run dev
+
+check Local: http://localhost:5173
+
 check http://localhost:3000
 or curl http://localhost:3000
 
