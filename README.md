@@ -34,6 +34,7 @@ carry_bee-# \dt
 Open a new terminal:
 
 $ npm install 
+
 $ node index.js
 
 check http://localhost:3000
