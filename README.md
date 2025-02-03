@@ -23,18 +23,21 @@ Open new terminal to run Prisma migrations ( Database name: carry_bee)
 
 $ docker exec -it backend npx prisma migrate dev --name init
 
-Connect to PostgreSQL inside the db container
+Connect to PostgreSQL inside the db container:
 
 $ docker exec -it db psql -U carry_bee
 
-To check if the backend is running:
+To check that the database is showing the information:
 
-docker logs backend
+carry_bee-# \dt 
 
-Check if it's listening on port 3000:
+Open a new terminal:
 
-curl http://localhost:3000
+$ npm install 
+$ node index.js
 
+check http://localhost:3000
+or curl http://localhost:3000
 
 ### Test 🌊
 
