@@ -50,6 +50,15 @@ check Local: http://localhost:5173
 check http://localhost:3000
 or curl http://localhost:3000
 
+
+To format the prisma schema (from the backend folder)
+
+npx prisma format
+npx prisma generate
+npx prisma db push
+npx prisma migrate dev --name init (Replace "init" with a meaningful name related to the changes)
+npx prisma studio
+
 ### Test 🌊
 
 --------------------------------
