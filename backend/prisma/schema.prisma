@@ -65,6 +65,7 @@ model Order {
   pickup_longitude  Float
   dropoff_latitude  Float
   dropoff_longitude Float
+  pickup_date       DateTime?
   total             Float
   status            OrderStatus?
   img_url           String?
