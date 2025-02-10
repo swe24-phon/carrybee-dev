@@ -13,6 +13,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.4.2",
+    "@react-google-maps/api": "^2.20.5",
     "axios": "^1.7.9",
     "dotenv": "^16.4.7",
     "geo-coder": "^1.0.2",
@@ -34,6 +35,6 @@
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
     "nodemon": "3.1.9",
-    "vite": "^6.0.5"
+    "vite": "^6.0.11"
   }
 }
