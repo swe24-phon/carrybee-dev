@@ -33,21 +33,20 @@
 // }
 
 // export default App
-// AIzaSyB613qjkRHO_l58B_9cF_ja3Tp7DKBT_y4 >>>> key
+// -----------
 import React from 'react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+// use Routes in React Router v6, which is the new way to define route
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import HomePage from './HomePage';
 
-const MapComponent = () => {
+const App: React.FC = () => {
   return (
-    <LoadScript googleMapsApiKey="AIzaSyB613qjkRHO_l58B_9cF_ja3Tp7DKBT_y4">
-      <GoogleMap
-        mapContainerStyle={{ width: '400px', height: '400px' }}
-        zoom={13}
-        center={{ lat: -37.8136, lng: 144.9631 }}>
-        <Marker position={{ lat: -37.8136, lng: 144.9631 }} />
-      </GoogleMap>
-    </LoadScript>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+      </Routes>
+    </Router>
   );
 };
 
-export default MapComponent;
+export default App;
