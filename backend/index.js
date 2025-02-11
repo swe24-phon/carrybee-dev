@@ -1,23 +1,27 @@
 const express = require('express');
-const { PrismaClient } = require ('@prisma/client');
-const bcrypt = require('bcrypt');
+const prisma = require('./prismaClient');
+const cors = require('cors');
 const userRoutes = require ('./src/routes/userRoutes.js')
 const parcelRoutes = require('./src/routes/parcelRoutes.js');
-const cors = require('cors');
 
-
-const prisma = new PrismaClient();
 // initialise the app 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
-//middleware
-app.use(express.json());
+app.use(cors()); // Middleware to allow cross-origin requests
+app.use(express.json()); //middleware to parse Json requests
 
 
-app.get('/', (req, res) => {
-    res.send('Hello Carry Bee!');
+app.get('/', async (req, res) => {
+    try {
+        // Test if Prisma can fetch something from the database, for example, the User model
+        const users = await prisma.user.findMany();
+        console.log('Connected to the database and fetched users:', users);
+        res.send('Hello Carry Bee!');
+    } catch (error) {
+        console.error('Error with Prisma:', error);
+        res.status(500).send('Error with database connection');
+    }
 });
 
 // Routes
