@@ -25,7 +25,6 @@ app.get('/', (req, res) => {
 });
 
 // Routes
-
 app.use('/api', userRoutes);
 
 //Server running
