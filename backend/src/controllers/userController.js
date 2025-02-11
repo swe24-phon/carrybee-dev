@@ -36,15 +36,15 @@ const updateUser = async (req, res) => {
     const updatedUser = await userService.updateUser(req.params.id, req.body);
     res.status(200).json(updatedUser);
   } catch (error) {
-    res.status(400).json({ error: error.messgae });
+    res.status(400).json({ error: error.message });
   }
 };
 
 //Delete user
 const deleteUser = async (req, res) => {
   try {
-    const deletedUser = await userService.deleteUser(req.params.id);
-    res.status(200).json(deletedUser);
+    const deletedMessage = await userService.deleteUser(req.params.id);
+    res.status(200).json(deletedMessage);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

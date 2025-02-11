@@ -2,6 +2,8 @@ const express = require('express');
 const { PrismaClient } = require ('@prisma/client');
 const bcrypt = require('bcrypt');
 const userRoutes = require ('./src/routes/userRoutes.js')
+const parcelRoutes = require('./src/routes/parcelRoutes.js');
+const cors = require('cors');
 
 
 const prisma = new PrismaClient();
@@ -9,16 +11,10 @@ const prisma = new PrismaClient();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(cors());
 //middleware
 app.use(express.json());
 
-// avoid any cors problem
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    next();
-});
 
 app.get('/', (req, res) => {
     res.send('Hello Carry Bee!');
@@ -26,6 +22,7 @@ app.get('/', (req, res) => {
 
 // Routes
 app.use('/api', userRoutes);
+app.use('/api', parcelRoutes); 
 
 //Server running
 
