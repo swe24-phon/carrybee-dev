@@ -45,7 +45,7 @@ const App: React.FC = () => {
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/SignIn" element={<LoginPage />} />
       </Routes>
     </Router>
   );
