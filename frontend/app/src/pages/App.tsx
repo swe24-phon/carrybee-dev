@@ -38,12 +38,14 @@ import React from 'react';
 // use Routes in React Router v6, which is the new way to define route
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './HomePage';
+import { LoginPage } from './SignIn';
 
 const App: React.FC = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </Router>
   );
