@@ -1,0 +1,76 @@
+body {
+  background-color: #FFFDF1;
+  display: flex;
+  align-items: center;
+}
+
+.nav-container {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  gap: 7rem;
+}
+
+#hamburger-icon {
+  width: 40px;
+}
+
+#logo {
+  width: 85px;
+}
+
+.banner-box {
+  margin-bottom: 2rem;
+}
+#banner {
+  width: 380px;
+  margin-top: 5rem;
+  border-radius: 10px;
+  margin-left: 15px;
+}
+
+#map {
+  border-radius: 10px;
+  margin-left: 5px;
+}
+
+.destination-container {
+  margin: 2rem;
+  padding: 1rem 2rem;
+  box-shadow: 1px 1px 5px 2px #d5d5d5;
+  margin: 1rem 2rem;
+  border-radius: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+#first-box {
+  display: flex;
+  justify-content: space-between;
+}
+
+#second-box {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 800;
+}
+
+input {
+  font-size: 16px;
+  margin: 15px 0;
+  background: transparent;
+  border: none;
+  border-bottom: #FECF30 1px solid;
+}
+
+#next-btn {
+  background-color: #FECF30;
+}
