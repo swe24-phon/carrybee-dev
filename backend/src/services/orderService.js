@@ -1,3 +1,70 @@
-const prisma = require('../prismaClient');
+const prisma = require('../../prismaClient');
 
-// Create Order
+// Base price
+const vehicle_price = {
+    MOTORBIKE: 8.18,  // Rate taken from Lalamove-Hong Kong 
+    CAR: 10.22,
+    VAN: 14.30,
+    TRUCK: 22.48,
+};
+
+// Rate per KM 
+const distanceRate = {
+  MOTORBIKE: 0.5, 
+  CAR: 0.8,
+  VAN: 1.2,
+  TRUCK: 2,
+};
+// Weight surcharge
+const weightRate = {
+  MOTORBIKE: 0.2,
+  CAR: 0.3,
+  VAN: 0.4,
+  TRUCK: 0.6,
+}
+
+//Category surcharge
+const categoryRate = {
+  SMALL: 2,
+  MEDIUM: 4,
+  LARGE: 6,
+  EXTRA_LARGE: 8,
+};
+
+// Haversine Formula to Calculate Distance (in km)
+function calculateDistance(pickup_lat, pickup_lon, dropoff_lat, dropoff_lon) {
+  const toRad = (value) => (value * Math.PI) / 180; // Convert degrees to radian
+  const R = 6371; // Earth's radius in km
+
+  const dLat = toRad(dropoff_lat - pickup_lat);
+  const dLon = toRad(dropoff_lon - pickup_lon);
+  
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(pickup_lat)) * Math.cos(toRad(dropoff_lat)) * Math.sin(dLon / 2) ** 2;
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;  // Distance in km
+}
+
+// Helper function to calculate price
+const calculatePrice = (vehicleType, distance, weight, category) => {
+  const basePrice = vehicle_price[vehicleType];
+  const perKmRate = distanceRate[vehicleType];
+  const perKgRate = weightRate[vehicleType];
+  const categoryFee = categoryRate[category];
+
+  if (!basePrice || !perKmRate || !perKgRate || !categoryFee) {
+    throw new Error('Invalid vehicle type or parcel category')
+  };
+  const distanceFee = distance * perKmRate;
+  const weightFee = weight * perKgRate;
+
+  const totalPrice = basePrice + distanceFee + weightFee + categoryFee;
+  return totalPrice.toFixed(2);
+
+};
+
+const createOrder = async (orderData) {
+  
+}

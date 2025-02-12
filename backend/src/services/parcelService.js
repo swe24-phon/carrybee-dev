@@ -1,4 +1,4 @@
-const prisma = require('../prismaClient');
+const prisma = require('../../prismaClient');
 
 
 // Create Parcel
@@ -7,16 +7,16 @@ const createParcel = async (parcelData) => {
     const { item_name, category, quantity, weight, width, length, height, description, user_id } = parcelData;
 
     const categoryDimensions = {
-      SMALL: { length: 50, width: 40, height: 50, maxWeight: 20 },
-      MEDIUM: { length: 210, width: 120, height: 110, maxWeight: 600 },
-      LARGE: { length: 210, width: 120, height: 120, maxWeight: 1000 }
+      SMALL: { length: 50, width: 40, height: 50, maxWeight: 20 }, // NSC110 Dio
+      MEDIUM: { length: 210, width: 120, height: 110, maxWeight: 600 }, // Renault Kangoo
+      LARGE: { length: 310, width: 180, height: 180, maxWeight: 1000 }, // Kia K2700
+      EXTRA_LARGE: {length:600 , width:195 , height: 195, maxWeight: 4000 } // Isuzu npr
     };
-    // If category is not 'OTHER', assign default dimensions and max weight based on category
-    if (category !== 'OTHER') {
-      const defaultDim  = categoryDimensions[category]
-      if (!defaultDim) {
-        throw new Error('Invalid category selected')
-      }
+    // Assign default dimensions and max weight based on category
+    const defaultDim  = categoryDimensions[category]
+    if (!defaultDim) {
+      throw new Error('Invalid category selected')
+    }
     // Check if the provided weight exceeds the maximum weight for this category
     if (weight > defaultDim.maxWeight) {
       throw new Error(`Weight exceeds the maximum limit for the ${category} category. Max weight: ${defaultDim.maxWeight} kg`);
@@ -25,13 +25,6 @@ const createParcel = async (parcelData) => {
     parcelData.width = defaultDim.width;
     parcelData.length = defaultDim.length;
     parcelData.height = defaultDim.height;
-
-    // If category is 'OTHER', ensure dimensions are provided
-   } else {
-      if (!width || !length || !height || !weight) {
-        throw new Error('For category "OTHER", width, length, height and weigth are required.');
-      }
-    }
     // Create the parcel
     const newParcel = await prisma.parcel.create({
       data: {
