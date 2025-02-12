@@ -40,6 +40,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './HomePage';
 import '../css/index.css';
 import { LoginPage } from './SignIn';
+import Schedule from './Schedule';
 
 
 const App: React.FC = () => {
@@ -48,6 +49,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/SignIn" element={<LoginPage />} />
+        <Route path="/Schedule" element={<Schedule />} />
       </Routes>
     </Router>
   );
