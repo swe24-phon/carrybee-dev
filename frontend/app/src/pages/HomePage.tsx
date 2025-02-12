@@ -1,13 +1,16 @@
 import React from 'react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import MapComponent from '../components/mapComponent';
+import NavbarComponent from '../components/NavbarComponent';
 
-const MapComponent = () => {
+const HomePage = () => {
   return (
-    <>
-    <h1>Hello! CarryBee</h1>
-    <h2>map is in progress</h2>
-    </>
+    <div>
+      <NavbarComponent />
+      <h1>test</h1>
+      <h1 className="text-4xl font-bold text-center text-blue-600 mt-10">Hello, here's your map!</h1>
+      <MapComponent />
+    </div>
   );
 };
 
-export default MapComponent;
+export default HomePage;

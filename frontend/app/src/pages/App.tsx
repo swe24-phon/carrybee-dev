@@ -38,6 +38,7 @@ import React from 'react';
 // use Routes in React Router v6, which is the new way to define route
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './HomePage';
+import '../css/index.css';
 
 const App: React.FC = () => {
   return (
