@@ -17,7 +17,7 @@ enum ParcelCategory {
   SMALL
   MEDIUM
   LARGE
-  OTHER
+  EXTRA_LARGE
 }
 
 enum OrderStatus {
@@ -61,10 +61,10 @@ model Order {
   receiver_name     String
   pickup_address    String
   dropoff_address   String
-  pickup_latitude   Float
-  pickup_longitude  Float
-  dropoff_latitude  Float
-  dropoff_longitude Float
+  pickup_lat        Float
+  pickup_lon        Float
+  dropoff_lat       Float
+  dropoff_lon       Float
   pickup_date       DateTime?
   distance          Float?
   total             Float
