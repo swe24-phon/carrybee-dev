@@ -4,7 +4,7 @@ import '../css/homepage.css';
 
 const MapComponent: React.FC = () => {
   return (
-    <LoadScript googleMapsApiKey="PUBLIC_KEY">
+    <LoadScript googleMapsApiKey="add_public_key_here">
       <GoogleMap id='map'
         mapContainerStyle={{ width: '400px', height: '400px' }}
         zoom={13}

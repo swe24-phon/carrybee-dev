@@ -23,14 +23,6 @@ const weightRate = {
   TRUCK: 0.6,
 }
 
-//Category surcharge
-const categoryRate = {
-  SMALL: 2,
-  MEDIUM: 4,
-  LARGE: 6,
-  EXTRA_LARGE: 8,
-};
-
 // Haversine Formula to Calculate Distance (in km)
 function calculateDistance(pickup_lat, pickup_lon, dropoff_lat, dropoff_lon) {
   const toRad = (value) => (value * Math.PI) / 180; // Convert degrees to radian
@@ -52,15 +44,14 @@ const calculatePrice = (vehicleType, distance, weight, category) => {
   const basePrice = vehicle_price[vehicleType];
   const perKmRate = distanceRate[vehicleType];
   const perKgRate = weightRate[vehicleType];
-  const categoryFee = categoryRate[category];
 
-  if (!basePrice || !perKmRate || !perKgRate || !categoryFee) {
+  if (!basePrice || !perKmRate || !perKgRate) {
     throw new Error('Invalid vehicle type or parcel category')
   };
   const distanceFee = distance * perKmRate;
   const weightFee = weight * perKgRate;
 
-  const totalPrice = basePrice + distanceFee + weightFee + categoryFee;
+  const totalPrice = basePrice + distanceFee + weightFee;
   return totalPrice.toFixed(2);
 
 };
