@@ -3,46 +3,8 @@ const bcrypt = require('bcrypt');
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
 
-//add by phon *************
 const registerUser = async (req, res) => {
-  try {
-    const { email, password, first_name, last_name, phone, address } = req.body;
-
-    // Validate email format
-    if (!validator.isEmail(email)) {
-      return res.status(400).json({ error: 'Invalid email address' });
-    }
-
-    // Check if email already exists
-    const existingUser = await prisma.user.findUnique({ where: { email } });
-    if (existingUser) {
-      return res.status(400).json({ error: 'Email already registered' });
-    }
-
-    // Check if phone number already exists
-    const existingPhone = await prisma.user.findUnique({ where: { phone } });
-    if (existingPhone) {
-      return res.status(400).json({ error: 'Phone number already registered' });
-    }
-
-    // Encrypt the password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const newUser = await prisma.user.create({
-      data: {
-        first_name,
-        last_name,
-        phone,
-        email,
-        password: hashedPassword,
-        address,
-      },
-    });
-
-    return res.status(201).json({ message: 'User created successfully', user: newUser });
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
+  return createUser(req, res); // No need to duplicate logic
 };
 
 //cause error by phon
@@ -130,19 +92,6 @@ const createUser = async (userData) => {
     }
 };
 
-// Get user by email
-// const getUserByEmail = async (email) => {
-//   try {
-//     const user = await prisma.user.findUnique({ where: { email } });
-//     if (!user) {
-//       throw new Error('User not found');
-//     }
-//     return user;
-//     } catch (error) {
-//       throw new Error(error.message);
-//     }
-// };
-
 //add by  phon
 // Get user by email
 const getUserByEmail = async (email) => {
@@ -168,16 +117,6 @@ const getUserByEmail = async (email) => {
   }
 };
 
-//add by phon end here
-
-// Get All Users
-// const getAllUsers = async () => {
-//   try {
-//     return await prisma.user.findMany();
-//   } catch (error) {
-//     throw new Error('Failed to get all users');
-//   }
-// };
 //add by phon
 // Get All Users
 const getAllUsers = async () => {
