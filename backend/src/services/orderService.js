@@ -1,4 +1,5 @@
 const prisma = require('../../prismaClient');
+const { createParcel } = require('./parcelService');
 
 // Base price
 const vehicle_price = {
@@ -15,6 +16,7 @@ const distanceRate = {
   VAN: 1.2,
   TRUCK: 2,
 };
+
 // Weight surcharge
 const weightRate = {
   MOTORBIKE: 0.2,
@@ -22,14 +24,6 @@ const weightRate = {
   VAN: 0.4,
   TRUCK: 0.6,
 }
-
-//Category surcharge
-const categoryRate = {
-  SMALL: 2,
-  MEDIUM: 4,
-  LARGE: 6,
-  EXTRA_LARGE: 8,
-};
 
 // Haversine Formula to Calculate Distance (in km)
 function calculateDistance(pickup_lat, pickup_lon, dropoff_lat, dropoff_lon) {
@@ -45,26 +39,68 @@ function calculateDistance(pickup_lat, pickup_lon, dropoff_lat, dropoff_lon) {
 
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c;  // Distance in km
-}
+};
 
 // Helper function to calculate price
-const calculatePrice = (vehicleType, distance, weight, category) => {
+const calculatePrice = (vehicleType, distance, weight) => {
   const basePrice = vehicle_price[vehicleType];
   const perKmRate = distanceRate[vehicleType];
   const perKgRate = weightRate[vehicleType];
-  const categoryFee = categoryRate[category];
 
-  if (!basePrice || !perKmRate || !perKgRate || !categoryFee) {
+  if (!basePrice || !perKmRate || !perKgRate) {
     throw new Error('Invalid vehicle type or parcel category')
   };
   const distanceFee = distance * perKmRate;
   const weightFee = weight * perKgRate;
 
-  const totalPrice = basePrice + distanceFee + weightFee + categoryFee;
+  const totalPrice = basePrice + distanceFee + weightFee;
   return totalPrice.toFixed(2);
 
 };
 
-const createOrder = async (orderData) {
-  
-}
+const createOrder = async (orderData) => {
+  try {
+    const {
+      user_id,
+      receiver_name,
+      pickup_address,
+      dropoff_address,
+      pickup_lat,
+      pickup_lon,
+      dropoff_lat,
+      dropoff_lon,
+      pickup_date,
+      vehicleType,
+      parcelData,
+    } = orderData
+    const distance = calculateDistance(pickup_lat, pickup_lon, dropoff_lat, dropoff_lon);
+    const totalPrice = calculatePrice(vehicleType, distance, parcelData.weight, parcelData.category);
+
+    const { parcel } = await createParcel({ ...parcelData, user_id });
+
+    const newOrder = await prisma.order.create({
+      data: {
+          receiver_name,
+          pickup_address,
+          dropoff_address,
+          pickup_lat,
+          pickup_lon,
+          dropoff_lat,
+          dropoff_lon,
+          pickup_date,
+          distance,
+          total: parseFloat(totalPrice),
+          status: 'IN_TRANSIT', // Default status
+          user_id,
+          parcel_id: parcel.id, // Linking parcel to order
+      },
+    });
+    return { message: 'Oder created successfully', order: newOrder };
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+module.exports = {
+ createOrder,
+};

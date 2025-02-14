@@ -21,10 +21,11 @@ const createParcel = async (parcelData) => {
     if (weight > defaultDim.maxWeight) {
       throw new Error(`Weight exceeds the maximum limit for the ${category} category. Max weight: ${defaultDim.maxWeight} kg`);
     }
-    // Assign default dimensions if the category is SMALL, MEDIUM, or LARGE
+    // Assign default dimensions depending on the category
     parcelData.width = defaultDim.width;
     parcelData.length = defaultDim.length;
     parcelData.height = defaultDim.height;
+
     // Create the parcel
     const newParcel = await prisma.parcel.create({
       data: {
