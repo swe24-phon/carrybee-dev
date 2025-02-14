@@ -1,10 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../css/homepage.css';
-import '../css/tailwind.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
 
 const DestinationBox: React.FC = () => {
+  const navigate = useNavigate(); // usage of useNavigate
   return (
     <>
       <div className='destination-container'>
@@ -18,7 +19,7 @@ const DestinationBox: React.FC = () => {
               <input type="text" name="pickup" id="pickup" placeholder='Pick-up' />
               <input type="text" name="dropoff" id="dropoff" placeholder='Drop-off' />
             </div>
-            <button id='next-btn'>
+            <button id='next-btn' onClick={() => navigate('/Schedule')}>
               <FontAwesomeIcon icon={faArrowRightLong} id='next-icon'/>
             </button>
           </div>

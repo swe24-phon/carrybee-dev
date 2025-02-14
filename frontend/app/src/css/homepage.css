@@ -1,3 +1,12 @@
+/* src/tailwind.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  overflow-y: hidden;
+}
+
 body {
   background-color: #FFFDF1;
   display: flex;
@@ -29,15 +38,17 @@ body {
   --R: calc(var(--size)*sqrt(var(--m)*var(--m) + 1));
 }
 
-#hamburger-icon {
-  width: 40px;
+#signout-icon {
+  width: 38px;
   position: fixed;
   left: 0;
-  margin-left: 2rem;
+  margin-left: 1.5rem;
 }
 
 #logo {
   width: 70px;
+  position: relative;
+  top: -5px;
 }
 
 #avatar {
@@ -65,6 +76,7 @@ body {
 }
 
 .destination-container {
+  top: 33%;
   padding: 0.5rem 1.5rem;
   box-shadow: 1px 1px 5px 2px #00000029;
   margin: 1rem 2rem;
@@ -153,4 +165,8 @@ div#map {
   font-size: 2rem;
   color: #FECF30;
   text-shadow: 1px 3px 0px grey;
+}
+
+.nav-icon:hover {
+  color: #be9a24;
 }

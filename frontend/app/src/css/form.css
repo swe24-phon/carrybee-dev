@@ -1,0 +1,11 @@
+html {
+  overflow-y: hidden;
+}
+
+body {
+  background-color: #FFFDF1;
+  display: flex;
+  align-items: center;
+  overflow-x: hidden;
+  align-items: flex-start;
+}
