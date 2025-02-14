@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+// import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -113,7 +113,7 @@ const Calendar = () => {
             {createCalendarDays().map((week, weekIndex) => (
               <tr key={weekIndex}>
                 {week.map((date, dateIndex) => (
-                  <td 
+                  <td
                     key={dateIndex}
                     onClick={() => date.isCurrentMonth && setSelectedDate(date.day)}
                     className="text-center p-2"
@@ -166,13 +166,13 @@ const Calendar = () => {
 
             {/* AM/PM toggle */}
             <div className="flex gap-2">
-              <button 
+              <button
                 className={`px-4 py-1 rounded ${timeMode === 'AM' ? 'bg-black text-white' : ''}`}
                 onClick={() => setTimeMode('AM')}
             >
               AM
             </button>
-            <button 
+            <button
               className={`px-4 py-1 rounded ${timeMode === 'PM' ? 'bg-black text-white' : ''}`}
               onClick={() => setTimeMode('PM')}
             >

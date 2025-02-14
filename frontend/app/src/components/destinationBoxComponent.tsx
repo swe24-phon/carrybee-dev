@@ -1,19 +1,26 @@
 import React from 'react';
 import '../css/homepage.css';
+import '../css/tailwind.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLocationDot, faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
 
-const destinationBox: React.FC = () => {
+const DestinationBox: React.FC = () => {
   return (
     <>
       <div className='destination-container'>
         <form action="">
           <div id='first-box'>
-            <div id='second-box'>
-              <label htmlFor="">Pick-up:</label>
-              <input type="text" name="pickup" id="pickup" />
-              <label htmlFor="">Drop-off:</label>
-              <input type="text" name="pickup" id="dropoff" />
+            <div id='location-icons'>
+              <FontAwesomeIcon icon={faLocationDot} id='location-icon'/>
+              <FontAwesomeIcon icon={faLocationDot} id='location-icon'/>
             </div>
-            <button id='next-btn'>Next</button>
+            <div id='second-box'>
+              <input type="text" name="pickup" id="pickup" placeholder='Pick-up' />
+              <input type="text" name="dropoff" id="dropoff" placeholder='Drop-off' />
+            </div>
+            <button id='next-btn'>
+              <FontAwesomeIcon icon={faArrowRightLong} id='next-icon'/>
+            </button>
           </div>
         </form>
       </div>
@@ -21,4 +28,4 @@ const destinationBox: React.FC = () => {
   );
 };
 
-export default destinationBox;
+export default DestinationBox;

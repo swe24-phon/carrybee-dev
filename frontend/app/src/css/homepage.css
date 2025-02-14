@@ -2,33 +2,61 @@ body {
   background-color: #FFFDF1;
   display: flex;
   align-items: center;
+  overflow-x: hidden;
+  align-items: flex-start;
 }
 
 .nav-container {
+  width: 100%;
+  background-color: #FECF30;
   padding: 10px;
   display: flex;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  gap: 7rem;
+  justify-content: center;
+  align-items: flex-start;
+  /* position: absolute; */
+  /* top: 0; */
+  mask: radial-gradient(var(--R) at 50% calc(100% - (var(--size) + var(--p))), #000 99%, #0000 101%)
+      calc(50% - 3 * var(--size)) 0/calc(1.5 * var(--size)) 100%,
+    radial-gradient(var(--R) at 50% calc(100% + var(--p)), #0000 99%, #000 101%)
+      50% calc(100% - var(--size)) / calc(4 * var(--size)) 100% repeat-x;
+  /* height: 200px; */
+}
+
+.wave {
+  --size: 60px;
+  --m: 0.3;
+  --p: calc(var(--m)*var(--size));
+  --R: calc(var(--size)*sqrt(var(--m)*var(--m) + 1));
 }
 
 #hamburger-icon {
   width: 40px;
+  position: fixed;
+  left: 0;
+  margin-left: 2rem;
 }
 
 #logo {
-  width: 85px;
+  width: 70px;
+}
+
+#avatar {
+  position: absolute;
+  right: 0;
+  width: 40px;
+  border-radius: 50%;
+  margin-right: 1rem;
 }
 
 .banner-box {
   margin-bottom: 2rem;
 }
+
 #banner {
   width: 380px;
-  margin-top: 5rem;
   border-radius: 10px;
-  margin-left: 15px;
+  margin: 1.5rem 1rem;
+  position: relative;
 }
 
 #map {
@@ -37,11 +65,14 @@ body {
 }
 
 .destination-container {
-  margin: 2rem;
-  padding: 1rem 2rem;
-  box-shadow: 1px 1px 5px 2px #d5d5d5;
+  padding: 0.5rem 1.5rem;
+  box-shadow: 1px 1px 5px 2px #00000029;
   margin: 1rem 2rem;
   border-radius: 10px;
+  background-color: #ffffff;
+  z-index: 3;
+  position: fixed;
+  opacity: 0.95;
 }
 
 form {
@@ -51,16 +82,23 @@ form {
 
 #first-box {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
 }
 
 #second-box {
   display: flex;
   flex-direction: column;
 }
+#location-icons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 2rem;
+  margin-right: 10px;
+}
 
-label {
-  font-weight: 800;
+#location-icon {
+  color: #FECF30;
 }
 
 input {
@@ -73,4 +111,46 @@ input {
 
 #next-btn {
   background-color: #FECF30;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  margin-left: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 1px 1px 3px 0px grey;
+}
+
+#next-icon {
+  font-size: 1.4rem;
+  color: white;
+}
+
+div#map {
+  width: 400px;
+  height: 600px;
+  position: relative;
+  overflow: hidden;
+  top: -25%;
+  z-index: 1;
+}
+
+#bottom-nav {
+  display: grid;
+  position: absolute;
+  bottom: 3px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  padding: 2rem;
+  margin: 0 2px;
+  gap: 4rem;
+  background-color: #ffffff;
+  width: -webkit-fill-available;
+  border-radius: 25px;
+  box-shadow: 2px 2px 10px 0px #a8a8a8;
+}
+
+.nav-icon {
+  font-size: 2rem;
+  color: #FECF30;
+  text-shadow: 1px 3px 0px grey;
 }
