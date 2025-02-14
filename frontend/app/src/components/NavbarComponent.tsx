@@ -10,9 +10,9 @@ const NavbarComponent: React.FC = () => {
   return (
     <>
       <div className='nav-container wave'>
-        <img id="logo" src={signout} alt="signout-icon" id='signout-icon' />
+        <img id="signout-icon" src={signout} alt="signout-icon" />
         <img id="logo" src={logo} alt="logo" />
-        <img id='avatar' src={avatar} alt='avatar' />
+        <img id="avatar" src={avatar} alt="avatar" />
       </div>
     </>
   );

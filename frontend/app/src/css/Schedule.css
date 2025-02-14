@@ -1,0 +1,252 @@
+/* src/tailwind.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Body and HTML Styles */
+html {
+  overflow-y: hidden;
+}
+
+body {
+  background-color: #FFFDF1;
+  display: flex;
+  align-items: flex-start;
+  overflow-x: hidden;
+}
+
+/* Schedule Component Enhanced Styles */
+.schedule-container {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* Custom scrollbar for overflow content */
+.schedule-container {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+.schedule-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.schedule-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.schedule-container::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+/* Smooth transition for interactive elements */
+.schedule-button {
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.schedule-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Ripple effect for buttons */
+.schedule-button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.schedule-button:active::after {
+  width: 100px;
+  height: 100px;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Subtle animation for date selection */
+@keyframes dateSelectionPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.date-selection-active {
+  animation: dateSelectionPulse 0.5s ease-in-out;
+}
+
+/* Navigation Styles */
+.nav-container {
+  width: 100%;
+  background-color: #FECF30;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: absolute;
+  top: 0;
+  mask: 
+    radial-gradient(var(--R) at 50% calc(100% - (var(--size) + var(--p))), #000 99%, #0000 101%)
+    calc(50% - 3 * var(--size)) 0/calc(1.5 * var(--size)) 100%,
+    radial-gradient(var(--R) at 50% calc(100% + var(--p)), #0000 99%, #000 101%)
+    50% calc(100% - var(--size)) / calc(4 * var(--size)) 100% repeat-x;
+}
+
+.wave {
+  --size: 60px;
+  --m: 0.3;
+  --p: calc(var(--m)*var(--size));
+  --R: calc(var(--size)*sqrt(var(--m)*var(--m) + 1));
+}
+
+/* Icons and Logo */
+#signout-icon {
+  width: 38px;
+  position: fixed;
+  left: 0;
+  margin-left: 1.5rem;
+}
+
+#logo {
+  width: 70px;
+  position: relative;
+  top: -5px;
+}
+
+#avatar {
+  position: absolute;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.menu-icon {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Calendar and Schedule Specific Styles */
+.calendar-container {
+  margin-top: 50px;
+  padding: 1rem;
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Bottom Navigation */
+#bottom-nav {
+  display: grid;
+  position: absolute;
+  bottom: 3px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  padding: 2rem;
+  margin: 0 2px;
+  gap: 4rem;
+  background-color: #ffffff;
+  width: -webkit-fill-available;
+  border-radius: 25px;
+  box-shadow: 2px 2px 10px 0px #a8a8a8;
+}
+
+.nav-icon {
+  font-size: 2rem;
+  color: #FECF30;
+  text-align: center;
+}
+
+.nav-icon:hover {
+  color: #be9a24;
+}
+
+/* Heading and Section Styles */
+.section-heading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.date-section {
+  margin-bottom: 2rem;
+}
+
+.time-section {
+  margin-top: 2rem;
+}
+
+.pickup-label {
+  margin-bottom: 0.5rem;
+  color: #4B5563;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 375px) {
+  .schedule-container {
+    padding: 10px;
+  }
+
+  .schedule-button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  #bottom-nav {
+    gap: 2rem;
+    padding: 1.5rem;
+  }
+}
+
+/* Time Picker Enhancements */
+.time-picker-select {
+  appearance: none;
+  background-color: #f4f4f4;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 0.5rem;
+  margin: 0 0.25rem;
+  transition: all 0.3s ease;
+}
+
+.time-picker-select:focus {
+  outline: none;
+  border-color: #FECF30;
+  box-shadow: 0 0 0 3px rgba(254, 207, 48, 0.2);
+}
+
+/* Additional subtle animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-section {
+  animation: fadeIn 0.5s ease-out;
+}
