@@ -4,46 +4,46 @@ const validator = require('validator');
 const jwt = require('jsonwebtoken');
 
 //add by phon *************
-const registerUser = async (req, res) => {
-  try {
-    const { email, password, first_name, last_name, phone, address } = req.body;
+// const registerUser = async (req, res) => {
+//   try {
+//     const { email, password, first_name, last_name, phone, address } = req.body;
 
-    // Validate email format
-    if (!validator.isEmail(email)) {
-      return res.status(400).json({ error: 'Invalid email address' });
-    }
+//     // Validate email format
+//     if (!validator.isEmail(email)) {
+//       return res.status(400).json({ error: 'Invalid email address' });
+//     }
 
-    // Check if email already exists
-    const existingUser = await prisma.user.findUnique({ where: { email } });
-    if (existingUser) {
-      return res.status(400).json({ error: 'Email already registered' });
-    }
+//     // Check if email already exists
+//     const existingUser = await prisma.user.findUnique({ where: { email } });
+//     if (existingUser) {
+//       return res.status(400).json({ error: 'Email already registered' });
+//     }
 
-    // Check if phone number already exists
-    const existingPhone = await prisma.user.findUnique({ where: { phone } });
-    if (existingPhone) {
-      return res.status(400).json({ error: 'Phone number already registered' });
-    }
+//     // Check if phone number already exists
+//     const existingPhone = await prisma.user.findUnique({ where: { phone } });
+//     if (existingPhone) {
+//       return res.status(400).json({ error: 'Phone number already registered' });
+//     }
 
-    // Encrypt the password
-    const hashedPassword = await bcrypt.hash(password, 10);
+//     // Encrypt the password
+//     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = await prisma.user.create({
-      data: {
-        first_name,
-        last_name,
-        phone,
-        email,
-        password: hashedPassword,
-        address,
-      },
-    });
+//     const newUser = await prisma.user.create({
+//       data: {
+//         first_name,
+//         last_name,
+//         phone,
+//         email,
+//         password: hashedPassword,
+//         address,
+//       },
+//     });
 
-    return res.status(201).json({ message: 'User created successfully', user: newUser });
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
-};
+//     return res.status(201).json({ message: 'User created successfully', user: newUser });
+//   } catch (error) {
+//     return res.status(500).json({ error: error.message });
+//   }
+// };
 
 //cause error by phon
 // const loginUser = async (req, res) => {
