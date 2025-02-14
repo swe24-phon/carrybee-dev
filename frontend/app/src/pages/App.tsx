@@ -50,7 +50,6 @@ const App: React.FC = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/SignIn" element={<LoginPage />} />
         <Route path="/Schedule" element={<Schedule />} />
-        <Route path="/Schedule" element={<Form />} />
       </Routes>
     </Router>
   );
