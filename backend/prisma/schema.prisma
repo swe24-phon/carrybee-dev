@@ -78,7 +78,7 @@ model Order {
   driver            Driver?       @relation(fields: [driver_id], references: [id])
   payment           Payment?
   review_id         String?       @unique
-  review            Review?       @relation(fields: [review_id], references: [id])
+  review            Review?       @relation()
   driverOrders      DriverOrder[]
   created_at        DateTime      @default(now())
   updated_at        DateTime      @updatedAt
@@ -142,7 +142,8 @@ model Review {
   user       User     @relation(fields: [user_id], references: [id])
   driver_id  String
   driver     Driver   @relation(fields: [driver_id], references: [id])
-  order      Order?
+  order      Order?   @relation(fields: [order_id], references: [id])
+  order_id   String?  @unique
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 }
