@@ -1,7 +1,97 @@
 const prisma = require('../../prismaClient');
 const bcrypt = require('bcrypt');
-const validator = require('validator')
+const validator = require('validator');
+const jwt = require('jsonwebtoken');
 
+//add by phon *************
+// const registerUser = async (req, res) => {
+//   try {
+//     const { email, password, first_name, last_name, phone, address } = req.body;
+
+//     // Validate email format
+//     if (!validator.isEmail(email)) {
+//       return res.status(400).json({ error: 'Invalid email address' });
+//     }
+
+//     // Check if email already exists
+//     const existingUser = await prisma.user.findUnique({ where: { email } });
+//     if (existingUser) {
+//       return res.status(400).json({ error: 'Email already registered' });
+//     }
+
+//     // Check if phone number already exists
+//     const existingPhone = await prisma.user.findUnique({ where: { phone } });
+//     if (existingPhone) {
+//       return res.status(400).json({ error: 'Phone number already registered' });
+//     }
+
+//     // Encrypt the password
+//     const hashedPassword = await bcrypt.hash(password, 10);
+
+//     const newUser = await prisma.user.create({
+//       data: {
+//         first_name,
+//         last_name,
+//         phone,
+//         email,
+//         password: hashedPassword,
+//         address,
+//       },
+//     });
+
+//     return res.status(201).json({ message: 'User created successfully', user: newUser });
+//   } catch (error) {
+//     return res.status(500).json({ error: error.message });
+//   }
+// };
+
+//cause error by phon
+// const loginUser = async (req, res) => {
+//   try {
+//     const { email, password } = req.body;
+
+//     // Retrieve user by email
+//     const user = await prisma.user.findUnique({ where: { email } });
+//     if (!user || !(await bcrypt.compare(password, user.password))) {
+//       return res.status(401).json({ error: 'Invalid credentials' });
+//     }
+
+//     // Generate JWT token
+//     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+//     res.status(200).json({ token });
+//   } catch (error) {
+//     return res.status(500).json({ error: error.message });
+//   }
+// };
+// end by phon*************
+// const loginUser = async (req) => {
+//   const { email, password } = req.body;
+
+//   // Retrieve user by email
+//   const user = await prisma.user.findUnique({ where: { email } });
+//   if (!user || !(await bcrypt.compare(password, user.password))) {
+//     throw new Error('Invalid credentials');
+//   }
+
+//   // Generate JWT token
+//   const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+//   return token; // Return** the token instead of sending a response
+// };
+
+const loginUser = async (req) => {
+  const { email, password } = req.body;
+
+  // Retrieve user by email
+  const user = await prisma.user.findUnique({ where: { email } });
+  if (!user || !(await bcrypt.compare(password, user.password))) {
+    throw new Error('Invalid credentials');
+  }
+
+  // Generate JWT token with email included in the payload
+  const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+  return token; // Return the token instead of sending a response
+};
+//add by phon end here*************
 // Create User
 const createUser = async (userData) => {
   try {
@@ -41,27 +131,65 @@ const createUser = async (userData) => {
 };
 
 // Get user by email
+// const getUserByEmail = async (email) => {
+//   try {
+//     const user = await prisma.user.findUnique({ where: { email } });
+//     if (!user) {
+//       throw new Error('User not found');
+//     }
+//     return user;
+//     } catch (error) {
+//       throw new Error(error.message);
+//     }
+// };
+
+//add by  phon
+// Get user by email
 const getUserByEmail = async (email) => {
   try {
     const user = await prisma.user.findUnique({ where: { email } });
     if (!user) {
       throw new Error('User not found');
     }
-    return user;
-    } catch (error) {
-      throw new Error(error.message);
-    }
+    // Create a new object excluding the password
+    const userWithoutPassword = {
+      id: user.id,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      phone: user.phone,
+      email: user.email,
+      address: user.address,
+      created_at: user.created_at,
+      updated_at: user.updated_at,
+    };
+    return userWithoutPassword; // Return the new object
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
+//add by phon end here
+
+// Get All Users
+// const getAllUsers = async () => {
+//   try {
+//     return await prisma.user.findMany();
+//   } catch (error) {
+//     throw new Error('Failed to get all users');
+//   }
+// };
+//add by phon
 // Get All Users
 const getAllUsers = async () => {
   try {
-    return await prisma.user.findMany();
+    const users = await prisma.user.findMany();
+    // Map through users to exclude passwords
+    return users.map(({ password, ...userWithoutPassword }) => userWithoutPassword);
   } catch (error) {
     throw new Error('Failed to get all users');
   }
 };
-
+//add by phon end here
 // Update user
 const updateUser = async (id, updateData) => {
   try {
@@ -119,4 +247,6 @@ module.exports = {
     getAllUsers,
     updateUser,
     deleteUser,
+    registerUser,//add by phon
+    loginUser,//add by phon
   };

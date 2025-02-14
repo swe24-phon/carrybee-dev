@@ -1,5 +1,36 @@
 const userService = require('../services/userService');
 
+//add by phon start here*************
+// Register User
+const registerUser = async (req, res) => {
+  try {
+    const newUser = await userService.registerUser(req, res);
+    res.status(201).json(newUser);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+// Login User
+// const loginUser = async (req, res) => {
+//   try {
+//     const token = await userService.loginUser(req, res);
+//     res.status(200).json({ token });
+//   } catch (error) {
+//     res.status(401).json({ error: error.message });
+//   }
+// };
+
+const loginUser = async (req, res) => {
+  try {
+    const token = await userService.loginUser(req); // Pass only req
+    res.status(200).json({ token });
+  } catch (error) {
+    res.status(401).json({ error: error.message });
+  }
+};
+//add by phon end here*************
+
 // Create User
 const createUser = async (req, res) => {
   try {
@@ -11,14 +42,24 @@ const createUser = async (req, res) => {
 };
 
 //Get user by Email
+// const getUserByEmail = async (req, res) => {
+//   try {
+//     const user = await userService.getUserByEmail(req.params.email);
+//     res.status(200).json(user);
+//   } catch (error) {
+//     res.status(404).json({ error: error.message });
+//   }
+// };
+//add by phon start here*************
 const getUserByEmail = async (req, res) => {
   try {
     const user = await userService.getUserByEmail(req.params.email);
-    res.status(200).json(user);
+    res.status(200).json(user); // Ensure this is the modified user object
   } catch (error) {
     res.status(404).json({ error: error.message });
   }
 };
+//add by phon end here*************
 
 // Get all users
 const getAllUsers = async (req, res) => {
@@ -56,4 +97,6 @@ module.exports = {
     getAllUsers,
     updateUser,
     deleteUser,
+    registerUser,//add by phon
+    loginUser,//add by phon
   };
