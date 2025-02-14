@@ -1,0 +1,151 @@
+body {
+    background-color: #FFFDF1;
+    display: flex;
+    align-items: center;
+    overflow-x: hidden;
+    align-items: flex-start;
+}
+
+.nav-container {
+    width: 100%;
+    background-color: #FECF30;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* position: absolute; */
+    /* top: 0; */
+    mask: radial-gradient(var(--R) at 50% calc(100% - (var(--size) + var(--p))), #000 99%, #0000 101%)
+        calc(50% - 3 * var(--size)) 0/calc(1.5 * var(--size)) 100%,
+      radial-gradient(var(--R) at 50% calc(100% + var(--p)), #0000 99%, #000 101%)
+        50% calc(100% - var(--size)) / calc(4 * var(--size)) 100% repeat-x;
+    /* height: 200px; */
+}
+
+.calendar-container {
+    max-width: 28rem; /* equivalent to max-w-md */
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* This makes it take full viewport height */
+}
+  
+  .calendar-header {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .time-selector {
+    background-color: #f3f4f6;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .time-display {
+    font-size: 1.125rem;
+    margin-top: 0.5rem;
+  }
+  
+  .navigation-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  /* Center table contents */
+table {
+    margin: 0 auto;
+  }
+  
+  /* Center text in table cells */
+  td, th {
+    text-align: center;
+  }
+  
+  /* Center the time picker section */
+  .time-picker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  /* Center the buttons container */
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+  }
+
+/* Center select dropdowns and their container */
+.time-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  /* Center AM/PM toggle buttons */
+  .am-pm-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  /* Center the time display text */
+  .time-display {
+    text-align: center;
+  }
+
+  .wave {
+    --size: 60px;
+    --m: 0.3;
+    --p: calc(var(--m)*var(--size));
+    --R: calc(var(--size)*sqrt(var(--m)*var(--m) + 1));
+  }
+  
+  #hamburger-icon {
+    width: 40px;
+    position: fixed;
+    left: 0;
+    margin-left: 2rem;
+  }
+  
+  #logo {
+    width: 70px;
+  }
+  
+  #avatar {
+    position: absolute;
+    right: 0;
+    width: 40px;
+    border-radius: 50%;
+    margin-right: 1rem;
+  }
+
+  #bottom-nav {
+    display: grid;
+    position: absolute;
+    bottom: 3px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 2rem;
+    margin: 0 2px;
+    gap: 4rem;
+    background-color: #ffffff;
+    width: -webkit-fill-available;
+    border-radius: 25px;
+    box-shadow: 2px 2px 10px 0px #a8a8a8;
+  }
+  
+  .nav-icon {
+    font-size: 2rem;
+    color: #FECF30;
+    text-shadow: 1px 3px 0px grey;
+  }
+  
