@@ -41,7 +41,7 @@ import HomePage from './HomePage';
 import '../css/index.css';
 import { LoginPage } from './SignIn';
 import Schedule from './Schedule';
-
+import Form from './Form';
 
 const App: React.FC = () => {
   return (
@@ -50,6 +50,7 @@ const App: React.FC = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/SignIn" element={<LoginPage />} />
         <Route path="/Schedule" element={<Schedule />} />
+        <Route path="/Schedule" element={<Form />} />
       </Routes>
     </Router>
   );
