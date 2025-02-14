@@ -42,15 +42,7 @@ const createUser = async (req, res) => {
 };
 
 //Get user by Email
-// const getUserByEmail = async (req, res) => {
-//   try {
-//     const user = await userService.getUserByEmail(req.params.email);
-//     res.status(200).json(user);
-//   } catch (error) {
-//     res.status(404).json({ error: error.message });
-//   }
-// };
-//add by phon start here*************
+
 const getUserByEmail = async (req, res) => {
   try {
     const user = await userService.getUserByEmail(req.params.email);
@@ -59,7 +51,7 @@ const getUserByEmail = async (req, res) => {
     res.status(404).json({ error: error.message });
   }
 };
-//add by phon end here*************
+
 
 // Get all users
 const getAllUsers = async (req, res) => {

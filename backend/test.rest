@@ -1,15 +1,13 @@
-### DATA ENDPOINT
-GET http://localhost:3000/api/data
 
-### data endponint for adding a user
+### Create a user
 POST http://localhost:3000/api/users
 Content-Type: application.application/json
 
 {
-    first_name: "angela"
-    last_name: "garcia"
-    phone: "1312313"
-    email: "angela@example.com"
-    address: "carry"
-    password: "carrybee"
+    "first_name": "Wendy",
+    "last_name": "Lu",
+    "phone": "84742742",
+    "email": "Wendy@example.com",
+    "address": "carry",
+    "password": "securepassword"
 }
