@@ -1,0 +1,24 @@
+#bottom-nav {
+  display: grid;
+  z-index: 0;
+  position: sticky;
+  bottom: 0;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  padding: 2rem;
+  margin: 0 2px;
+  gap: 4rem;
+  background-color: #ffffff;
+  width: -webkit-fill-available;
+  border-radius: 25px;
+  box-shadow: 2px 2px 10px 0px #a8a8a8;
+}
+
+.nav-icon {
+  font-size: 2rem;
+  color: #FECF30;
+  text-shadow: 1px 3px 0px grey;
+}
+
+.nav-icon:hover {
+  color: #be9a24;
+}

@@ -1,0 +1,45 @@
+#type {
+  margin: 1rem;
+  position: relative;
+  top: 100px;
+  text-align: center;
+  color: #000000;
+  font-size: 1.4rem;
+}
+
+#parcel-cards {
+  margin: 8rem 1.5rem 2rem;
+  padding-right: 1.5rem;
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1.3rem;
+}
+
+.icon-box {
+  font-size: 14px;
+  background-color: #f9f9f9; /* Set background for each box */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #f3bb05;
+  font-weight: 600;
+  min-height: 80px; /* Set minimum height to ensure all boxes are equal */
+  padding: 1rem;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(103, 103, 103, 0.1);
+  width: 70px;
+}
+
+/* Optional: Add hover effect */
+.icon-box:hover {
+  background-color: #FECF30;
+  color: #2a2a2a;
+}
+
+.parcel-icon {
+  font-size: 20px;
+}
