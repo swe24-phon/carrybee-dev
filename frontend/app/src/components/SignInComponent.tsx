@@ -1,5 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-import './SignIn.css';
+import { useNavigate } from 'react-router-dom';
+import '../css/SignIn.css';
 
 interface Credentials {
   username: string;
@@ -17,6 +18,7 @@ const SignInComponent: React.FC<SignInProps> = ({
   onSignUp,
   onForgotPassword
 }) => {
+  const navigate = useNavigate();
   const [credentials, setCredentials] = useState<Credentials>({
     username: '',
     password: ''
@@ -32,15 +34,22 @@ const SignInComponent: React.FC<SignInProps> = ({
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+    // Call the provided onSignIn prop if it exists
     onSignIn?.(credentials);
+    // Navigate to homepage after sign in
+    navigate('/home');
   };
 
   const handleSignUp = (): void => {
     onSignUp?.();
+    // Add navigation to sign up page if needed
+    navigate('/signup');
   };
 
   const handleForgotPassword = (): void => {
     onForgotPassword?.();
+    // Add navigation to forgot password page if needed
+    navigate('/forgot-password');
   };
 
   return (
