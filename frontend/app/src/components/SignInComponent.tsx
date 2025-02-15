@@ -1,5 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
+import logo from '../assets/logo.png';
 import '../css/SignIn.css';
 
 interface Credentials {
@@ -55,19 +56,23 @@ const SignInComponent: React.FC<SignInProps> = ({
   return (
     <div className="signin-container">
       <div className="logo-circle">
-        <div className="logo">LOGO</div>
-        <div className="slogan">SLOGAN</div>
+        <img
+          src={logo}
+          alt="CarryBee Logo"
+          className="logo-image"
+        />
+        <div className="slogan">BUZZING AROUND TO DELIVER YOUR NEEDS</div>
       </div>
       
       <form className="signin-form" onSubmit={handleSubmit}>
         <h2>SIGN IN</h2>
         
         <div className="form-group">
-          <label htmlFor="username">username</label>
+          <label htmlFor="username">Username</label>
           <input
             id="username"
             type="text"
-            name="username"
+            name="Username"
             value={credentials.username}
             onChange={handleChange}
             autoComplete="username"
@@ -75,11 +80,11 @@ const SignInComponent: React.FC<SignInProps> = ({
         </div>
         
         <div className="form-group">
-          <label htmlFor="password">password</label>
+          <label htmlFor="password">Password</label>
           <input
             id="password"
             type="password"
-            name="password"
+            name="Password"
             value={credentials.password}
             onChange={handleChange}
             autoComplete="current-password"
