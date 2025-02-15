@@ -5,6 +5,8 @@ import BannerComponent from '../components/bannerComponent';
 import DestinationBoxComponent from '../components/destinationBoxComponent';
 import BottomNavComponent from '../components/bottomNavComponent';
 import '../css/homepage.css';
+import '../css/topnav.css'
+import '../css/bottomnav.css'
 
 const HomePage = () => {
   return (
