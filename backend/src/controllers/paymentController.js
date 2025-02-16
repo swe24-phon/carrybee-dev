@@ -82,11 +82,11 @@ const deletePayment = async (req, res) =>
     }
 };
 
-module.expors = {
+module.exports = {
     createPayment,
     getPaymentByID,
     getPaymentByOrderID,
     getAllPayments,
     updatePayment,
-    deletePayment
+    deletePayment,
 };
