@@ -101,51 +101,30 @@ const createOrder = async (orderData) => {
   }
 };
 
-const getAllOrders = async () => {
-  try {
-    return await prisma.order.findMany();
-  } catch (error) {
-    throw new Error('Failed to get all orders');
-  }
-};
+// const getAllOrders = async () => {
+//   try {
+//     return await prisma.order.findMany();
+//   } catch (error) {
+//     throw new Error('Failed to get all orders');
+//   }
+// };
 
-const getOrderById = async (id) => {
-  try {
-    const order = await prisma.order.findUnique({ where: { id } });
-    if (!order) {
-      throw new Error('Order not found')
-    }
-    return order;
-  } catch (error) {
-    throw new Error(error.message);
-  }
-};
-
-const updateOrder = asycn (id, updateData) => {
-  try {
-    const {
-        receiver_name,
-        pickup_address,
-        dropoff_address,
-        pickup_lat,
-        pickup_lon,
-        dropoff_lat,
-        dropoff_lon,
-        pickup_date,
-        distance,
-        total: parseFloat(totalPrice),
-        status: 'PICKED_UP', // Default status
-        user_id,
-        parcel_id: parcel.id, // Linking parcel to order
-    } = updateData;
-  }
-}
- 
+// const getOrderById = async (id) => {
+//   try {
+//     const order = await prisma.order.findUnique({ where: { id } });
+//     if (!order) {
+//       throw new Error('Order not found')
+//     }
+//     return order;
+//   } catch (error) {
+//     throw new Error(error.message);
+//   }
+// };
 
 module.exports = {
  createOrder,
  calculatePrice,
  calculateDistance,
- getAllOrders,
- getOrderById
+//  getAllOrders,
+//  getOrderById
 };
