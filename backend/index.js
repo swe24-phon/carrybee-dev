@@ -3,6 +3,7 @@ const prisma = require('./prismaClient');
 const cors = require('cors');
 const userRoutes = require ('./src/routes/userRoutes.js')
 const parcelRoutes = require('./src/routes/parcelRoutes.js');
+const orderRoutes = require('./src/routes/orderRoutes.js')
 
 // initialise the app 
 const app = express();
@@ -27,6 +28,7 @@ app.get('/', async (req, res) => {
 // Routes
 app.use('/api', userRoutes);
 app.use('/api', parcelRoutes); 
+app.use('/api', orderRoutes);
 
 //Server running
 

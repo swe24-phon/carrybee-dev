@@ -1,45 +1,49 @@
-/* src/tailwind.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Global Body and HTML Styles */
-html {
-  overflow-y: hidden;
-}
-
-body {
-  background-color: #FFFDF1;
-  display: flex;
-  align-items: flex-start;
-  overflow-x: hidden;
-}
-
-/* Schedule Component Enhanced Styles */
-.schedule-container {
+/* Calendar Container */
+.calendar-container {
+  margin-top: 50px;
+  padding: 1.5rem;
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
   background-color: #ffffff;
   border-radius: 16px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 1rem;
 }
 
-/* Custom scrollbar for overflow content */
-.schedule-container {
+/* Timepicker Container */
+.timepicker-container {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Container Wrapper */
+.scheduling-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+  max-height: calc(100vh - 150px); /* Account for nav and bottom bar */
+  overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 }
 
-.schedule-container::-webkit-scrollbar {
+/* Scrollbar styles for the wrapper */
+.scheduling-wrapper::-webkit-scrollbar {
   width: 6px;
 }
 
-.schedule-container::-webkit-scrollbar-track {
+.scheduling-wrapper::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.schedule-container::-webkit-scrollbar-thumb {
+.scheduling-wrapper::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 3px;
 }
@@ -159,9 +163,11 @@ body {
 .section-heading {
   font-size: 1.25rem;
   font-weight: 600;
-  margin-bottom: 1rem;
   color: #333;
+  margin-bottom: 1rem;
+  padding-left: 0.5rem;
 }
+
 
 .date-section {
   margin-bottom: 2rem;
@@ -189,34 +195,47 @@ body {
 }
 
 /* Time Picker Enhancements */
+/* Time Picker Specific Styles */
 .time-picker-select {
   appearance: none;
   background-color: #f4f4f4;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
-  padding: 0.5rem;
-  margin: 0 0.25rem;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  width: 100%;
   transition: all 0.3s ease;
 }
 
-.time-picker-select:focus {
-  outline: none;
-  border-color: #FECF30;
-  box-shadow: 0 0 0 3px rgba(254, 207, 48, 0.2);
+/* Responsive Design */
+@media (min-width: 768px) {
+  .scheduling-wrapper {
+    flex-direction: row;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .calendar-container,
+  .timepicker-container {
+    flex: 1;
+    margin-top: 50px;
+  }
 }
 
-/* Additional subtle animations */
+/* Animation for container appearance */
+.calendar-container,
+.timepicker-container {
+  animation: fadeIn 0.5s ease-out;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.fade-in-section {
-  animation: fadeIn 0.5s ease-out;
 }

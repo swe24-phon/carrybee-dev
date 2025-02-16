@@ -97,10 +97,12 @@ const createOrder = async (orderData) => {
     });
     return { message: 'Oder created successfully', order: newOrder };
   } catch (error) {
-    throw new Error(error.message);
+    throw new Error('Failed to create a new order');
   }
 };
 
 module.exports = {
  createOrder,
+ calculatePrice,
+ calculateDistance,
 };
