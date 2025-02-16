@@ -1,6 +1,9 @@
+require('dotenv').config();
+
 const express = require('express');
 const prisma = require('./prismaClient');
 const cors = require('cors');
+
 const userRoutes = require ('./src/routes/userRoutes.js')
 const parcelRoutes = require('./src/routes/parcelRoutes.js');
 const orderRoutes = require('./src/routes/orderRoutes.js')
@@ -12,6 +15,8 @@ const PORT = process.env.PORT || 3000;
 app.use(cors()); // Middleware to allow cross-origin requests
 app.use(express.json()); //middleware to parse Json requests
 
+// Check if .env variables are loaded
+console.log('JWT_SECRET:', process.env.JWT_SECRET); 
 
 app.get('/', async (req, res) => {
     try {
