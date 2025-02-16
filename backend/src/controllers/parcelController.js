@@ -1,6 +1,6 @@
 const parcelService = require('../services/parcelService');
 
-const createParcel =async (req, res) => {
+const createParcel = async (req, res) => {
   try {
     const newParcel = await parcelService.createParcel(req.body);
     res.status(201).json(newParcel);
