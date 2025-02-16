@@ -1,0 +1,77 @@
+/* Dashboard Container Styles */
+/* .dashboard-container {
+  width: 266px;
+  height: 511px;
+  position: relative;
+  overflow: hidden;
+} */
+
+/* Header Styles */
+.profile-section {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1rem;
+}
+
+.profile-image {
+  width: 21px;
+  height: 31px;
+  position: absolute;
+  right: 1rem;
+  top: 6px;
+}
+
+/* Welcome Text Style */
+#dashboard-welcome {
+  color: black;
+  font-size: 20px;
+  font-family: 'Inter', sans-serif;
+  font-weight: normal;
+  margin-left: 85px;
+  margin-top: 0px;
+}
+
+/* Invoice Cards Container */
+.invoice-cards-container {
+  margin-top: 2rem;
+  padding: 0 18px;
+}
+
+.invoice-cards-container > * + * {
+  margin-top: 1rem;
+}
+
+.home-button {
+  position: absolute;
+  bottom: 35px;
+  left: 50%;
+  transform: translate(-50%);
+  width: 75px;
+  height: 40px;
+  background-color: #FECF30;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.home-button:hover {
+  background-color: #FECF30;
+  transform: translate(-50%) scale(1.05);
+}
+
+.home-button:active {
+  transform: translate(-50%) scale(0.95);
+}
+
+.home-button-text {
+  color: white;
+  font-size: 20px;
+  font-family: 'Inter', sans-serif;
+  font-weight: normal;
+}
+
