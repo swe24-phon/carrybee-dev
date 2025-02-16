@@ -16,23 +16,24 @@ body {
 }
 
 .signin-container {
-    width: 100%;
-    max-width: 400px;
+    /* width: 100%;
+    max-width: 400px; */
+    height: 100%;
     margin: 0 auto;
     padding: 20px;
     background: white;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
-  
+
   .logo-image {
-    width: 200px;  /* Adjust size as needed */
+    width: 200px;
     height: auto;
     margin-bottom: 15px;
     margin-top: 70px;
     object-fit: contain;
   }
-  
+
   /* Update logo-circle to accommodate the image */
   .logo-circle {
     width: 300px;
@@ -52,44 +53,44 @@ body {
     align-items: center;
     text-align: center;
   }
-  
+
   .logo {
     font-size: 24px;
     margin-bottom: 10px;
   }
-  
+
   .slogan {
     font-size: 16px;
     font-weight: bold;
     color: #333;
     margin-bottom: 5px;
   }
-  
+
   .signin-form {
     display: flex;
     flex-direction: column;
     gap: 20px;
     padding: 0 20px;
   }
-  
+
   .signin-form h2 {
     text-align: center;
     font-size: 30px;
     margin-bottom: 20px;
     margin-top: 0.5px;
   }
-  
+
   .form-group {
     display: flex;
     flex-direction: column;
     gap: 5px;
   }
-  
+
   .form-group label {
     font-size: 20px;
     color: #333;
   }
-  
+
   .form-group input {
     padding: 10px;
     border: none;
@@ -97,14 +98,14 @@ body {
     border-radius: 5px;
     font-size: 20px;
   }
-  
+
   .forgot-password {
     font-size: 14px;
     color: #666;
     cursor: pointer;
     margin-top: -10px;
   }
-  
+
   .signin-btn,
   .signup-btn {
     padding: 12px;
@@ -114,14 +115,14 @@ body {
     cursor: pointer;
     transition: opacity 0.2s;
   }
-  
+
   .signin-btn {
     background: #FECF30;
   }
-  
+
   .signup-btn {
     background: #1B1B1B;
-    color: white;  /* Added this line to make the text white */
+    color: white;
     padding: 12px;
     border: none;
     border-radius: 5px;
@@ -129,9 +130,8 @@ body {
     cursor: pointer;
     transition: opacity 0.2s;
   }
-  
+
   .signin-btn:hover,
   .signup-btn:hover {
     opacity: 0.9;
   }
-  

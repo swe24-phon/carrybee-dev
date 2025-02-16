@@ -1,0 +1,7 @@
+#vehicle-cards {
+  margin: 3rem;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+}

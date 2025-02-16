@@ -1,7 +1,6 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import NavbarComponent from '../components/NavbarComponent';
-import BottomNavbarComponent from '../components/bottomNavComponent'
+import BottomNavbarComponent from '../components/bottomNavComponent';
 import CheckboxComponent from '../components/checkboxComponent';
 import FormComponent from '../components/formComponent';
 import ParcelCardComponent from '../components/parcelCardComponent';
@@ -9,7 +8,7 @@ import CameraComponent from '../components/cameraComponent';
 import '../css/form.css';
 import '../css/parcelType.css';
 import '../css/topnav.css';
-import '../css/bottomnav.css'
+import '../css/bottomnav.css';
 
 const Form = () => {
   return (
@@ -19,7 +18,9 @@ const Form = () => {
       <CheckboxComponent />
       <FormComponent />
       <CameraComponent />
-      <BottomNavbarComponent />
+      <div style={{ position: 'sticky', bottom: 0 }}>
+        <BottomNavbarComponent /> // bottom nav for form page needs different prop
+      </div>
     </>
   );
 };

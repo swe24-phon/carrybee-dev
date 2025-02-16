@@ -43,9 +43,9 @@ import '../css/index.css';
 import '../css/phoneWrapper.css';
 // import { LoginPage } from './SignIn';
 import SignInComponent from '../components/SignInComponent';
-
 import Schedule from './Schedule';
 import Form from './Form';
+import Vehicle from './Vehicle';
 
 const App: React.FC = () => {
   return (
@@ -57,6 +57,7 @@ const App: React.FC = () => {
             <Route path="/SignIn" element={<SignInComponent />} />
             <Route path="/Schedule" element={<Schedule />} />
             <Route path="/Form" element={<Form />} />
+            <Route path="/Vehicle" element={<Vehicle />} />
           </Routes>
         </Router>
       </div>

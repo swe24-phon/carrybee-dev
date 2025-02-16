@@ -1,27 +1,26 @@
 import React from 'react';
-import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom';
 
-const NavbarComponent: React.FC = () => {
-  const navigate = useNavigate(); // usage of useNavigate
+interface PrevButtonProps {
+  onClick: () => void; // This tells TypeScript that the onClick prop is a function that returns nothing (void)
+}
+
+const PrevButtonComponent: React.FC<PrevButtonProps> = ({ onClick }) => {
   return (
-    <>
-      <Button
-  variant="outlined"
-  onClick={() => navigate('/Schedule')}
-  sx={{
-    color: '#ffffff',
-    fontWeight: '600',
-    background: '#000000',
-    borderRadius: '5px',
-    width: '120px',
-    '&:hover': {
-      borderColor: '#f3bb05', // Maintain yellow border on hover
-      backgroundColor: 'rgba(254, 207, 48, 0.1)', },}}>Previous</Button>
-
-    </>
+    <Button
+      variant="outlined"
+      onClick={onClick}
+      sx={{
+        color: '#FECF30',
+        borderColor: '#FECF30',
+        '&:hover': {
+          backgroundColor: '#FECF30',
+          color: '#000000',
+        },
+      }}>
+      Previous
+    </Button>
   );
 };
 
-export default NavbarComponent;
+export default PrevButtonComponent;
