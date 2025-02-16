@@ -1,0 +1,15 @@
+#checkbox {
+  display: flex;
+  justify-content: center;
+}
+
+#checkbox-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: #ffffff;
+  padding-left: 1rem;
+  border-radius: 10px;
+  justify-items: center;
+  position: absolute;
+  left: 20px;
+}

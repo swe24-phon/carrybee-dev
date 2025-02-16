@@ -1,3 +1,7 @@
+html {
+  overflow-y: hidden;
+}
+
 body {
   background-color: #FFFDF1;
   display: flex;
@@ -6,73 +10,28 @@ body {
   align-items: flex-start;
 }
 
-.nav-container {
-  width: 100%;
-  background-color: #FECF30;
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  /* position: absolute; */
-  /* top: 0; */
-  mask: radial-gradient(var(--R) at 50% calc(100% - (var(--size) + var(--p))), #000 99%, #0000 101%)
-      calc(50% - 3 * var(--size)) 0/calc(1.5 * var(--size)) 100%,
-    radial-gradient(var(--R) at 50% calc(100% + var(--p)), #0000 99%, #000 101%)
-      50% calc(100% - var(--size)) / calc(4 * var(--size)) 100% repeat-x;
-  /* height: 200px; */
-}
-
-.wave {
-  --size: 60px;
-  --m: 0.3;
-  --p: calc(var(--m)*var(--size));
-  --R: calc(var(--size)*sqrt(var(--m)*var(--m) + 1));
-}
-
-#hamburger-icon {
-  width: 40px;
-  position: fixed;
-  left: 0;
-  margin-left: 2rem;
-}
-
-#logo {
-  width: 70px;
-}
-
-#avatar {
-  position: absolute;
-  right: 0;
-  width: 40px;
-  border-radius: 50%;
-  margin-right: 1rem;
-}
-
 .banner-box {
   margin-bottom: 2rem;
 }
 
 #banner {
-  width: 380px;
-  border-radius: 10px;
+  width: 355px;
+  border-radius: 20px;
   margin: 1.5rem 1rem;
+  margin-top: 2rem;
   position: relative;
 }
 
-#map {
-  border-radius: 10px;
-  margin-left: 5px;
-}
-
 .destination-container {
-  padding: 0.5rem 1.5rem;
+  top: 35%;
+  padding: 0.2rem 1.2rem;
   box-shadow: 1px 1px 5px 2px #00000029;
   margin: 1rem 2rem;
-  border-radius: 10px;
+  border-radius: 15px;
   background-color: #ffffff;
   z-index: 3;
   position: fixed;
-  opacity: 0.95;
+  opacity: 0.9;
 }
 
 form {
@@ -127,30 +86,13 @@ input {
 }
 
 div#map {
-  width: 400px;
-  height: 600px;
+  /* width: 400px;
+  height: 600px; */
   position: relative;
   overflow: hidden;
   top: -25%;
   z-index: 1;
-}
-
-#bottom-nav {
-  display: grid;
-  position: absolute;
-  bottom: 3px;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  padding: 2rem;
-  margin: 0 2px;
-  gap: 4rem;
-  background-color: #ffffff;
-  width: -webkit-fill-available;
-  border-radius: 25px;
-  box-shadow: 2px 2px 10px 0px #a8a8a8;
-}
-
-.nav-icon {
-  font-size: 2rem;
-  color: #FECF30;
-  text-shadow: 1px 3px 0px grey;
+  left: 15px;
+  border-radius: 20px;
+  /* margin-left: 5px; */
 }

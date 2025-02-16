@@ -6,7 +6,7 @@ const MapComponent: React.FC = () => {
   return (
     <LoadScript googleMapsApiKey="add_public_key_here">
       <GoogleMap id='map'
-        mapContainerStyle={{ width: '400px', height: '400px' }}
+        mapContainerStyle={{ width: '360px', height: '380px' }}
         zoom={13}
         center={{ lat: -37.8136, lng: 144.9631 }} // melbourne coordinates
         options={{

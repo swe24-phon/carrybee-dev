@@ -1,0 +1,19 @@
+html {
+  overflow-y: hidden;
+}
+
+body {
+  background-color: #FFFDF1;
+  display: flex;
+  align-items: center;
+  overflow-x: hidden;
+  align-items: flex-start;
+}
+
+#form-box {
+  /* position: absolute; */
+  margin-top: 4rem;
+  padding: 1rem 2rem;
+  /* background-color: #ffffff; */
+  border-radius: 10px;
+}

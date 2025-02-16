@@ -3,15 +3,15 @@ const userController = require('../controllers/userController');
 const { authenticate } = require('../middleware/authMiddleware'); //add by phon
 const router = express.Router();
 
-router.post('/users', userController.createUser);
-router.get('/users/:email', userController.getUserByEmail);
+router.post('/', userController.createUser);
+router.get('/:id', userController.getUserById);
 //router.get('/users', userController.getAllUsers);
 //router.put('/users/:id', userController.updateUser);
 //router.delete('/users/:id', userController.deleteUser);
 router.post('/login', userController.loginUser);//add by phon
-router.get('/users', authenticate, userController.getAllUsers); // Protect this route
-router.put('/users/:id', authenticate, userController.updateUser); // Protect this route
-router.delete('/users/:id', authenticate, userController.deleteUser); // Protect this route
+router.get('/', authenticate, userController.getAllUsers); // Protect this route
+router.put('/:id', authenticate, userController.updateUser); // Protect this route
+router.delete('/:id', authenticate, userController.deleteUser); // Protect this route
 
 module.exports = router;
 

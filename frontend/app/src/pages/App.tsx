@@ -36,22 +36,34 @@
 // -----------
 import React from 'react';
 // use Routes in React Router v6, which is the new way to define route
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './HomePage';
 import '../css/index.css';
-import { LoginPage } from './SignIn';
+import '../css/phoneWrapper.css';
+// import { LoginPage } from './SignIn';
+import SignInComponent from '../components/SignInComponent';
 import Schedule from './Schedule';
-
+import Form from './Form';
+import Vehicle from './Vehicle';
+import Dashboard from './Dashboard';
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/SignIn" element={<LoginPage />} />
-        <Route path="/Schedule" element={<Schedule />} />
-      </Routes>
-    </Router>
+    <div className="smartphone-frame">
+      <div className="app-content">
+        <Router>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/SignIn" element={<SignInComponent />} />
+            <Route path="/Schedule" element={<Schedule />} />
+            <Route path="/Form" element={<Form />} />
+            <Route path="/Vehicle" element={<Vehicle />} />
+            <Route path="/dashboard" element={<Dashboard />} /> 
+          </Routes>
+        </Router>
+      </div>
+    </div>
   );
 };
 

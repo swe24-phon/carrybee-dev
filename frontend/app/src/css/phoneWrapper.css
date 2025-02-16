@@ -1,0 +1,49 @@
+:root {
+  --smartphone-width: 412px;  /* Width of the Samsung Galaxy Ultra 20 */
+  --smartphone-height: 915px; /* Height of the Samsung Galaxy Ultra 20 */
+}
+
+.smartphone-frame {
+  position: absolute;
+  width: var(--smartphone-width);
+  height: var(--smartphone-height);
+  margin: auto;
+  border: 10px solid #161616;  /* Border color */
+  border-radius: 40px;  /* Rounded corners */
+  background-color: black;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  -ms-border-radius: 40px;
+  -o-border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.app-content {
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  background-color: #FFFDF1;
+  border-radius: 40px;
+  box-sizing: border-box;
+  position: relative;
+  overflow-y: auto;  /* Enable vertical scrolling */
+  overflow-x: hidden;  /* Prevent horizontal scrolling */
+  scrollbar-color: transparent transparent;
+}
+
+.app-content iframe {
+  width: 100%;
+  height: 100%;
+  border-radius: 40px;
+  object-fit: contain;  /* Ensure the content scales and fits inside the frame */
+}
+
+/* .nav-container {
+  width: 90%;
+  position: fixed;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+} */
