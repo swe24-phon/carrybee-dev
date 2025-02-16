@@ -1,0 +1,83 @@
+.time-section {
+    padding: 1rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .section-heading {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  .time-picker-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+  
+  .time-selectors {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .time-picker-select {
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    border: 1px solid #e5e7eb;
+    background-color: white;
+    font-size: 0.875rem;
+    min-width: 3.5rem;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .time-picker-select:focus {
+    outline: none;
+    border-color: #FECF30;
+    box-shadow: 0 0 0 2px rgba(254, 207, 48, 0.2);
+  }
+  
+  .time-separator {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #4b5563;
+  }
+  
+  .time-mode-buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .time-mode-button {
+    padding: 0.5rem 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.375rem;
+    background-color: white;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .time-mode-button:hover {
+    background-color: #FECF30;
+  }
+  
+  .time-mode-active {
+    background-color: #FECF30;
+    color: white;
+    border-color: #FECF30;
+  }
+  
+  .time-display {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: #4b5563;
+  }
+  

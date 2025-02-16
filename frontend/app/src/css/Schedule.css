@@ -1,241 +1,26 @@
-/* Calendar Container */
-.calendar-container {
-  margin-top: 50px;
-  padding: 1.5rem;
-  max-width: 28rem;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Timepicker Container */
-.timepicker-container {
-  margin-top: 1.5rem;
-  padding: 1.5rem;
-  max-width: 28rem;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Container Wrapper */
-.scheduling-wrapper {
+.schedule-container {
+  max-width: 42rem;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  padding: 1rem;
-  max-height: calc(100vh - 150px); /* Account for nav and bottom bar */
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 }
 
-/* Scrollbar styles for the wrapper */
-.scheduling-wrapper::-webkit-scrollbar {
-  width: 6px;
-}
-
-.scheduling-wrapper::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.scheduling-wrapper::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
-}
-
-/* Smooth transition for interactive elements */
-.schedule-button {
-  transition: all 0.3s ease-in-out;
-  position: relative;
-  overflow: hidden;
-}
-
-.schedule-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-} */
-
-/* Ripple effect for buttons */
-.schedule-button::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  width: 0;
-  height: 0;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  opacity: 0;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.schedule-button:active::after {
-  width: 100px;
-  height: 100px;
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-/* Subtle animation for date selection */
-@keyframes dateSelectionPulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-.date-selection-active {
-  animation: dateSelectionPulse 0.5s ease-in-out;
-}
-
-/* Navigation Styles */
-/* .nav-container {
-  width: 100%;
-  background-color: #FECF30;
-  padding: 10px;
+.calendar-and-time {
   display: flex;
-  justify-content: center;
+  gap: 1.5rem;
   align-items: flex-start;
-  position: absolute;
-  top: 0;
-  mask:
-    radial-gradient(var(--R) at 50% calc(100% - (var(--size) + var(--p))), #000 99%, #0000 101%)
-    calc(50% - 3 * var(--size)) 0/calc(1.5 * var(--size)) 100%,
-    radial-gradient(var(--R) at 50% calc(100% + var(--p)), #0000 99%, #000 101%)
-    50% calc(100% - var(--size)) / calc(4 * var(--size)) 100% repeat-x;
 }
 
-.wave {
-  --size: 60px;
-  --m: 0.3;
-  --p: calc(var(--m)*var(--size));
-  --R: calc(var(--size)*sqrt(var(--m)*var(--m) + 1));
-} */
-
-/* Icons and Logo */
-/* #signout-icon {
-  width: 38px;
-  position: fixed;
-  left: 0;
-  margin-left: 1.5rem;
-}
-
-#logo {
-  width: 70px;
-  position: relative;
-  top: -5px;
-}
-
-#avatar {
-  position: absolute;
-  right: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}
-
-.menu-icon {
-  font-size: 24px;
-  cursor: pointer;
-} */
-
-/* Calendar and Schedule Specific Styles */
-.calendar-container {
-  margin-top: 50px;
-  padding: 1rem;
-  max-width: 28rem;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Heading and Section Styles */
-.section-heading {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 1rem;
-  padding-left: 0.5rem;
-}
-
-
-.date-section {
-  margin-bottom: 2rem;
+.calendar-section {
+  flex: 1;
+  min-width: 0; /* Prevent flex child from overflowing */
 }
 
 .time-section {
-  margin-top: 2rem;
-}
-
-.pickup-label {
-  margin-bottom: 0.5rem;
-  color: #4B5563;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 375px) {
-  .schedule-container {
-    padding: 10px;
-  }
-
-  .schedule-button {
-    font-size: 14px;
-    padding: 10px;
-  }
-}
-
-/* Time Picker Enhancements */
-/* Time Picker Specific Styles */
-.time-picker-select {
-  appearance: none;
-  background-color: #f4f4f4;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 0.75rem;
-  margin: 0.5rem 0;
-  width: 100%;
-  transition: all 0.3s ease;
-}
-
-/* Responsive Design */
-@media (min-width: 768px) {
-  .scheduling-wrapper {
-    flex-direction: row;
-    align-items: flex-start;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .calendar-container,
-  .timepicker-container {
-    flex: 1;
-    margin-top: 50px;
-  }
-}
-
-/* Animation for container appearance */
-.calendar-container,
-.timepicker-container {
-  animation: fadeIn 0.5s ease-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  width: 300px;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
 }
