@@ -49,11 +49,11 @@ describe("Order Service", () => {
       parcelData: { weight: 2 },
     };
 
-    createParcel.mockResolvedValue({ parcek : { id: 1} });
+    createParcel.mockResolvedValue({ parcel : { id: 1} });
     prisma.order.create.mockResolvedValue({ id: 123, ...mockOrderData });
 
     const result = await createOrder(mockOrderData);
-    expect(result).toHaveProperty("message", "Order creates successfully");
+    expect(result).toHaveProperty("message", "Order created successfully");
     expect(result.order).toHaveProperty("id", 123);
   });
 });

@@ -90,19 +90,62 @@ const createOrder = async (orderData) => {
           pickup_date,
           distance,
           total: parseFloat(totalPrice),
-          status: 'IN_TRANSIT', // Default status
+          status: 'PICKED_UP', // Default status
           user_id,
           parcel_id: parcel.id, // Linking parcel to order
       },
     });
-    return { message: 'Oder created successfully', order: newOrder };
+    return { message: 'Order created successfully', order: newOrder };
   } catch (error) {
     throw new Error('Failed to create a new order');
   }
 };
 
+const getAllOrders = async () => {
+  try {
+    return await prisma.order.findMany();
+  } catch (error) {
+    throw new Error('Failed to get all orders');
+  }
+};
+
+const getOrderById = async (id) => {
+  try {
+    const order = await prisma.order.findUnique({ where: { id } });
+    if (!order) {
+      throw new Error('Order not found')
+    }
+    return order;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+const updateOrder = asycn (id, updateData) => {
+  try {
+    const {
+        receiver_name,
+        pickup_address,
+        dropoff_address,
+        pickup_lat,
+        pickup_lon,
+        dropoff_lat,
+        dropoff_lon,
+        pickup_date,
+        distance,
+        total: parseFloat(totalPrice),
+        status: 'PICKED_UP', // Default status
+        user_id,
+        parcel_id: parcel.id, // Linking parcel to order
+    } = updateData;
+  }
+}
+ 
+
 module.exports = {
  createOrder,
  calculatePrice,
  calculateDistance,
+ getAllOrders,
+ getOrderById
 };
