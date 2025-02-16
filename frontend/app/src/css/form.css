@@ -10,14 +10,10 @@ body {
   align-items: flex-start;
 }
 
-/* .nav-container {
-  width: 100vw;
-} */
-
 #form-box {
   /* position: absolute; */
-  margin-top: 3rem;
+  margin-top: 4rem;
   padding: 1rem 2rem;
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
   border-radius: 10px;
 }

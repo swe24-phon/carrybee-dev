@@ -1,5 +1,6 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import PrevButtonComponent from '../components/previousButton';
 import NextButtonComponent from '../components/nextButton';
@@ -20,6 +21,7 @@ const VisuallyHiddenInput = styled('input')({
 });
 
 const CameraFunction = () => {
+  const navigate = useNavigate(); // usage of useNavigate
   return (
     <>
     <div id='camera-container'>
@@ -44,8 +46,8 @@ const CameraFunction = () => {
         />
       </Button>
       <div id='buttons'>
-        <PrevButtonComponent />
-        <NextButtonComponent />
+        <PrevButtonComponent onClick={() => navigate('/Schedule')}/>
+        <NextButtonComponent onClick={() => navigate('/Vehicle')}/>
       </div>
       </div>
     </div>

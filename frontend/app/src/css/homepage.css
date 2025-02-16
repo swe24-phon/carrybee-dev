@@ -15,27 +15,23 @@ body {
 }
 
 #banner {
-  width: 380px;
-  border-radius: 10px;
+  width: 355px;
+  border-radius: 20px;
   margin: 1.5rem 1rem;
+  margin-top: 2rem;
   position: relative;
-}
-
-#map {
-  border-radius: 10px;
-  margin-left: 5px;
 }
 
 .destination-container {
   top: 35%;
-  padding: 0.5rem 1.5rem;
+  padding: 0.2rem 1.2rem;
   box-shadow: 1px 1px 5px 2px #00000029;
   margin: 1rem 2rem;
-  border-radius: 10px;
+  border-radius: 15px;
   background-color: #ffffff;
   z-index: 3;
   position: fixed;
-  opacity: 0.95;
+  opacity: 0.9;
 }
 
 form {
@@ -90,10 +86,13 @@ input {
 }
 
 div#map {
-  width: 400px;
-  height: 600px;
+  /* width: 400px;
+  height: 600px; */
   position: relative;
   overflow: hidden;
   top: -25%;
   z-index: 1;
+  left: 15px;
+  border-radius: 20px;
+  /* margin-left: 5px; */
 }

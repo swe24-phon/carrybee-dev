@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import '../css/Schedule.css';
-import NavbarComponent from './NavbarComponent';
+// import NavbarComponent from './NavbarComponent';
 
 const ScheduleComponent: React.FC = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -70,17 +70,17 @@ const ScheduleComponent: React.FC = () => {
   }, [currentDate]);
 
   // Generate hours and minutes arrays
-  const hours = useMemo(() => 
+  const hours = useMemo(() =>
     Array.from({ length: 12 }, (_, i) => {
       const num = i + 1;
       return num < 10 ? `0${num}` : `${num}`;
-    }), 
+    }),
   []);
 
-  const minutes = useMemo(() => 
-    Array.from({ length: 60 }, (_, i) => 
+  const minutes = useMemo(() =>
+    Array.from({ length: 60 }, (_, i) =>
       i < 10 ? `0${i}` : `${i}`
-    ), 
+    ),
   []);
 
   // Navigate to previous month
@@ -115,7 +115,7 @@ const ScheduleComponent: React.FC = () => {
 
   return (
     <>
-      <NavbarComponent />
+      {/* <NavbarComponent /> */}
       <div className="schedule-container fade-in-section">
         <div className="calendar-section">
           <div className="text-center mb-4">
@@ -126,13 +126,13 @@ const ScheduleComponent: React.FC = () => {
                 {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
               </h2>
               <div className="flex space-x-4">
-                <button 
+                <button
                   className="schedule-button"
                   onClick={goToPreviousMonth}
                 >
                   ←
                 </button>
-                <button 
+                <button
                   className="schedule-button"
                   onClick={goToNextMonth}
                 >
@@ -160,13 +160,13 @@ const ScheduleComponent: React.FC = () => {
                         onClick={() => handleDateSelect(date)}
                         className="text-center p-2"
                       >
-                        <span 
+                        <span
                           className={`
                             inline-flex items-center justify-center w-8 h-8 rounded-full
                             schedule-button
                             ${date.isCurrentMonth ? 'cursor-pointer' : 'text-gray-300'}
-                            ${date.isCurrentMonth && date.day === selectedDate 
-                              ? 'bg-green-500 text-white date-selection-active' 
+                            ${date.isCurrentMonth && date.day === selectedDate
+                              ? 'bg-green-500 text-white date-selection-active'
                               : ''}
                           `}
                         >

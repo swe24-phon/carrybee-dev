@@ -4,9 +4,9 @@ import '../css/homepage.css';
 
 const MapComponent: React.FC = () => {
   return (
-    <LoadScript googleMapsApiKey="AIzaSyB613qjkRHO_l58B_9cF_ja3Tp7DKBT_y4">
+    <LoadScript googleMapsApiKey="add_public_key_here">
       <GoogleMap id='map'
-        mapContainerStyle={{ width: '400px', height: '400px' }}
+        mapContainerStyle={{ width: '360px', height: '380px' }}
         zoom={13}
         center={{ lat: -37.8136, lng: 144.9631 }} // melbourne coordinates
         options={{
