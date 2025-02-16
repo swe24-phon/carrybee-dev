@@ -101,30 +101,63 @@ const createOrder = async (orderData) => {
   }
 };
 
-// const getAllOrders = async () => {
-//   try {
-//     return await prisma.order.findMany();
-//   } catch (error) {
-//     throw new Error('Failed to get all orders');
-//   }
-// };
+const getAllOrders = async () => {
+  try {
+    return await prisma.order.findMany();
+  } catch (error) {
+    throw new Error('Failed to get all orders');
+  }
+};
 
-// const getOrderById = async (id) => {
-//   try {
-//     const order = await prisma.order.findUnique({ where: { id } });
-//     if (!order) {
-//       throw new Error('Order not found')
-//     }
-//     return order;
-//   } catch (error) {
-//     throw new Error(error.message);
-//   }
-// };
+const getOrderById = async (id) => {
+  try {
+    const order = await prisma.order.findUnique({ where: { id } });
+    if (!order) {
+      throw new Error('Order not found')
+    }
+    return order;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+//Update Order
+
+const updateOrder = async (id, updateData) => {
+  try {
+    const { receiver_name, pickup_address, dropoff_address, pickup_date } = updateData;
+    const updatedOrder = await prisma.order.update({
+      where: { id },
+      data: {
+        receiver_name: receiver_name || undefined,
+        pickup_address: pickup_address || undefined,
+        dropoff_address: dropoff_address || undefined,
+        pickup_date: pickup_date || undefined,
+      },
+    });
+    return { message: 'Order updated succesfully', order: updatedOrder};
+   } catch (error) {
+    throw new Error(error.message);
+   }
+};
+
+// Delete Order
+const deleteOrder = async (id) => {
+  try {
+    await prisma.order.delete({ where: { id }});
+    return { message: 'Order deleted succesfully'};
+  } catch (error) {
+    throw new Error('Failed to delete order');
+  }
+};
+
 
 module.exports = {
  createOrder,
  calculatePrice,
  calculateDistance,
-//  getAllOrders,
-//  getOrderById
+ getAllOrders,
+ getOrderById,
+ updateOrder,
+ deleteOrder,
 };
