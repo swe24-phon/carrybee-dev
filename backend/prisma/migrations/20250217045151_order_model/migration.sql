@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Order" ALTER COLUMN "dropoff_lat" DROP NOT NULL,
+ALTER COLUMN "dropoff_lon" DROP NOT NULL,
+ALTER COLUMN "pickup_lat" DROP NOT NULL,
+ALTER COLUMN "pickup_lon" DROP NOT NULL;
