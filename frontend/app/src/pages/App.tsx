@@ -46,6 +46,7 @@ import SignInComponent from '../components/SignInComponent';
 import Schedule from './Schedule';
 import Form from './Form';
 import Vehicle from './Vehicle';
+import Payment from './Payment';
 
 const App: React.FC = () => {
   return (
@@ -58,6 +59,7 @@ const App: React.FC = () => {
             <Route path="/Schedule" element={<Schedule />} />
             <Route path="/Form" element={<Form />} />
             <Route path="/Vehicle" element={<Vehicle />} />
+            <Route path="/Payment" element={<Payment />} />
           </Routes>
         </Router>
       </div>

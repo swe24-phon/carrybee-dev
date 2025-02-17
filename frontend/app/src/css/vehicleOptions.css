@@ -5,3 +5,15 @@
   grid-template-columns: 1fr 1fr;
   justify-items: center;
 }
+
+#vehicle-buttons {
+  display: grid;
+  grid-template-rows: 1fr;
+  gap: 2rem;
+  justify-items: center;
+}
+
+button {
+  width: 165px;
+  font-weight: 900;
+}

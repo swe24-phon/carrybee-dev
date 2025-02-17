@@ -63,10 +63,10 @@ const SignInComponent: React.FC<SignInProps> = ({
         />
         <div className="slogan">BUZZING AROUND TO DELIVER YOUR NEEDS</div>
       </div>
-      
+
       <form className="signin-form" onSubmit={handleSubmit}>
         <h2>SIGN IN</h2>
-        
+
         <div className="form-group">
           <label htmlFor="username">Username</label>
           <input
@@ -78,7 +78,7 @@ const SignInComponent: React.FC<SignInProps> = ({
             autoComplete="username"
           />
         </div>
-        
+
         <div className="form-group">
           <label htmlFor="password">Password</label>
           <input
@@ -90,9 +90,9 @@ const SignInComponent: React.FC<SignInProps> = ({
             autoComplete="current-password"
           />
         </div>
-        
-        <div 
-          className="forgot-password" 
+
+        <div
+          className="forgot-password"
           onClick={handleForgotPassword}
           role="button"
           tabIndex={0}
@@ -100,13 +100,13 @@ const SignInComponent: React.FC<SignInProps> = ({
         >
           forget password
         </div>
-        
+
         <button type="submit" className="signin-btn">
           SIGN IN
         </button>
-        
-        <button 
-          type="button" 
+
+        <button
+          type="button"
           className="signup-btn"
           onClick={handleSignUp}
         >
