@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { LoadScript, GoogleMap, Marker, Libraries } from '@react-google-maps/api';
 
-const GOOGLE_MAPS_API_KEY = "AIzaSyB613qjkRHO_l58B_9cF_ja3Tp7DKBT_y4";
+const GOOGLE_MAPS_API_KEY = "";
 
 // Define libraries array using the 'Libraries' type
 const libraries: Libraries = ['places', 'geometry'];
