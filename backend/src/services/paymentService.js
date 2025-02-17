@@ -37,7 +37,7 @@ const createPayment = async (paymentData) =>
     {
         throw new Error('Failed to create parcel: ' + error.message);
     }
-}
+};
 
 // In a real situation there could be tens of thousands of payments
 // so it'd be ill-advised to get ALL payments
@@ -51,7 +51,7 @@ const getAllPayments = async () =>
     {
         throw new Error('Failed to get all payments: ' + error.message);
     }
-}
+};
 
 // Implement a version that uses
 // uses another key to fetch a payment
@@ -70,13 +70,13 @@ const getPaymentByID = async (id) =>
     {
         throw new Error(error.message);
     }
-}
+};
 
 const getPaymentByOrder = async (orderID) => 
     {
         try
         {
-            const payment = await prisma.payment.findUnique({where: {orderID}});
+            const payment = await prisma.payment.findUnique({where: {order_id: orderID}});
             if(!payment)
             {
                 throw new error('Payment not found');
@@ -87,7 +87,7 @@ const getPaymentByOrder = async (orderID) =>
         {
             throw new Error(error.message);
         }
-    }
+    };
 
 // VERY DANGEROUS TO DO IN THE REAL WORLD
 // I'd throw in some admin role check or something for the update
@@ -115,10 +115,10 @@ const updatePayment = async (id, updateData) =>
     {
         throw new Error(error.message);
     }
-}
+};
 
 // ALSO VERY DANGEROUS TO DO IN THE REAL WORLD
-const deletePayment = async () =>
+const deletePayment = async (id) =>
 {
     try
     {
@@ -129,7 +129,7 @@ const deletePayment = async () =>
     {
         throw new Error ('Failed to delete payment');
     }
-}
+};
 
 module.exports = {
     createPayment,

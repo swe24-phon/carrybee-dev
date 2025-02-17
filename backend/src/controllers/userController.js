@@ -43,9 +43,9 @@ const createUser = async (req, res) => {
 
 //Get user by Email
 
-const getUserByEmail = async (req, res) => {
+const getUserById = async (req, res) => {
   try {
-    const user = await userService.getUserByEmail(req.params.email);
+    const user = await userService.getUserById(req.params.id);
     res.status(200).json(user); // Ensure this is the modified user object
   } catch (error) {
     res.status(404).json({ error: error.message });
@@ -85,7 +85,7 @@ const deleteUser = async (req, res) => {
 
 module.exports = {
     createUser,
-    getUserByEmail,
+    getUserById,
     getAllUsers,
     updateUser,
     deleteUser,

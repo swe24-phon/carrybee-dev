@@ -12,7 +12,8 @@ const opts = {
 
 passport.use(new Strategy(opts, async (jwt_payload, done) => {
   try {
-    const user = await userService.getUserByEmail(jwt_payload.email);
+    console.log("JWT Payload:", jwt_payload);
+    const user = await userService.getUserById(jwt_payload.id);
     if (user) {
       return done(null, user);
     }

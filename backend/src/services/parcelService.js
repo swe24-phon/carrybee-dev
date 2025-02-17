@@ -93,7 +93,7 @@ const updateParcel = async (id, updateData) => {
 };
 
 // Delete parcel
-const deleteParcel= async (id) => {
+const deleteParcel = async (id) => {
   try {
     await prisma.parcel.delete({ where: { id }});
     return { message: 'Parcel deleted succesfully'};

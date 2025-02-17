@@ -1,9 +1,14 @@
+require('dotenv').config();
+
 const express = require('express');
 const prisma = require('./prismaClient');
 const cors = require('cors');
-const userRoutes = require ('./src/routes/userRoutes.js')
+
+const userRoutes = require ('./src/routes/userRoutes.js');
 const parcelRoutes = require('./src/routes/parcelRoutes.js');
-const orderRoutes = require('./src/routes/orderRoutes.js')
+const orderRoutes = require('./src/routes/orderRoutes.js');
+const paymentRoutes = require('./src/routes/paymentRoutes.js');
+const reviewRoutes = require('./src/routes/reviewRoutes.js');
 
 // initialise the app 
 const app = express();
@@ -12,6 +17,8 @@ const PORT = process.env.PORT || 3000;
 app.use(cors()); // Middleware to allow cross-origin requests
 app.use(express.json()); //middleware to parse Json requests
 
+// Check if .env variables are loaded
+console.log('JWT_SECRET:', process.env.JWT_SECRET); 
 
 app.get('/', async (req, res) => {
     try {
@@ -26,9 +33,11 @@ app.get('/', async (req, res) => {
 });
 
 // Routes
-app.use('/api', userRoutes);
-app.use('/api', parcelRoutes); 
-app.use('/api', orderRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/parcels', parcelRoutes); 
+app.use('/api/orders', orderRoutes);
+app.use('/api/payments', paymentRoutes);
+app.use('/api/reviews', reviewRoutes);
 
 //Server running
 

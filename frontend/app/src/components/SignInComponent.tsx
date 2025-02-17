@@ -2,9 +2,10 @@ import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import '../css/SignIn.css';
+import API from "../api/api";
 
 interface Credentials {
-  username: string;
+  email: string;
   password: string;
 }
 
@@ -21,7 +22,7 @@ const SignInComponent: React.FC<SignInProps> = ({
 }) => {
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState<Credentials>({
-    username: '',
+    email: '',
     password: ''
   });
 
@@ -32,14 +33,40 @@ const SignInComponent: React.FC<SignInProps> = ({
       [name]: value
     }));
   };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+  
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    // Call the provided onSignIn prop if it exists
-    onSignIn?.(credentials);
-    // Navigate to homepage after sign in
-    navigate('/home');
+  
+    try {
+      const response = await API.post("/login", {
+        email: credentials.email,
+        password: credentials.password
+      });
+  
+      // Assuming the backend sends back a JWT token
+      const { token } = response.data;
+  
+      // Save token in localStorage
+      localStorage.setItem("token", token);
+  
+      // Optionally, store user info if backend sends it
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+  
+      // Navigate to homepage
+      navigate("/");
+    } catch (error) {
+      console.error("Login failed:", error.response?.data?.message || error.message);
+      alert(error.response?.data?.message || "Invalid credentials. Please try again.");
+    }
   };
+
+  // const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+  //   e.preventDefault();
+  //   // Call the provided onSignIn prop if it exists
+  //   onSignIn?.(credentials);
+  //   // Navigate to homepage after sign in
+  //   navigate('/home');
+  // };
 
   const handleSignUp = (): void => {
     onSignUp?.();
@@ -68,14 +95,14 @@ const SignInComponent: React.FC<SignInProps> = ({
         <h2>SIGN IN</h2>
 
         <div className="form-group">
-          <label htmlFor="username">Username</label>
+          <label htmlFor="email">Email</label>
           <input
-            id="username"
+            id="email"
             type="text"
-            name="Username"
-            value={credentials.username}
+            name="email"
+            value={credentials.email}
             onChange={handleChange}
-            autoComplete="username"
+            autoComplete="email"
           />
         </div>
 
@@ -84,7 +111,7 @@ const SignInComponent: React.FC<SignInProps> = ({
           <input
             id="password"
             type="password"
-            name="Password"
+            name="password"
             value={credentials.password}
             onChange={handleChange}
             autoComplete="current-password"

@@ -50,7 +50,7 @@ const loginUser = async (req) => {
   }
 
   // Generate JWT token with email included in the payload
-  const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+  const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
   return token; // Return the token instead of sending a response
 };
 //add by phon end here*************
@@ -93,10 +93,10 @@ const createUser = async (userData) => {
 };
 
 //add by  phon
-// Get user by email
-const getUserByEmail = async (email) => {
+// Get user by id
+const getUserById = async (id) => {
   try {
-    const user = await prisma.user.findUnique({ where: { email } });
+    const user = await prisma.user.findUnique({ where: { id: id, } });
     if (!user) {
       throw new Error('User not found');
     }
@@ -182,7 +182,7 @@ const deleteUser = async (id) => {
 
 module.exports = {
     createUser,
-    getUserByEmail,
+    getUserById,
     getAllUsers,
     updateUser,
     deleteUser,
