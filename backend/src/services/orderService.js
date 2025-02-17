@@ -1,5 +1,6 @@
 const prisma = require('../../prismaClient');
 const { createParcel } = require('./parcelService');
+const { geocodeAddress } = require('./geocodeService');
 
 // Base price
 const vehicle_price = {
@@ -65,28 +66,57 @@ const createOrder = async (orderData) => {
       receiver_name,
       pickup_address,
       dropoff_address,
-      pickup_lat,
-      pickup_lon,
-      dropoff_lat,
-      dropoff_lon,
       pickup_date,
       vehicleType,
       parcelData,
     } = orderData
-    const distance = calculateDistance(pickup_lat, pickup_lon, dropoff_lat, dropoff_lon);
+
+    console.log('Received order data:', orderData);
+
+    const pickupCoords = await geocodeAddress(pickup_address);
+    const dropoffCoords = await geocodeAddress(dropoff_address);
+
+    console.log('Pickup coordinates:', pickupCoords, 'Dropoff coordinates:', dropoffCoords);
+
+    if (
+      !pickupCoords || !dropoffCoords || 
+      typeof pickupCoords.lat !== 'number' || 
+      typeof pickupCoords.lng !== 'number' ||
+      typeof dropoffCoords.lat !== 'number' || 
+      typeof dropoffCoords.lng !== 'number' || 
+      pickupCoords.lat < -90 || pickupCoords.lat > 90 ||
+      pickupCoords.lng < -180 || pickupCoords.lng > 180 ||
+      dropoffCoords.lat < -90 || dropoffCoords.lat > 90 ||
+      dropoffCoords.lng < -180 || dropoffCoords.lng > 180
+    ) {
+      throw new Error('Invalid geocoding response: Coordinates are out of range.');
+    }
+
+
+    const distance = calculateDistance(
+      pickupCoords.lat,
+      pickupCoords.lng,
+      dropoffCoords.lat,
+      dropoffCoords.lng
+    );
+    console.log('Calculated distance:', distance);
+
     const totalPrice = calculatePrice(vehicleType, distance, parcelData.weight, parcelData.category);
 
+    console.log('Calculated total price:', totalPrice); 
+
     const { parcel } = await createParcel({ ...parcelData, user_id });
+    console.log('Created parcel:', parcel); 
 
     const newOrder = await prisma.order.create({
       data: {
           receiver_name,
           pickup_address,
           dropoff_address,
-          pickup_lat,
-          pickup_lon,
-          dropoff_lat,
-          dropoff_lon,
+          pickup_lat: pickupCoords.lat,
+          pickup_lon: pickupCoords.lng,
+          dropoff_lat: dropoffCoords.lat,
+          dropoff_lon: dropoffCoords.lng,
           pickup_date,
           distance,
           total: parseFloat(totalPrice),
@@ -97,6 +127,7 @@ const createOrder = async (orderData) => {
     });
     return { message: 'Order created successfully', order: newOrder };
   } catch (error) {
+    console.error('Error creating order:', error);
     throw new Error('Failed to create a new order');
   }
 };
