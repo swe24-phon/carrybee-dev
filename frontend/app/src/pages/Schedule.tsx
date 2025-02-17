@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import BottomNavComponent from '../components/bottomNavComponent';
 import NavbarComponent from '../components/NavbarComponent';
 import CalendarComponent from '../components/CalendarComponent';
 import TimePickerComponent from '../components/TimePickerComponent';
-import nextButton from '../components/nextButton';
-import previousButton from '../components/previousButton';
-import PrevButtonComponent from '../components/previousButton';
 import NextButtonComponent from '../components/nextButton';
+import PrevButtonComponent from '../components/previousButton';
+import '../css/Schedule.css';
 
 const Schedule: React.FC = () => {
+  const navigate = useNavigate();
   const [displayDate, setDisplayDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [timeMode, setTimeMode] = useState<'AM' | 'PM'>('AM');
@@ -36,28 +37,26 @@ const Schedule: React.FC = () => {
   };
 
   const handlePrevClick = () => {
-    // Handle previous button click
-    console.log('Previous clicked');
+    navigate('/'); // Navigate to homepage
   };
 
   const handleNextClick = () => {
-    // Handle next button click
-    console.log('Next clicked');
+    navigate('/form'); // Navigate to form page
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <NavbarComponent />
-      <main className="flex-1 container mx-auto px-4 pt-4 pb-24 overflow-y-auto">
-        <div className="max-w-xl mx-auto">
-          <CalendarComponent
-            currentDate={displayDate}
-            selectedDate={selectedDate}
-            onDateSelect={handleDateSelect}
-            onPrevMonth={handlePrevMonth}
-            onNextMonth={handleNextMonth}
-          />
-          <div className="mt-4">
+    <div className="h-screen flex justify-center bg-gray-50">
+      <div className="app-container">
+        <NavbarComponent />
+        <div className="content-wrapper">
+          <div className="schedule-container">
+            <CalendarComponent
+              currentDate={displayDate}
+              selectedDate={selectedDate}
+              onDateSelect={handleDateSelect}
+              onPrevMonth={handlePrevMonth}
+              onNextMonth={handleNextMonth}
+            />
             <TimePickerComponent
               hour={hour}
               minute={minute}
@@ -67,15 +66,15 @@ const Schedule: React.FC = () => {
               onMinuteChange={setMinute}
               onTimeModeChange={setTimeMode}
             />
-          </div>
-          <div className="flex justify-between mt-8 mb-4 px-4">
-            <PrevButtonComponent onClick={handlePrevClick} />
-            <NextButtonComponent onClick={handleNextClick} />
+            <div className="navigation-buttons">
+              <PrevButtonComponent onClick={handlePrevClick} />
+              <NextButtonComponent onClick={handleNextClick} />
+            </div>
           </div>
         </div>
-      </main>
-      <div className="fixed bottom-0 left-0 right-0">
-        <BottomNavComponent />
+        <div className="bottom-nav-wrapper">
+          <BottomNavComponent />
+        </div>
       </div>
     </div>
   );
