@@ -19,5 +19,8 @@ COPY . .
 # Expose tha port that the app runs on 
 EXPOSE 4000
 
+# RIC
+# RUN npx prisma migrate dev --name init
+
 # Define the command to run the application
-CMD ["node", "index.js"]
+CMD ["sh", "-c", "npx prisma migrate dev --name init && node index.js"]
