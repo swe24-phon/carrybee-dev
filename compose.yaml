@@ -21,6 +21,7 @@ services:
       dockerfile: backend.dockerfile
     ports:
       - 4000:4000
+      - 5555:5555
     env_file:
       - ./backend/.env
     environment:
