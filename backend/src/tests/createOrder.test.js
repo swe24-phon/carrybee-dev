@@ -1,82 +1,53 @@
-const { createOrder } = require('../src/models/order'); // Adjust the path accordingly
-const axios = require('axios');  // We need to mock axios
+const axios = require('axios');
+const { geocodeAddress } = require('../services/geocodeService');
 
-// Mocking axios
 jest.mock('axios');
 
-describe('createOrder function', () => {
-  it('should create an order successfully with valid coordinates', async () => {
-    // Mock axios to simulate successful geocoding
-    axios.get.mockResolvedValue({
-      data: {
-        status: 'OK',
-        results: [{ geometry: { location: { lat: 40.712776, lng: -74.005974 } } }],
-      },
+describe('geocodeAddress', () => {
+    it('should return latitude and longitude for a valid address', async () => {
+      const mockResponse = {
+        data: {
+          results: [
+            {
+              geometry: {
+                location: { lat: 40.7128, lng: -74.0060 },
+              },
+            },
+          ],
+        },
+      };
+  
+      axios.get.mockResolvedValue(mockResponse);
+  
+      const result = await geocodeAddress('New York, NY');
+      expect(result).toEqual({ lat: 40.7128, lng: -74.0060 });
     });
+    it('should throw an error if no results are found', async () => {
+        const mockResponse = { data: { results: [] } };
+        axios.get.mockResolvedValue(mockResponse);
+    
+        await expect(geocodeAddress('Invalid Address')).rejects.toThrow('Geocoding failed');
+      });
+    });
+    
+// orderService.test.js
+const { PrismaClient } = require('@prisma/client');
+const { createOrder } = require('../services/orderService'); // Adjust the import path as needed
 
-    const orderData = {
-      user_id: 1,
-      receiver_name: 'John Doe',
-      pickup_address: 'valid address',
-      dropoff_address: 'valid address',
-      pickup_date: '2025-02-20',
-      vehicleType: 'van',
-      parcelData: { weight: 5, category: 'electronics' },
-    };
+jest.mock('@prisma/client');
 
-    const response = await createOrder(orderData);
+describe('createOrder', () => {
+  it('should create a new order successfully', async () => {
+    const mockOrder = { id: 1, address: '123 Main St' };
+    PrismaClient.prototype.order.create.mockResolvedValue(mockOrder);
 
-    // Assertions (replace with actual expected values)
-    expect(response.message).toBe('Order created successfully');
-    expect(response.order).toHaveProperty('pickup_lat');
-    expect(response.order).toHaveProperty('pickup_lon');
-    expect(response.order).toHaveProperty('dropoff_lat');
-    expect(response.order).toHaveProperty('dropoff_lon');
+    const result = await createOrder('123 Main St');
+    expect(result).toEqual(mockOrder);
   });
 
-  it('should throw an error if geocoding fails (invalid address)', async () => {
-    // Mock axios to simulate geocoding failure
-    axios.get.mockResolvedValue({
-      data: {
-        status: 'ZERO_RESULTS', // Geocoding failure scenario
-      },
-    });
+  it('should throw an error if order creation fails', async () => {
+    PrismaClient.prototype.order.create.mockRejectedValue(new Error('Database error'));
 
-    const orderData = {
-      user_id: 1,
-      receiver_name: 'Jane Doe',
-      pickup_address: 'invalid address',
-      dropoff_address: 'valid address',
-      pickup_date: '2025-02-20',
-      vehicleType: 'bike',
-      parcelData: { weight: 2, category: 'clothing' },
-    };
-
-    try {
-      await createOrder(orderData);
-    } catch (error) {
-      expect(error.message).toBe('Geocoding failed. Invalid address.');
-    }
-  });
-
-  it('should throw an error if there is a network issue (axios error)', async () => {
-    // Mock axios to simulate a network error
-    axios.get.mockRejectedValue(new Error('Network Error'));
-
-    const orderData = {
-      user_id: 1,
-      receiver_name: 'Tom Doe',
-      pickup_address: 'valid address',
-      dropoff_address: 'valid address',
-      pickup_date: '2025-02-20',
-      vehicleType: 'truck',
-      parcelData: { weight: 10, category: 'furniture' },
-    };
-
-    try {
-      await createOrder(orderData);
-    } catch (error) {
-      expect(error.message).toBe('Error fetching geolocation: Network Error');
-    }
+    await expect(createOrder('123 Main St')).rejects.toThrow('Database error');
   });
 });
