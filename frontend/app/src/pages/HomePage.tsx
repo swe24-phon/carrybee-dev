@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MapComponent from '../components/MapComponent';
+import MapComponent from '../components/mapComponent';
 import NavbarComponent from '../components/NavbarComponent';
 import BannerComponent from '../components/bannerComponent';
 import DestinationBoxComponent from '../components/destinationBoxComponent';

@@ -73,25 +73,29 @@ const createOrder = async (orderData) => {
 
     console.log('Received order data:', orderData);
 
-    const pickupCoords = await geocodeAddress(pickup_address);
-    const dropoffCoords = await geocodeAddress(dropoff_address);
+    let pickupCoords, dropoffCoords;
 
-    console.log('Pickup coordinates:', pickupCoords, 'Dropoff coordinates:', dropoffCoords);
-
-    if (
-      !pickupCoords || !dropoffCoords || 
-      typeof pickupCoords.lat !== 'number' || 
-      typeof pickupCoords.lng !== 'number' ||
-      typeof dropoffCoords.lat !== 'number' || 
-      typeof dropoffCoords.lng !== 'number' || 
-      pickupCoords.lat < -90 || pickupCoords.lat > 90 ||
-      pickupCoords.lng < -180 || pickupCoords.lng > 180 ||
-      dropoffCoords.lat < -90 || dropoffCoords.lat > 90 ||
-      dropoffCoords.lng < -180 || dropoffCoords.lng > 180
-    ) {
-      throw new Error('Invalid geocoding response: Coordinates are out of range.');
+    try {
+      pickupCoords = await geocodeAddress(pickup_address);
+      if (!pickupCoords || !pickupCoords.lat || !pickupCoords.lng) {
+        throw new Error('Invalid pickup address');
+      }
+    } catch (error) {
+      console.error(`Error geocoding pickup address (${pickup_address}):`, error.message);
+      pickupCoords = { lat: -37.8136, lng: 144.9631 }; // Default: Melbourne
     }
 
+    try {
+      dropoffCoords = await geocodeAddress(dropoff_address);
+      if (!dropoffCoords || !dropoffCoords.lat || !dropoffCoords.lng) {
+        throw new Error('Invalid dropoff address');
+      }
+    } catch (error) {
+      console.error(`Error geocoding dropoff address (${dropoff_address}):`, error.message);
+      dropoffCoords = { lat: -37.8136, lng: 144.9631 }; // Default: Melbourne
+    }
+
+    console.log('Final Pickup Coordinates:', pickupCoords, 'Final Dropoff Coordinates:', dropoffCoords);
 
     const distance = calculateDistance(
       pickupCoords.lat,
