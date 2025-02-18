@@ -10,9 +10,9 @@ const orderRoutes = require('./src/routes/orderRoutes.js');
 const paymentRoutes = require('./src/routes/paymentRoutes.js');
 const reviewRoutes = require('./src/routes/reviewRoutes.js');
 
-// initialise the app 
+// initialise the app
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 app.use(cors()); // Middleware to allow cross-origin requests
 app.use(express.json()); //middleware to parse Json requests
