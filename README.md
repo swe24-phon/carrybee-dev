@@ -9,107 +9,182 @@ This project lasts for 4 weeks, which includes planning, diagram drawing, Figma 
 ### Technical Architecture 👩‍🏫
 ---------------------------------
 # Structure 🏔
+# 🚀 Project Setup and Usage
 
-### Usage 🛠
-## Set up the enviroment:
+## 🛠 **Docker Setup and Running the App**
 
-# Step to run the project from scratch
+### **1️⃣ Remove Existing Containers (Optional)**
 
-## 0. git pull origin main 
+To clean up existing Docker containers and images, run:
 
-##### 1. git clone https://ghp_xxxxxtokenxxxx@github.com/swe24-phon/carrybee-dev.git
+```bash
+docker compose down --rmi all
+```
 
-##### 2. cd .\carrybee-dev\
+### **2️⃣ Start the Containers**
 
-##### 3. Create your own branch 
-		git checkout -b branchname
+Build and start the Docker containers:
 
-##### 4. git status
-On branch branchname
-nothing to commit, working tree clean
+```bash
+docker compose up --build
+```
 
-### 5. make sure your docker desktop is running!
+### **3️⃣ Verify Running Containers**
 
-------------------------
-### Docker set up
-##### docker-compose up --build 
-##### docker ps -a or docker ps
+- Open the **Docker Desktop** app and ensure all three containers (**frontend, backend, and database**) are running.
+- Click on the **frontend port** to open the app in your browser.
 
-**Open new terminal** to run Prisma migrations ( Database name: carry_bee)
+### **4️⃣ Run Development Server (`npm run dev`)**
 
-$ docker exec -it backend npx prisma migrate dev --name init
+- Start an interactive session inside the **backend** or **frontend** container:
 
-Connect to PostgreSQL inside the db container:
+```bash
+docker exec -it <container_name> bash
+```
 
-$ docker exec -it db psql -U carry_bee
+- Then run the development server:
 
-To check that the database is showing the information:
+```bash
+npm run dev
+```
 
+---
+
+## 🛠 **Database Setup & Seeding Data**
+
+### **1️⃣ Verify Database Connection**
+
+Check backend logs to verify the database connection:
+
+```bash
+docker logs -f backend
+```
+
+Look for the confirmation message:
+
+```
+Prisma schema loaded from prisma/schema.prisma
+Datasource "db": PostgreSQL database "carry_bee", schema "public" at "db:5432"
+```
+
+### **2️⃣ Seed the Database**
+
+- Open a new terminal and enter the backend container:
+
+```bash
+docker exec -it backend bash
+```
+
+- Seed the database with:
+
+```bash
+npx prisma db seed
+```
+
+### **3️⃣ View Database Data with Prisma Studio**
+
+```bash
+npx prisma studio
+```
+
+This opens Prisma Studio, where you can view and edit database records.
+
+---
+
+# 🚦 **Running the Project from Scratch**
+
+### **0. Pull Latest Code**
+
+```bash
+git pull origin main
+```
+
+### **1. Clone the Repository**
+
+```bash
+git clone https://github.com/swe24-phon/carrybee-dev.git
+cd carrybee-dev
+```
+
+### **2. Create Your Branch**
+
+```bash
+git checkout -b <branch_name>
+```
+
+### **3. Check Git Status**
+
+```bash
+git status
+```
+
+### **4. Ensure Docker Desktop is Running!**
+
+---
+
+##  **Database Setup**
+
+### **1. Check Running Containers**
+
+```bash
+docker ps -a
+```
+
+### **2. Run Prisma Migrations**
+
+```bash
+docker exec -it backend npx prisma migrate dev --name init
+```
+
+### **3. Access the Database via psql**
+
+```bash
+docker exec -it db psql -U carry_bee
+```
+
+### **4. Verify Database Tables**
+
+```sql
 carry_bee-# \dt
+```
 
-#### Open a new terminal:
-**For backend**
-\carrybee-dev  
-**$ cd backend **    
+### **5. Prisma Commands (Optional)**
 
-$ npm install
-
-$ npm run dev 
-
-
-#### Open a new terminal:
-
-**For frontend**
-
-\carrybee-dev\frontend\
-
-**$ cd app**
-
-$ npm install
-
-$ npm run dev
-
-check Local: http://localhost:5173
-
-check http://localhost:3000
-or curl http://localhost:3000
-
-To format the prisma schema (from the backend folder)
-
+```bash
 npx prisma format
 npx prisma generate
 npx prisma db push
-npx prisma migrate dev --name init (Replace "init" with a meaningful name related to the changes)
+npx prisma migrate dev --name <meaningful_migration_name>
 npx prisma studio
+```
 
+---
 
-Note: if you run into this:
+## ⚠️ **Troubleshooting: Port 3000 Already in Use**
 
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 3000
+If you see this error:
 
-**For windows:**
-run netstat -ano | findstr :3000 to find the ports that need to kill
+```
+code: 'EADDRINUSE',
+errno: -4091,
+syscall: 'listen',
+address: '::',
+port: 3000
+```
 
-then run taskkill /PID 34088 /F
-where 34088 is the PID
+### **For Windows:**
 
-check Local: http://localhost:5173
+- Find the process using port 3000:
 
-check http://localhost:3000
-or curl http://localhost:3000
+```bash
+netstat -ano | findstr :3000
+```
 
+- Kill the process:
 
-To format the prisma schema (from the backend folder)
-
-npx prisma format
-npx prisma generate
-npx prisma db push
-npx prisma migrate dev --name init (Replace "init" with a meaningful name related to the changes)
-npx prisma studio
+```bash
+taskkill /PID <PID> /F
+```
 
 ### Test 🌊
 
