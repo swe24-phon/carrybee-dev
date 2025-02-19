@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+// import { Elements } from '@stripe/react-stripe-js';
+// import { loadStripe } from '@stripe/stripe-js';
+import PaymentFormComponent from '../components/PaymentFormComponent';
 import NavbarComponent from '../components/NavbarComponent';
 import BottomNavbarComponent from '../components/BottomNavComponent';
 import VehicleTypeComponent from '../components/VehicleCardComponent';
@@ -9,13 +12,21 @@ import '../css/TopNav.css';
 import '../css/bottomnav.css';
 
 const Payment = () => {
-  const navigate = useNavigate(); // usage of useNavigate
+  const navigate = useNavigate();
+
   return (
-    <>
-    < NavbarComponent/>
-    <h1>Payment</h1>
-    <BottomNavbarComponent />
-    </>
+    <div className="page-container">
+      {/* Top Navigation */}
+      <NavbarComponent />
+
+      {/* Main Content */}
+      <div className="main-content">
+        <PaymentFormComponent />
+      </div>
+
+      {/* Bottom Navigation */}
+      <BottomNavbarComponent />
+    </div>
   );
 };
 

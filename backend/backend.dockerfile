@@ -20,4 +20,8 @@ COPY . .
 EXPOSE 4000
 
 # Define the command to run the application
-CMD ["node", "index.js"]
+#CMD ["node", "index.js"]
+
+#CMD ["sh", "-c", "npx prisma migrate dev --name init && node index.js"]
+
+CMD ["sh", "-c", "npx prisma migrate deploy && node index.js"]

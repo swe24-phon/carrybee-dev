@@ -38,7 +38,7 @@ const SignInComponent: React.FC<SignInProps> = ({
     e.preventDefault();
 
     try {
-      const response = await API.post("/login", {
+      const response = await API.post("/users/login", {
         email: credentials.email,
         password: credentials.password
       });

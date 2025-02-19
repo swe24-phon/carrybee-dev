@@ -88,7 +88,8 @@ const TimePickerComponent: React.FC<TimePickerProps> = ({
       </div>
 
       <div className="time-display">
-        Selected date and time: {formatDate(selectedDate)} | {hour}:{minute} {timeMode}
+        <span className="time-display-label">Selected date and time: </span>
+        <span className="time-display-value">{formatDate(selectedDate)} | {hour}:{minute} {timeMode}</span>
       </div>
     </div>
   );

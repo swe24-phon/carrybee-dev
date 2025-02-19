@@ -81,3 +81,12 @@
     color: #4b5563;
   }
   
+  .time-display-label {
+    font-weight: 700;
+    color: #333;
+  }
+  
+  .time-display-value {
+    font-weight: 400;
+    color: #4b5563;
+  }
