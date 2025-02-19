@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from '../assets/logo.png';
+// import logo from '../assets/logo.png';
 import '../css/SignIn.css';
 import API from "../api/api";
 
@@ -33,25 +33,25 @@ const SignInComponent: React.FC<SignInProps> = ({
       [name]: value
     }));
   };
-  
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-  
+
     try {
       const response = await API.post("/login", {
         email: credentials.email,
         password: credentials.password
       });
-  
+
       // Assuming the backend sends back a JWT token
       const { token } = response.data;
-  
+
       // Save token in localStorage
       localStorage.setItem("token", token);
-  
+
       // Optionally, store user info if backend sends it
       localStorage.setItem("user", JSON.stringify(response.data.user));
-  
+
       // Navigate to homepage
       navigate("/");
     } catch (error) {
@@ -83,19 +83,19 @@ const SignInComponent: React.FC<SignInProps> = ({
   return (
     <div className="signin-container">
       <div className="logo-circle">
-        <img
+        {/* <img
           src={logo}
           alt="CarryBee Logo"
           className="logo-image"
-        />
-        <div className="slogan">BUZZING AROUND TO DELIVER YOUR NEEDS</div>
+        /> */}
+        {/* <div className="slogan">BUZZING AROUND TO DELIVER YOUR NEEDS</div> */}
       </div>
 
       <form className="signin-form" onSubmit={handleSubmit}>
-        <h2>SIGN IN</h2>
+        {/* <h2>SIGN IN</h2> */}
 
         <div className="form-group">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Email:</label>
           <input
             id="email"
             type="text"
@@ -107,7 +107,7 @@ const SignInComponent: React.FC<SignInProps> = ({
         </div>
 
         <div className="form-group">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Password:</label>
           <input
             id="password"
             type="password"

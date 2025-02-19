@@ -3,7 +3,7 @@ import NavbarComponent from '../components/NavbarComponent';
 import DashboardComponent from '../components/DashboardComponent';
 import InvoiceCard from '../components/InvoiceCard';
 import '../css/Dashboard.css';
-import '../css/topnav.css';
+import '../css/TopNav.css';
 
 const Dashboard: React.FC = () => {
   return (

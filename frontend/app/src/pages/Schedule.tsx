@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import BottomNavComponent from '../components/bottomNavComponent';
+import BottomNavComponent from '../components/BottomNavComponent';
 import NavbarComponent from '../components/NavbarComponent';
 import CalendarComponent from '../components/CalendarComponent';
 import TimePickerComponent from '../components/TimePickerComponent';
-import nextButton from '../components/nextButton';
-import previousButton from '../components/previousButton';
-import PrevButtonComponent from '../components/previousButton';
-import NextButtonComponent from '../components/nextButton';
+import nextButton from '../components/NextButton';
+import previousButton from '../components/PreviousButton';
+import PrevButtonComponent from '../components/PreviousButton';
+import NextButtonComponent from '../components/NextButton';
 
 const Schedule: React.FC = () => {
   const [displayDate, setDisplayDate] = useState(new Date());
