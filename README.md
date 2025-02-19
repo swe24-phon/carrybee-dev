@@ -11,6 +11,38 @@ This project lasts for 4 weeks, which includes planning, diagram drawing, Figma 
 # Structure 🏔
 # 🚀 Project Setup and Usage
 
+
+# 🚦 **Running the Project from Scratch**
+
+### **0. Pull Latest Code**
+
+```bash
+git pull origin main
+```
+
+### **1. Clone the Repository**
+
+```bash
+git clone https://github.com/swe24-phon/carrybee-dev.git
+cd carrybee-dev
+```
+
+### **2. Create Your Branch**
+
+```bash
+git checkout -b <branch_name>
+```
+
+### **3. Check Git Status**
+
+```bash
+git status
+```
+
+### **4. Ensure Docker Desktop is Running!**
+
+---
+
 ## 🛠 **Docker Setup and Running the App**
 
 ### **1️⃣ Remove Existing Containers (Optional)**
@@ -91,36 +123,6 @@ This opens Prisma Studio, where you can view and edit database records.
 
 ---
 
-# 🚦 **Running the Project from Scratch**
-
-### **0. Pull Latest Code**
-
-```bash
-git pull origin main
-```
-
-### **1. Clone the Repository**
-
-```bash
-git clone https://github.com/swe24-phon/carrybee-dev.git
-cd carrybee-dev
-```
-
-### **2. Create Your Branch**
-
-```bash
-git checkout -b <branch_name>
-```
-
-### **3. Check Git Status**
-
-```bash
-git status
-```
-
-### **4. Ensure Docker Desktop is Running!**
-
----
 
 ##  **Database Setup**
 
