@@ -5,7 +5,7 @@ import avatar from '../assets/avatar.jpg';
 import signout from '../assets/signout-icon.png';
 import { useNavigate } from 'react-router-dom';
 // import '../css/homepage.css';
-import '../css/TopNav.css';
+import '../css/topnav.css';
 
 
 const NavbarComponent: React.FC = () => {
