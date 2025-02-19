@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo3.png';
 // import banner1 from '../assets/banner1.png';
 import avatar from '../assets/avatar.jpg';
 import signout from '../assets/signout-icon.png';
