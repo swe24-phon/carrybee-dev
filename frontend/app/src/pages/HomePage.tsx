@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import MapComponent from '../components/mapComponent';
+import MapComponent from '../components/MapComponent';
 import NavbarComponent from '../components/NavbarComponent';
 import BannerComponent from '../components/BannerComponent';
 import DestinationBoxComponent from '../components/DestinationBoxComponent';
 import BottomNavComponent from '../components/BottomNavComponent';
 import '../css/homepage.css';
 import '../css/TopNav.css'
-import '../css/bottomnav.css'
+import '../css/BottomNav.css'
 
 
 const HomePage: React.FC = () => {

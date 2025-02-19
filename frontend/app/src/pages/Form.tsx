@@ -8,7 +8,7 @@ import CameraComponent from '../components/CameraComponent';
 import '../css/form.css';
 import '../css/parcelType.css';
 import '../css/TopNav.css';
-import '../css/bottomnav.css';
+import '../css/BottomNav.css';
 
 const Form = () => {
   return (

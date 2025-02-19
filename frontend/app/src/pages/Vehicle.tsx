@@ -6,7 +6,7 @@ import PrevButtonComponent from '../components/PreviousButton';
 import ProceedButtonComponent from '../components/ProceedButton';
 import { useNavigate } from 'react-router-dom';
 import '../css/TopNav.css';
-import '../css/bottomnav.css';
+import '../css/BottomNav.css';
 
 interface PrevButtonProps {
   onClick: () => void;
