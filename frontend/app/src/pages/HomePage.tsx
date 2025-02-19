@@ -5,7 +5,7 @@ import BannerComponent from '../components/BannerComponent';
 import DestinationBoxComponent from '../components/DestinationBoxComponent';
 import BottomNavComponent from '../components/BottomNavComponent';
 import '../css/homepage.css';
-import '../css/TopNav.css'
+import '../css/topnav.css'
 import '../css/BottomNav.css'
 
 

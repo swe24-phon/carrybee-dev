@@ -5,7 +5,7 @@ import VehicleTypeComponent from '../components/VehicleCardComponent';
 import PrevButtonComponent from '../components/PreviousButton';
 import ProceedButtonComponent from '../components/ProceedButton';
 import { useNavigate } from 'react-router-dom';
-import '../css/TopNav.css';
+import '../css/topnav.css';
 import '../css/BottomNav.css';
 
 interface PrevButtonProps {
