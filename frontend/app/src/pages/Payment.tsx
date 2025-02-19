@@ -9,7 +9,7 @@ import NextButtonComponent from '../components/NextButton';
 import PrevButtonComponent from '../components/PreviousButton';
 import { useNavigate } from 'react-router-dom';
 import '../css/topnav.css';
-import '../css/BottomNav.css';
+import '../css/bottomnav.css';
 
 const Payment = () => {
   const navigate = useNavigate();
