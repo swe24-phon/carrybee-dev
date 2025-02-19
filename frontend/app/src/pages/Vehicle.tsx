@@ -1,6 +1,6 @@
 import React from 'react';
 import NavbarComponent from '../components/NavbarComponent';
-import BottomNavbarComponent from '../components/BottomNavComponent';
+import BottomNav from '../components/BottomNavComponent';
 import VehicleTypeComponent from '../components/VehicleCardComponent';
 import PrevButtonComponent from '../components/PreviousButton';
 import ProceedButtonComponent from '../components/ProceedButton';
@@ -25,7 +25,7 @@ const Vehicle = () => {
         </div>
         <ProceedButtonComponent onClick={() => navigate('/Payment')}/>
       </div>
-      <BottomNavbarComponent />
+      <BottomNav />
     </>
   );
 };

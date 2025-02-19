@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BottomNavComponent from '../components/BottomNavComponent';
+import BottomNav from '../components/BottomNavComponent';
 import NavbarComponent from '../components/NavbarComponent';
 import CalendarComponent from '../components/CalendarComponent';
 import TimePickerComponent from '../components/TimePickerComponent';
@@ -74,7 +74,7 @@ const Schedule: React.FC = () => {
           </div>
         </div>
         <div className="bottom-nav-wrapper">
-          <BottomNavComponent />
+          <BottomNav />
         </div>
       </div>
     </div>
