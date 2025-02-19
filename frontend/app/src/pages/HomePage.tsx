@@ -6,7 +6,7 @@ import DestinationBoxComponent from '../components/DestinationBoxComponent';
 import BottomNavComponent from '../components/BottomNavComponent';
 import '../css/homepage.css';
 import '../css/topnav.css'
-import '../css/BottomNav.css'
+import '../css/bottomnav.css'
 
 
 const HomePage: React.FC = () => {
