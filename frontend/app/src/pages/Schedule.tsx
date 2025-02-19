@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BottomNavComponent from '../components/bottomNavComponent';
+import BottomNavComponent from '../components/BottomNavComponent';
 import NavbarComponent from '../components/NavbarComponent';
 import CalendarComponent from '../components/CalendarComponent';
 import TimePickerComponent from '../components/TimePickerComponent';
-import NextButtonComponent from '../components/nextButton';
-import PrevButtonComponent from '../components/previousButton';
-import '../css/Schedule.css';
+import nextButton from '../components/NextButton';
+import previousButton from '../components/PreviousButton';
+import PrevButtonComponent from '../components/PreviousButton';
+import NextButtonComponent from '../components/NextButton';
 
 const Schedule: React.FC = () => {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ const Schedule: React.FC = () => {
   };
 
   const handleNextClick = () => {
-    navigate('/form'); // Navigate to form page
+    navigate('/Form'); // Navigate to form page
   };
 
   return (

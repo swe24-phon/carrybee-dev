@@ -1,13 +1,13 @@
 import React from 'react';
 import NavbarComponent from '../components/NavbarComponent';
-import BottomNavbarComponent from '../components/bottomNavComponent';
-import CheckboxComponent from '../components/checkboxComponent';
-import FormComponent from '../components/formComponent';
-import ParcelCardComponent from '../components/parcelCardComponent';
-import CameraComponent from '../components/cameraComponent';
+import BottomNavbarComponent from '../components/BottomNavComponent';
+import CheckboxComponent from '../components/CheckboxComponent';
+import FormComponent from '../components/FormComponent';
+import ParcelCardComponent from '../components/ParcelCardComponent';
+import CameraComponent from '../components/CameraComponent';
 import '../css/form.css';
 import '../css/parcelType.css';
-import '../css/topnav.css';
+import '../css/TopNav.css';
 import '../css/bottomnav.css';
 
 const Form = () => {

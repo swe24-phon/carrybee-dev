@@ -3,13 +3,12 @@ import React, { useEffect, useState } from 'react';
 // import { loadStripe } from '@stripe/stripe-js';
 import PaymentFormComponent from '../components/PaymentFormComponent';
 import NavbarComponent from '../components/NavbarComponent';
-import BottomNavbarComponent from '../components/bottomNavComponent';
-// import VehicleTypeComponent from '../components/vehicleCardComponent';
-// import NextButtonComponent from '../components/nextButton';
-// import PrevButtonComponent from '../components/previousButton';
+import BottomNavbarComponent from '../components/BottomNavComponent';
+import VehicleTypeComponent from '../components/VehicleCardComponent';
+import NextButtonComponent from '../components/NextButton';
+import PrevButtonComponent from '../components/PreviousButton';
 import { useNavigate } from 'react-router-dom';
-import '../css/paymentform.css'
-import '../css/topnav.css';
+import '../css/TopNav.css';
 import '../css/bottomnav.css';
 
 const Payment = () => {
@@ -19,12 +18,12 @@ const Payment = () => {
     <div className="page-container">
       {/* Top Navigation */}
       <NavbarComponent />
-      
+
       {/* Main Content */}
       <div className="main-content">
         <PaymentFormComponent />
       </div>
-      
+
       {/* Bottom Navigation */}
       <BottomNavbarComponent />
     </div>

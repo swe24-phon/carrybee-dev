@@ -124,31 +124,7 @@ const DestinationBox: React.FC<Props> = ({ setPickupCoords, setDropoffCoords }) 
   };
 
   useEffect(() => {
-    if (pickupInputRef.current && dropoffInputRef.current && window.google && window.google.maps) {
-      const pickupAutocomplete = new google.maps.places.Autocomplete(pickupInputRef.current, { types: ['geocode'] });
-      const dropoffAutocomplete = new google.maps.places.Autocomplete(dropoffInputRef.current, { types: ['geocode'] });
-
-      const pickupListener = pickupAutocomplete.addListener("place_changed", () => {
-        const place = pickupAutocomplete.getPlace();
-        if (place.geometry) {
-          setPickup(place.formatted_address || '');
-          setPickupCoords(place.geometry.location || null);
-        }
-      });
-
-      const dropoffListener = dropoffAutocomplete.addListener("place_changed", () => {
-        const place = dropoffAutocomplete.getPlace();
-        if (place.geometry) {
-          setDropoff(place.formatted_address || '');
-          setDropoffCoords(place.geometry.location || null);
-        }
-      });
-
-      return () => {
-        google.maps.event.removeListener(pickupListener);
-        google.maps.event.removeListener(dropoffListener);
-      };
-    }
+    // No need for autocomplete setup now, so this can be removed
   }, []);
 
   return (
@@ -168,7 +144,6 @@ const DestinationBox: React.FC<Props> = ({ setPickupCoords, setDropoffCoords }) 
               value={pickup}
               onChange={(e) => setPickup(e.target.value)}
               placeholder="Pick-up"
-              disabled={loading}  // Disable input during loading
             />
             <input
               ref={dropoffInputRef}
@@ -178,7 +153,6 @@ const DestinationBox: React.FC<Props> = ({ setPickupCoords, setDropoffCoords }) 
               value={dropoff}
               onChange={(e) => setDropoff(e.target.value)}
               placeholder="Drop-off"
-              disabled={loading}  // Disable input during loading
             />
           </div>
           <button id="next-btn" type="submit" disabled={loading}>
