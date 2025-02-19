@@ -38,5 +38,5 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin: 1rem 0 6rem;
-  gap: 6rem;
+  gap: 2rem;
 }

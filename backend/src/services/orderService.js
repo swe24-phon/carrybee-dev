@@ -1,5 +1,6 @@
 const prisma = require('../../prismaClient');
 const { createParcel } = require('./parcelService');
+const { geocodeAddress } = require('./geocodeService');
 
 // Base price
 const vehicle_price = {
@@ -65,28 +66,61 @@ const createOrder = async (orderData) => {
       receiver_name,
       pickup_address,
       dropoff_address,
-      pickup_lat,
-      pickup_lon,
-      dropoff_lat,
-      dropoff_lon,
       pickup_date,
       vehicleType,
       parcelData,
     } = orderData
-    const distance = calculateDistance(pickup_lat, pickup_lon, dropoff_lat, dropoff_lon);
+
+    console.log('Received order data:', orderData);
+
+    let pickupCoords, dropoffCoords;
+
+    try {
+      pickupCoords = await geocodeAddress(pickup_address);
+      if (!pickupCoords || !pickupCoords.lat || !pickupCoords.lng) {
+        throw new Error('Invalid pickup address');
+      }
+    } catch (error) {
+      console.error(`Error geocoding pickup address (${pickup_address}):`, error.message);
+      pickupCoords = { lat: -37.8136, lng: 144.9631 }; // Default: Melbourne
+    }
+
+    try {
+      dropoffCoords = await geocodeAddress(dropoff_address);
+      if (!dropoffCoords || !dropoffCoords.lat || !dropoffCoords.lng) {
+        throw new Error('Invalid dropoff address');
+      }
+    } catch (error) {
+      console.error(`Error geocoding dropoff address (${dropoff_address}):`, error.message);
+      dropoffCoords = { lat: -37.8136, lng: 144.9631 }; // Default: Melbourne
+    }
+
+    console.log('Final Pickup Coordinates:', pickupCoords, 'Final Dropoff Coordinates:', dropoffCoords);
+
+    const distance = calculateDistance(
+      pickupCoords.lat,
+      pickupCoords.lng,
+      dropoffCoords.lat,
+      dropoffCoords.lng
+    );
+    console.log('Calculated distance:', distance);
+
     const totalPrice = calculatePrice(vehicleType, distance, parcelData.weight, parcelData.category);
 
+    console.log('Calculated total price:', totalPrice); 
+
     const { parcel } = await createParcel({ ...parcelData, user_id });
+    console.log('Created parcel:', parcel); 
 
     const newOrder = await prisma.order.create({
       data: {
           receiver_name,
           pickup_address,
           dropoff_address,
-          pickup_lat,
-          pickup_lon,
-          dropoff_lat,
-          dropoff_lon,
+          pickup_lat: pickupCoords.lat,
+          pickup_lon: pickupCoords.lng,
+          dropoff_lat: dropoffCoords.lat,
+          dropoff_lon: dropoffCoords.lng,
           pickup_date,
           distance,
           total: parseFloat(totalPrice),
@@ -97,34 +131,68 @@ const createOrder = async (orderData) => {
     });
     return { message: 'Order created successfully', order: newOrder };
   } catch (error) {
+    console.error('Error creating order:', error);
     throw new Error('Failed to create a new order');
   }
 };
 
-// const getAllOrders = async () => {
-//   try {
-//     return await prisma.order.findMany();
-//   } catch (error) {
-//     throw new Error('Failed to get all orders');
-//   }
-// };
+const getAllOrders = async () => {
+  try {
+    return await prisma.order.findMany();
+  } catch (error) {
+    throw new Error('Failed to get all orders');
+  }
+};
 
-// const getOrderById = async (id) => {
-//   try {
-//     const order = await prisma.order.findUnique({ where: { id } });
-//     if (!order) {
-//       throw new Error('Order not found')
-//     }
-//     return order;
-//   } catch (error) {
-//     throw new Error(error.message);
-//   }
-// };
+const getOrderById = async (id) => {
+  try {
+    const order = await prisma.order.findUnique({ where: { id } });
+    if (!order) {
+      throw new Error('Order not found')
+    }
+    return order;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+//Update Order
+
+const updateOrder = async (id, updateData) => {
+  try {
+    const { receiver_name, pickup_address, dropoff_address, pickup_date } = updateData;
+    const updatedOrder = await prisma.order.update({
+      where: { id },
+      data: {
+        receiver_name: receiver_name || undefined,
+        pickup_address: pickup_address || undefined,
+        dropoff_address: dropoff_address || undefined,
+        pickup_date: pickup_date || undefined,
+      },
+    });
+    return { message: 'Order updated succesfully', order: updatedOrder};
+   } catch (error) {
+    throw new Error(error.message);
+   }
+};
+
+// Delete Order
+const deleteOrder = async (id) => {
+  try {
+    await prisma.order.delete({ where: { id }});
+    return { message: 'Order deleted succesfully'};
+  } catch (error) {
+    throw new Error('Failed to delete order');
+  }
+};
+
 
 module.exports = {
  createOrder,
  calculatePrice,
  calculateDistance,
-//  getAllOrders,
-//  getOrderById
+ getAllOrders,
+ getOrderById,
+ updateOrder,
+ deleteOrder,
 };

@@ -17,7 +17,7 @@ const BottomNav: React.FC = () => {
           <FontAwesomeIcon icon={faHouseChimney} className='nav-icon' onClick={() => navigate('/')}/>
         </div>
         <div className='nav-icons'>
-        <FontAwesomeIcon icon={faGauge} className='nav-icon'/>
+        <FontAwesomeIcon icon={faGauge} className='nav-icon' onClick={() => navigate('/dashboard')}/>
         </div>
         <div className='nav-icons'>
         <FontAwesomeIcon icon={faGear} className='nav-icon'/>

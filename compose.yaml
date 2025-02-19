@@ -1,5 +1,4 @@
 version: '3.9'
-
 services:
   frontend:
     container_name: frontend
@@ -14,6 +13,8 @@ services:
     restart: always
     depends_on:
       - backend
+    networks:
+      - private
   backend:
     container_name: backend
     image: backend
@@ -22,11 +23,17 @@ services:
       dockerfile: backend.dockerfile
     ports:
       - 4000:4000
-    environment:
-      - DATABASE_URL=postgresql://carry_bee:buzzingaround@db:5432/carry_bee?schema=public
+      - 5555:5555
+    env_file:
+      - ./backend/.env
+    #environment:
+     # - DATABASE_URL=postgresql://carry_bee:buzzingaround@db:5432/carry_bee?schema=public
+    #  - JWT_SECRET=your_secret_key_here
     depends_on:
       - db
     restart: always
+    networks:
+      - private
   db:
       container_name: db
       image: postgres:17
@@ -39,6 +46,9 @@ services:
         - 5432:5432
       volumes:
         - pgdata:/var/lib/postgresql/data
-
+      networks:
+      - private
 volumes:
   pgdata: {}
+networks:
+  private:
