@@ -17,3 +17,19 @@ button {
   width: 165px;
   font-weight: 900;
 }
+
+* Individual Vehicle Card */
+.icon-box {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+/* added by angela */
+.icon-box.selected {
+  border-color: #FECF30 ;
+  border: 2px solid #2a2a2a;
+} /* added by angela */

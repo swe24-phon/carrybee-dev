@@ -68,7 +68,7 @@ const useOrderStore = create((set) => ({
   },
   setParcelDetails: (parcelDetails) => {
     set((state) => {
-      const newState = { ...state, parcelDetails };
+      const newState = { ...state, parcelDetails, ...parcelDetails };
       console.log('setParcelDetails:', newState);
       return newState;
     });
@@ -88,13 +88,13 @@ const useOrderStore = create((set) => ({
     });
   },
 
-  updateOrderDetails: (details) => {
-    set((state) => {
-      const newState = { ...state, ...details };
-      console.log(details,'updateOrderDetails:', newState);
-      return newState;
-    });
-  },
+  // updateOrderDetails: (details) => {
+  //   set((state) => {
+  //     const newState = { ...state, ...details };
+  //     console.log(details,'updateOrderDetails:', newState);
+  //     return newState;
+  //   });
+  // },
 
   resetOrder: () => {
     set((state) => {
