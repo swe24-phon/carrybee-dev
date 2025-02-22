@@ -1,9 +1,4 @@
 import React from 'react';
-<<<<<<< Updated upstream
-import '../css/homepage.css';
-=======
-import '../css/homepage.css'
->>>>>>> Stashed changes
 import '../css/bottomnav.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouseChimney } from '@fortawesome/free-solid-svg-icons';
