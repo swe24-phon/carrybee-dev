@@ -1,10 +1,10 @@
 import React from 'react';
 import NavbarComponent from '../components/NavbarComponent';
-import BottomNavbarComponent from '../components/bottomNavComponent';
-import CheckboxComponent from '../components/checkboxComponent';
-import FormComponent from '../components/formComponent';
-import ParcelCardComponent from '../components/parcelCardComponent';
-import CameraComponent from '../components/cameraComponent';
+import BottomNavComponent from '../components/BottomNavComponent';
+import CheckboxComponent from '../components/CheckboxComponent';
+import FormComponent from '../components/FormComponent';
+import ParcelCardComponent from '../components/ParcelCardComponent';
+// import CameraComponent from '../components/CameraComponent';
 import '../css/form.css';
 import '../css/parcelCategory.css';
 import '../css/topnav.css';
@@ -17,9 +17,9 @@ const Form = () => {
       <ParcelCardComponent />
       <CheckboxComponent />
       <FormComponent />
-      <CameraComponent />
+      {/* <CameraComponent /> */}
       <div style={{ position: 'sticky', bottom: 0 }}>
-        <BottomNavbarComponent /> // bottom nav for form page needs different prop
+        <BottomNavComponent /> // bottom nav for form page needs different prop
       </div>
     </>
   );

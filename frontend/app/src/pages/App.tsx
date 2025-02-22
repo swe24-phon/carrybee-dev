@@ -48,6 +48,8 @@ import Form from './Form';
 import Vehicle from './Vehicle';
 import Payment from './Payment';
 import Dashboard from './Dashboard';
+import PaymentSuccess from './PaymentSuccess';
+import PaymentError from './PaymentError';
 
 const App: React.FC = () => {
   return (
@@ -61,7 +63,9 @@ const App: React.FC = () => {
             <Route path="/Form" element={<Form />} />
             <Route path="/Vehicle" element={<Vehicle />} />
             <Route path="/Payment" element={<Payment />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/Dashboard" element={<Dashboard />} />
+            <Route path="/payment-success" element={<PaymentSuccess />} />
+            <Route path="/payment-error" element={<PaymentError />} />
           </Routes>
         </Router>
       </div>

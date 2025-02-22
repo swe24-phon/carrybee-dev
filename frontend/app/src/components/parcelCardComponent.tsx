@@ -110,6 +110,7 @@
 
 // export default ParcelType;
 
+
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleInfo, faFile, faBox, faGifts, faCouch, faCubes, faBoxOpen, faMotorcycle, faCarSide, faVanShuttle, faTruckPickup, faShip, faHelicopter } from '@fortawesome/free-solid-svg-icons';
@@ -165,10 +166,15 @@ const ParcelCategory = ({ onSelectCategory }) => {
     <>
       <h1 id='type'>Parcel Type</h1>
       <div id="parcel-cards">
+
         <div className={`icon-box ${selectedCard === 0 ? 'selected' : ''}`}
           onClick={() => handleCardClick(0, 'DOCUMENT')}
         >
           <div className={`info-box ${active === 0 ? 'active' : ''}`}>
+
+        <div className="icon-box">
+          <div className={`info-box ${active === 0 ? 'active' : ''}`} onClick={() => handleInfoClick(0)}>
+
             <span className="info-button">
               <FontAwesomeIcon icon={faCircleInfo} />
             </span>
@@ -176,16 +182,24 @@ const ParcelCategory = ({ onSelectCategory }) => {
               <h3 className='popup-head'>Document</h3>
               <FontAwesomeIcon icon={faMotorcycle} className='vehicle-icon'/>
               <p><strong>Weight:</strong> up to 20kg</p>
+
               <p><strong>Size limit (L x W x H):</strong> 35 x 32 x 10 cm</p>
+              <p><strong>Size limit (L x W x H):</strong> 0.5 x 0.4 x 0.5 meters</p>
+
             </div>
           </div>
           <FontAwesomeIcon icon={faFile} className="parcel-icon" /> Document
         </div>
 
+
         <div className={`icon-box ${selectedCard === 1 ? 'selected' : ''}`}
           onClick={() => handleCardClick(1, 'SMALL')}
         >
           <div className={`info-box ${active === 1 ? 'active' : ''}`}>
+
+        <div className="icon-box">
+          <div className={`info-box ${active === 1 ? 'active' : ''}`} onClick={() => handleInfoClick(1)}>
+
             <span className="info-button">
               <FontAwesomeIcon icon={faCircleInfo} />
             </span>
@@ -193,73 +207,116 @@ const ParcelCategory = ({ onSelectCategory }) => {
               <h3 className='popup-head'>Small</h3>
               <FontAwesomeIcon icon={faCarSide} className='vehicle-icon'/>
               <p><strong>Weight:</strong> up to 200kg</p>
+
               <p><strong>Size limit (L x W x H):</strong> 50 x 40 x 50 cm </p>
+              <p><strong>Size limit (L x W x H):</strong> 1 x 0.6 x 0.7 meters</p>
+
             </div>
           </div>
           <FontAwesomeIcon icon={faBox} className="parcel-icon" /> Small
         </div>
 
+
         <div className={`icon-box ${selectedCard === 2 ? 'selected' : ''}`}
           onClick={() => handleCardClick(2, 'MEDIUM')}
         >
           <div className={`info-box ${active === 2 ? 'active' : ''}`}>
+
+        <div className="icon-box">
+          <div className={`info-box ${active === 2 ? 'active' : ''}`} onClick={() => handleInfoClick(2)}>
+
             <span className="info-button">
               <FontAwesomeIcon icon={faCircleInfo} />
             </span>
             <div className="info-popup">
               <h3 className='popup-head'>Medium</h3>
+
               <FontAwesomeIcon icon={faVanShuttle} className='vehicle-icon' />
               <p><strong>Weight:</strong> up to 300kg</p>
               <p><strong>Size limit (L x W x H):</strong> 210 x 120 x 110 cm </p>
+
+              <FontAwesomeIcon icon={faVanShuttle} className='vehicle-icon'/>
+              <p><strong>Weight:</strong> up to 300kg</p>
+              <p><strong>Size limit (L x W x H):</strong> 1.2 x 1 x 0.9 meters</p>
+
             </div>
           </div>
           <FontAwesomeIcon icon={faGifts} className="parcel-icon" /> Medium
         </div>
 
+
         <div className={`icon-box ${selectedCard === 3 ? 'selected' : ''}`}
           onClick={() => handleCardClick(3, 'LARGE')}
-        >
+          >
           <div className={`info-box ${active === 3 ? 'active' : ''}`}>
+
+        <div className="icon-box">
+          <div className={`info-box ${active === 3 ? 'active' : ''}`} onClick={() => handleInfoClick(3)}>
+
             <span className="info-button">
               <FontAwesomeIcon icon={faCircleInfo} />
             </span>
             <div className="info-popup">
               <h3 className='popup-head'>Large</h3>
+
               <FontAwesomeIcon icon={faTruckPickup} className='vehicle-icon' />
               <p><strong>Weight:</strong> up to 800kg</p>
               <p><strong>Size limit (L x W x H):</strong> 310 x 180 x 180 cm</p>
+
+              <FontAwesomeIcon icon={faTruckPickup} className='vehicle-icon'/>
+              <p><strong>Weight:</strong> up to 800kg</p>
+              <p><strong>Size limit (L x W x H):</strong> 2.7 x 1.5 x 0.5 meters</p>
+
             </div>
           </div>
           <FontAwesomeIcon icon={faCouch} className="parcel-icon" /> Large
         </div>
 
+
         <div className={`icon-box ${selectedCard === 4 ? 'selected' : ''}`}
           onClick={() => handleCardClick(4, 'EXTRA_LARGE')}
         >
           <div className={`info-box ${active === 4 ? 'active' : ''}`}>
+
+        <div className="icon-box">
+          <div className={`info-box ${active === 4 ? 'active' : ''}`} onClick={() => handleInfoClick(4)}>
+
             <span className="info-button">
               <FontAwesomeIcon icon={faCircleInfo} />
             </span>
             <div className="info-popup">
               <h3 className='popup-head'>Extra Large</h3>
+
               <FontAwesomeIcon icon={faShip} className='vehicle-icon' />
               <p><strong>Weight:</strong> up to 1000kg</p>
               <p><strong>Size limit (L x W x H):</strong> 600 x 195 x 195 cm</p>
+              <FontAwesomeIcon icon={faShip} className='vehicle-icon'/>
+              <p><strong>Weight:</strong> up to 1000kg</p>
+              <p><strong>Size limit (L x W x H):</strong> 10 x 10 x 10 meters</p>
+
             </div>
           </div>
           <FontAwesomeIcon icon={faCubes} className="parcel-icon" /> Extra Large
         </div>
 
+
         <div className={`icon-box ${selectedCard === 5 ? 'selected' : ''}`}
           onClick={() => handleCardClick(5, 'CUSTOM')}
         >
           <div className={`info-box ${active === 5 ? 'active' : ''}`}>
+
+        <div className="icon-box">
+          <div className={`info-box ${active === 5 ? 'active' : ''}`} onClick={() => handleInfoClick(5)}>
+
             <span className="info-button">
               <FontAwesomeIcon icon={faCircleInfo} />
             </span>
             <div className="info-popup">
               <h3 className='popup-head'>Custom</h3>
+
               <FontAwesomeIcon icon={faHelicopter} className='vehicle-icon' />
+              <FontAwesomeIcon icon={faHelicopter} className='vehicle-icon'/>
+
               <p><strong>Weight:</strong> contact customer team</p>
               <p><strong>Size limit (L x W x H):</strong> contact customer team</p>
               <h5 id='customer-contact'>Contact us</h5>

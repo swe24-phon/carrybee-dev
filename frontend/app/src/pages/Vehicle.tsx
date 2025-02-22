@@ -1,9 +1,9 @@
 import React from 'react';
 import NavbarComponent from '../components/NavbarComponent';
-import BottomNavbarComponent from '../components/bottomNavComponent';
-import VehicleTypeComponent from '../components/vehicleCardComponent';
-import PrevButtonComponent from '../components/previousButton';
-import ProceedButtonComponent from '../components/proceedButton';
+import BottomNav from '../components/BottomNavComponent';
+import VehicleTypeComponent from '../components/VehicleCardComponent';
+import PrevButtonComponent from '../components/PreviousButton';
+import ProceedButtonComponent from '../components/ProceedButton';
 import { useNavigate } from 'react-router-dom';
 import '../css/topnav.css';
 import '../css/bottomnav.css';
@@ -25,7 +25,7 @@ const Vehicle = () => {
         </div>
         <ProceedButtonComponent onClick={() => navigate('/Payment')}/>
       </div>
-      <BottomNavbarComponent />
+      <BottomNav />
     </>
   );
 };
