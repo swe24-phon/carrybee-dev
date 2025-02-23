@@ -140,13 +140,13 @@
 // export default MapComponent;
 // THIS CODE WORKS
 import React, { useState, useEffect, useRef } from 'react';
-import { LoadScript, GoogleMap, Libraries, Marker } from '@react-google-maps/api';
+import { LoadScript, GoogleMap, Libraries } from '@react-google-maps/api';
 import markerIcon from '../assets/marker.png';
 
 const GOOGLE_MAPS_API_KEY = "AIzaSyB613qjkRHO_l58B_9cF_ja3Tp7DKBT_y4";
 
 // Define libraries array using the 'Libraries' type
-const libraries: Libraries = ['places', 'geometry', 'marker']; // Add 'marker' to load AdvancedMarkerElement
+const libraries: Libraries = ['places', 'geometry', 'marker'];
 
 interface Props {
   pickupCoords: google.maps.LatLng | null;
@@ -154,25 +154,12 @@ interface Props {
 }
 
 const MapComponent: React.FC<Props> = ({ pickupCoords, dropoffCoords }) => {
-  const [zoomLevel, setZoomLevel] = useState<number>(11);
   const mapRef = useRef<google.maps.Map | null>(null);
-
-  useEffect(() => {
-    if (pickupCoords && dropoffCoords) {
-      const distance = google.maps.geometry.spherical.computeDistanceBetween(pickupCoords, dropoffCoords);
-      if (distance < 5000) {
-        setZoomLevel(14); // closer zoom for shorter distances
-      } else if (distance < 10000) {
-        setZoomLevel(12); // medium zoom
-      } else {
-        setZoomLevel(11); // default zoom
-      }
-    }
-  }, [pickupCoords, dropoffCoords]);
+  const [markers, setMarkers] = useState<google.maps.Marker[]>([]);
 
   // Function to add a marker with a custom icon
   const addMarker = (map: google.maps.Map, position: google.maps.LatLng, title: string, iconUrl: string) => {
-    new google.maps.Marker({
+    const marker = new google.maps.Marker({
       position: position.toJSON(),
       map: map,
       title: title,
@@ -181,33 +168,40 @@ const MapComponent: React.FC<Props> = ({ pickupCoords, dropoffCoords }) => {
         scaledSize: new google.maps.Size(40, 40), // Size of the icon
       },
     });
+
+    setMarkers((prevMarkers) => [...prevMarkers, marker]);
+  };
+
+  // Function to remove previous markers from the map
+  const clearMarkers = () => {
+    markers.forEach(marker => marker.setMap(null)); // Remove all markers from the map
+    setMarkers([]); // Clear the marker array
   };
 
   useEffect(() => {
     if (mapRef.current && pickupCoords && dropoffCoords) {
+      // Clear previous markers before adding new ones
+      clearMarkers();
+
+      const bounds = new google.maps.LatLngBounds();
+      bounds.extend(pickupCoords);
+      bounds.extend(dropoffCoords);
+
+      mapRef.current.fitBounds(bounds); // Automatically adjusts zoom to fit both markers
+
       const iconUrl = "https://media.istockphoto.com/id/1148705812/vector/location-icon-vector-pin-sign-isolated-on-white-background-navigation-map-gps-direction.jpg?s=612x612&w=0&k=20&c=lqEIzW3QedZfytsX30NoBJbHxZZbWnlLsvEiwOSbaow=";
-      // Clear previous markers, or handle adding both markers
-      addMarker(mapRef.current, pickupCoords, "Pick-up Location", iconUrl); // Add custom icon for pickup
-      addMarker(mapRef.current, dropoffCoords, "Drop-off Location", iconUrl); // Add custom icon for dropoff
+      addMarker(mapRef.current, pickupCoords, "Pick-up Location", iconUrl);
+      addMarker(mapRef.current, dropoffCoords, "Drop-off Location", iconUrl);
     }
   }, [pickupCoords, dropoffCoords]);
-
+  console.log(`pickup-coordinates: ${pickupCoords}, drop-off-coordinates: ${dropoffCoords}`)
   return (
     <LoadScript googleMapsApiKey={GOOGLE_MAPS_API_KEY} libraries={libraries}>
       <GoogleMap
         id="map"
         mapContainerStyle={{ width: '100%', height: '400px' }}
-        zoom={zoomLevel}
-        center={pickupCoords && dropoffCoords
-          ? {
-              lat: (pickupCoords.lat() + dropoffCoords.lat()) / 2,
-              lng: (pickupCoords.lng() + dropoffCoords.lng()) / 2,
-            }
-          : pickupCoords
-          ? pickupCoords.toJSON()
-          : dropoffCoords
-          ? dropoffCoords.toJSON()
-          : { lat: -37.8136, lng: 144.9631 }} // Default to Melbourne
+        zoom={11} // Default zoom level (will be overridden by fitBounds)
+        center={pickupCoords || { lat: -37.8136, lng: 144.9631 }} // Default to Melbourne if no coords
         onLoad={(map) => {
           mapRef.current = map; // Set the map reference for markers
         }}
