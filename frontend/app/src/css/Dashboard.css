@@ -26,7 +26,7 @@
 #dashboard-welcome {
   color: black;
   font-size: 20px;
-  font-family: 'Inter', sans-serif;
+  /* font-family: 'Inter', sans-serif; */
   font-weight: normal;
   margin-left: 85px;
   margin-top: 0px;
@@ -74,4 +74,3 @@
   font-family: 'Inter', sans-serif;
   font-weight: normal;
 }
-

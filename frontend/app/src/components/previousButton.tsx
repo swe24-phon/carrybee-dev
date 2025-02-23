@@ -11,8 +11,8 @@ const PrevButtonComponent: React.FC<PrevButtonProps> = ({ onClick }) => {
       variant="outlined"
       onClick={onClick}
       sx={{
-        color: '#FECF30',
-        borderColor: '#FECF30',
+        color: '#cc9e00',
+        borderColor: '#cc9e00',
         '&:hover': {
           backgroundColor: '#FECF30',
           color: '#000000',

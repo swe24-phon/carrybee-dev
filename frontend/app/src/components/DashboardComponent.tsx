@@ -60,7 +60,7 @@ const DashboardComponent = ({ invoices }: DashboardComponentProps) => {
             className="home-button hover:bg-[#FECF30] transition-colors duration-300"
           >
             <span className="home-button-text">
-              home
+              HOME
             </span>
           </button>
         </div>
