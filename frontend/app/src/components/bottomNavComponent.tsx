@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/homepage.css'
+// import '../css/homepage.css'
 import '../css/bottomnav.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouseChimney } from '@fortawesome/free-solid-svg-icons';
