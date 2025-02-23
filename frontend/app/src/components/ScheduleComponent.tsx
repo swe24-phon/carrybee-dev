@@ -89,12 +89,12 @@ const ScheduleComponent = () => {
       return newDate;
     });
   }, []);
-  
+
   const handleDateSelect = useCallback((date: Date) => {
     console.log("HandleDate", date)
     setSelectedDate(date);
   }, [selectedDate]);
-//ombines the selected date and time into a
+// combines the selected date and time into a
 // proper Date object and updates the store with setSchedule
   useEffect(() => {
     if (selectedDate) {

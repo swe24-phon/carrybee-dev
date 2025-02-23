@@ -11,9 +11,7 @@ body {
 }
 
 #form-box {
-  /* position: absolute; */
   margin-top: 4rem;
   padding: 1rem 2rem;
-  /* background-color: #ffffff; */
   border-radius: 10px;
 }

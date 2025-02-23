@@ -40,7 +40,7 @@ const DashboardComponent = ({ invoices }: DashboardComponentProps) => {
 
         {/* Welcome Text */}
         <div id="dashboard-welcome">
-          Welcome to dashboard
+          Welcome to Dashboard
         </div>
 
         {/* Invoice Cards Section */}
