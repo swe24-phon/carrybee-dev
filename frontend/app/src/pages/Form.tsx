@@ -3,8 +3,8 @@ import NavbarComponent from '../components/NavbarComponent';
 import BottomNavComponent from '../components/bottomNavComponent';
 import CheckboxComponent from '../components/CheckboxComponent';
 import FormComponent from '../components/FormComponent';
-import ParcelCardComponent from '../components/ParcelCardComponent';
-import CameraComponent from '../components/cameraComponent';
+import ParcelCardComponent from '../components/parcelCardComponent';
+// import CameraComponent from '../components/cameraComponent';
 import '../css/form.css';
 import '../css/parcelCategory.css';
 import '../css/topnav.css';
@@ -17,7 +17,7 @@ const Form = () => {
       <ParcelCardComponent />
       <CheckboxComponent />
       <FormComponent />
-      <CameraComponent />
+      {/* <CameraComponent /> */}
       <div style={{ position: 'sticky', bottom: 0 }}>
         <BottomNavComponent />
       </div>
