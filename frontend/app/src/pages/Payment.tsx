@@ -3,7 +3,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import PaymentFormComponent from '../components/PaymentFormComponent';
 import NavBarComponent from '../components/NavBarComponent';
-import BottomNavComponent from '../components/BottomNavComponent';
+import BottomNavComponent from '../components/bottomNavComponent';
 
 // Import payment method icons
 import paypal from '../assets/paypal.png';

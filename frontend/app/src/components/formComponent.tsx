@@ -123,8 +123,7 @@ import React, { useState, useRef } from 'react';
 import TextField from '@mui/material/TextField';
 import useOrderStore from '../store/orderStore';
 
-const FormComponent = ({ onSubmit }) => {
-  const formRef = useRef<HTMLFormElement>(null);
+const FormComponent = () => {
   const { setParcelDetails, setReceiverName } = useOrderStore();
 
   const [formData, setFormData] = useState({
@@ -150,11 +149,10 @@ const FormComponent = ({ onSubmit }) => {
       description: formData.description,
     });
     setReceiverName(formData.receiverName);
-    onSubmit && onSubmit(); // Notify parent component if needed
   };
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div id='form-box'>
         <TextField
           label='Item'
@@ -234,6 +232,7 @@ const FormComponent = ({ onSubmit }) => {
           }}
         />
       </div>
+      <button type="submit">Submit</button>
     </form>
   );
 };

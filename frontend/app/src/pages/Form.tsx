@@ -42,12 +42,15 @@ import '../css/topnav.css';
 import '../css/bottomnav.css';
 
 const Form = () => {
+  const handleSubmit= () => {
+    console.log('Form submitted');
+};
   return (
     <>
       <NavbarComponent />
       <ParcelCardComponent />
       <CheckboxComponent />
-      <FormComponent onSubmit={() => console.log('Form submitted!')} />
+      <FormComponent onSubmit={handleSubmit}  />
       <CameraComponent /> 
       <div style={{ position: 'sticky', bottom: 0 }}>
         <BottomNavComponent /> {/* bottom nav for form page needs different prop */}

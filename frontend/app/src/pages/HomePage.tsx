@@ -3,7 +3,7 @@ import MapComponent from '../components/MapComponent';
 import NavbarComponent from '../components/NavbarComponent';
 import BannerComponent from '../components/BannerComponent';
 import DestinationBoxComponent from '../components/DestinationBoxComponent';
-import BottomNavComponent from '../components/BottomNavComponent';
+import BottomNavComponent from '../components/bottomNavComponent';
 import '../css/homepage.css';
 import '../css/topnav.css'
 import '../css/bottomnav.css'
