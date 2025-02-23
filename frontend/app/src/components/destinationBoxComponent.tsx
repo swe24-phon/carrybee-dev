@@ -252,7 +252,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
 import useOrderStore from '../store/orderStore';
-// import MapComponent from './mapComponent';
 import { useNavigate } from 'react-router-dom';
 
 interface Props {

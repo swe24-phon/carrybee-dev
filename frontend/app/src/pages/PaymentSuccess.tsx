@@ -2,8 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'; // Add this import
-import NavbarComponent from '/src/components/NavbarComponent';
-import BottomNavComponent from '/src/components/BottomNavComponent';
+import NavbarComponent from '../components/NavbarComponent';
+import BottomNavComponent from '../components/bottomNavComponent';
 
 const PaymentSuccess: React.FC = () => {
     const navigate = useNavigate();
