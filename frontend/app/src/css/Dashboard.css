@@ -25,10 +25,9 @@
 /* Welcome Text Style */
 #dashboard-welcome {
   color: black;
-  font-size: 20px;
-  /* font-family: 'Inter', sans-serif; */
+  font-size: 1.8rem;
   font-weight: normal;
-  margin-left: 85px;
+  text-align: center;
   margin-top: 0px;
 }
 

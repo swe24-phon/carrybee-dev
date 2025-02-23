@@ -18,7 +18,7 @@ const ProceedButtonComponent: React.FC<ProceedButtonProps> = ({ onClick }) => {
           backgroundColor: '#E6B82A',
         },
       }}>
-      Proceed to Pay
+      Proceed
     </Button>
   );
 };

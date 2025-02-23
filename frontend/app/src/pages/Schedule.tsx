@@ -4,8 +4,9 @@ import BottomNavComponent from '../components/bottomNavComponent';
 import NavbarComponent from '../components/NavbarComponent';
 import CalendarComponent from '../components/CalendarComponent';
 import TimePickerComponent from '../components/TimePickerComponent';
-import NextButtonComponent from '../components/nextButton';
+// import NextButtonComponent from '../components/NextButton';
 import PrevButtonComponent from '../components/previousButton';
+import ProceedButtonComponent from '../components/ProceedButton'
 import '../css/Schedule.css';
 import useOrderStore from '../store/orderStore'; // Import the order store
 
@@ -17,7 +18,7 @@ const Schedule: React.FC = () => {
   const [timeMode, setTimeMode] = useState<'AM' | 'PM'>('AM');
   const [hour, setHour] = useState<string>('02');
   const [minute, setMinute] = useState<string>('00');
-  
+
   const setSchedule = useOrderStore((state) => state.setSchedule); // Get setSchedule from the store
 
   const handlePrevMonth = () => {
@@ -87,7 +88,7 @@ useEffect(() => {
             />
             <div className="navigation-buttons">
               <PrevButtonComponent onClick={handlePrevClick} />
-              <NextButtonComponent onClick={handleNextClick} />
+              <ProceedButtonComponent onClick={handleNextClick} />
             </div>
           </div>
         </div>
