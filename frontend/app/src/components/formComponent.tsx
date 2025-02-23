@@ -13,10 +13,10 @@ function OptionCheckbox() {
         sx={{ // to apply custom styles
           width: '100%',
           mb: 2, // margin-bottom
-          '& .MuiInputLabel-root': { color: '#f3bb05' }, // Before focus label
-          '& .MuiInputLabel-root.Mui-focused': { color: '#f3bb05' }, // After focus label
-          '& .MuiInput-underline:before': { borderBottomColor: '#f3bb05' }, // Before focus border-bottom
-          '& .MuiInput-underline:after': { borderBottomColor: '#f3bb05' },  // After focus border-bottom
+          '& .MuiInputLabel-root': { color: '#cc9e00' }, // Before focus label
+          '& .MuiInputLabel-root.Mui-focused': { color: '#cc9e00' }, // After focus label
+          '& .MuiInput-underline:before': { borderBottomColor: '#cc9e00' }, // Before focus border-bottom
+          '& .MuiInput-underline:after': { borderBottomColor: '#cc9e00' },  // After focus border-bottom
         }}
         />
         <TextField
@@ -25,10 +25,10 @@ function OptionCheckbox() {
         sx={{ // to apply custom styles
           width: '100%',
           mb: 2, // margin-bottom
-          '& .MuiInputLabel-root': { color: '#f3bb05' }, // Before focus label
-          '& .MuiInputLabel-root.Mui-focused': { color: '#f3bb05' }, // After focus label
-          '& .MuiInput-underline:before': { borderBottomColor: '#f3bb05' }, // Before focus border-bottom
-          '& .MuiInput-underline:after': { borderBottomColor: '#f3bb05' },  // After focus border-bottom
+          '& .MuiInputLabel-root': { color: '#cc9e00' }, // Before focus label
+          '& .MuiInputLabel-root.Mui-focused': { color: '#cc9e00' }, // After focus label
+          '& .MuiInput-underline:before': { borderBottomColor: '#cc9e00' }, // Before focus border-bottom
+          '& .MuiInput-underline:after': { borderBottomColor: '#cc9e00' },  // After focus border-bottom
         }}
       />
         <TextField
@@ -37,10 +37,10 @@ function OptionCheckbox() {
           sx={{ // to apply custom styles
             width: '100%',
             mb: 2, // margin-bottom
-            '& .MuiInputLabel-root': { color: '#f3bb05' }, // Before focus label
-            '& .MuiInputLabel-root.Mui-focused': { color: '#f3bb05' }, // After focus label
-            '& .MuiInput-underline:before': { borderBottomColor: '#f3bb05' }, // Before focus border-bottom
-            '& .MuiInput-underline:after': { borderBottomColor: '#f3bb05' },  // After focus border-bottom
+            '& .MuiInputLabel-root': { color: '#cc9e00' }, // Before focus label
+            '& .MuiInputLabel-root.Mui-focused': { color: '#cc9e00' }, // After focus label
+            '& .MuiInput-underline:before': { borderBottomColor: '#cc9e00' }, // Before focus border-bottom
+            '& .MuiInput-underline:after': { borderBottomColor: '#cc9e00' },  // After focus border-bottom
           }}
         />
          <TextField
@@ -51,10 +51,10 @@ function OptionCheckbox() {
           sx={{
             width: '100%', // Adjust width as needed
             mb: 2, // margin-bottom
-            '& .MuiInputLabel-root': { color: '#f3bb05' }, // Before focus
-            '& .MuiInputLabel-root.Mui-focused': { color: '#f3bb05' }, // After focus
-            '& .MuiInput-underline:before': { borderBottomColor: '#f3bb05' }, // Before focus
-            '& .MuiInput-underline:after': { borderBottomColor: '#f3bb05' },  // After focus
+            '& .MuiInputLabel-root': { color: '#cc9e00' }, // Before focus
+            '& .MuiInputLabel-root.Mui-focused': { color: '#cc9e00' }, // After focus
+            '& .MuiInput-underline:before': { borderBottomColor: '#cc9e00' }, // Before focus
+            '& .MuiInput-underline:after': { borderBottomColor: '#cc9e00' },  // After focus
           }}
         />
       </div>

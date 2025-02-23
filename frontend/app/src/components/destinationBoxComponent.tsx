@@ -80,6 +80,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   setPickupCoords: React.Dispatch<React.SetStateAction<google.maps.LatLng | null>>;
@@ -92,6 +93,8 @@ const DestinationBox: React.FC<Props> = ({ setPickupCoords, setDropoffCoords }) 
   const [loading, setLoading] = useState(false);  // Loading state for feedback
   const pickupInputRef = useRef<HTMLInputElement>(null);
   const dropoffInputRef = useRef<HTMLInputElement>(null);
+
+  const navigate = useNavigate(); // usage of useNavigate
 
   const geocodeAddress = async (address: string) => {
     const geocoder = new google.maps.Geocoder();
@@ -155,7 +158,7 @@ const DestinationBox: React.FC<Props> = ({ setPickupCoords, setDropoffCoords }) 
               placeholder="Drop-off"
             />
           </div>
-          <button id="next-btn" type="submit" disabled={loading}>
+          <button id="next-btn" type="submit" disabled={loading} onClick={() => navigate('/Form')}>
             {loading ? 'Loading...' : <FontAwesomeIcon icon={faArrowRightLong} id="next-icon" />}
           </button>
         </div>
