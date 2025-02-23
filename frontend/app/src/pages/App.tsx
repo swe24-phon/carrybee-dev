@@ -38,6 +38,8 @@ import React from 'react';
 // use Routes in React Router v6, which is the new way to define route
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import HomePage from './HomePage';
 import '../css/index.css';
 import '../css/phoneWrapper.css';
@@ -51,10 +53,13 @@ import Dashboard from './Dashboard';
 import PaymentSuccess from './PaymentSuccess';
 import PaymentError from './PaymentError';
 
+const stripePromise = loadStripe('');
+
 const App: React.FC = () => {
   return (
     <div className="smartphone-frame">
       <div className="app-content">
+      <Elements stripe={stripePromise}>
         <Router>
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -68,6 +73,7 @@ const App: React.FC = () => {
             <Route path="/payment-error" element={<PaymentError />} />
           </Routes>
         </Router>
+      </Elements>
       </div>
     </div>
   );
