@@ -23,7 +23,7 @@ body {
 }
 
 .destination-container {
-  top: 35%;
+  top: 32%;
   padding: 0.2rem 1.2rem;
   box-shadow: 1px 1px 5px 2px #00000029;
   margin: 1rem 2rem;
@@ -32,6 +32,10 @@ body {
   z-index: 3;
   position: fixed;
   opacity: 0.9;
+}
+
+.destination-container p {
+  margin: 0 0 5px;
 }
 
 form {
@@ -61,7 +65,7 @@ form {
 }
 
 input {
-  font-size: 16px;
+  font-size: 18px;
   margin: 15px 0;
   background: transparent;
   border: none;

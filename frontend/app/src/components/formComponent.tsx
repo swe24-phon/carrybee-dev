@@ -122,8 +122,10 @@
 import React, { useState, useRef } from 'react';
 import TextField from '@mui/material/TextField';
 import useOrderStore from '../store/orderStore';
+import { useNavigate } from 'react-router-dom';
 
 const FormComponent = () => {
+  const navigate = useNavigate(); // usage of useNavigate
   const { setParcelDetails, setReceiverName } = useOrderStore();
 
   const [formData, setFormData] = useState({
@@ -152,20 +154,8 @@ const FormComponent = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{height: '70%'}}>
       <div id='form-box'>
-        <TextField
-        label="Receiver"
-        variant="standard"
-        sx={{ // to apply custom styles
-          width: '100%',
-          mb: 2, // margin-bottom
-          '& .MuiInputLabel-root': { color: '#cc9e00' }, // Before focus label
-          '& .MuiInputLabel-root.Mui-focused': { color: '#cc9e00' }, // After focus label
-          '& .MuiInput-underline:before': { borderBottomColor: '#cc9e00' }, // Before focus border-bottom
-          '& .MuiInput-underline:after': { borderBottomColor: '#cc9e00' },  // After focus border-bottom
-        }}
-        />
         <TextField
         label="Item"
         name='item'
@@ -244,7 +234,10 @@ const FormComponent = () => {
           }}
         />
       </div>
-      <button type="submit">Submit</button>
+      <div className='btn-box'>
+        <button id="prev-btn" onClick={() => navigate('/Schedule')}>Previous</button>
+        <button id="proceed-btn" type="submit" onClick={() => navigate('/Vehicle')}>Proceed</button>
+      </div>
     </form>
   );
 };
