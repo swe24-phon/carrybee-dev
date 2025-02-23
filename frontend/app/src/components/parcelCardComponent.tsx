@@ -126,15 +126,15 @@ const defaultDimensions = {
 };
 
 const availableVehicles = [
-  { id: 1, type: 'motorcycle', name: 'Motorcycle' },
-  { id: 2, type: 'car', name: 'Car' },
+  { id: 1, type: 'Motorcycle', name: 'Motorcycle' },
+  { id: 2, type: 'Car', name: 'Car' },
   { id: 3, type: 'van', name: 'Van' },
-  { id: 4, type: 'truck', name: 'Truck' },
-  { id: 5, type: 'ship', name: 'Ship' }
+  { id: 4, type: 'Truck', name: 'Truck' },
+  { id: 5, type: 'Ship', name: 'Ship' }
 ];
 
-const ParcelCategory = ({ onSelectCategory }) => {
-  const { updateOrderDetails, setSelectedVehicle } = useOrderStore();
+const ParcelCategory = () => {
+  const { setParcelDetails, setSelectedVehicle } = useOrderStore();
   const [active, setActive] = useState(null);
   const [selectedCard, setSelectedCard] = useState(null); // for selected card
 
@@ -144,19 +144,30 @@ const ParcelCategory = ({ onSelectCategory }) => {
   
     const dimensions = defaultDimensions[category];
     
-    updateOrderDetails({
-      parcelDetails: {
+    setParcelDetails({
         height: dimensions.height,
         width: dimensions.width,
         length: dimensions.length,
-      },
     });
     
     // Use the suggestion function to pick a vehicle based on parcel dimensions.
     // Make sure the dimensions have non-null values
     if (dimensions.length && dimensions.width && dimensions.height) {
       const suggested = suggestVehicle(dimensions, availableVehicles);
-      setSelectedVehicle(suggested);
+
+      if (suggested) {
+        // Wait until the selected vehicle is updated
+        setSelectedVehicle(suggested);
+        console.log('Suggested Vehicle:', suggested);  // Log to confirm suggestion
+
+        // You can now safely navigate or trigger the next action
+        setTimeout(() => {
+          // Navigate to the next page or trigger the next action
+          console.log('State updated, proceed to next page');
+        }, 100); // Give it a short delay
+      } else {
+        console.log('No vehicle suggested');
+      }
     }
   };
 
