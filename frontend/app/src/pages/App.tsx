@@ -53,7 +53,7 @@ import Dashboard from './Dashboard';
 import PaymentSuccess from './PaymentSuccess';
 import PaymentError from './PaymentError';
 
-const stripePromise = loadStripe('');
+const stripePromise = loadStripe('process.env.STRIPE_PUBLISHABLE_KEY');
 
 const App: React.FC = () => {
   return (

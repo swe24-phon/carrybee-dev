@@ -14,15 +14,7 @@ const Payment: React.FC = () => {
     <div className="smartphone-frame">
       <div className="app-content">
         <NavbarComponent />
-        <Elements stripe={stripePromise}>
-          <PaymentComponent 
-            itemWeight={10}
-            vehicleType="CAR"
-            pickupAddress="123 Pickup St"
-            dropoffAddress="456 Dropoff Ave"
-            itemDescription="Standard Delivery"
-          />
-        </Elements>
+          <PaymentComponent />
         <BottomNavComponent />
       </div>
     </div>
