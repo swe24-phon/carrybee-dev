@@ -1,7 +1,7 @@
 // import React, { useState, useEffect } from 'react';
 // import { LoadScript, GoogleMap, Marker, Libraries } from '@react-google-maps/api';
 
-// const GOOGLE_MAPS_API_KEY = "AIzaSyB613qjkRHO_l58B_9cF_ja3Tp7DKBT_y4";
+// const GOOGLE_MAPS_API_KEY = "";
 
 // // Define libraries array using the 'Libraries' type
 // const libraries: Libraries = ['places', 'geometry'];
@@ -64,7 +64,7 @@
 // import React, { useState, useEffect } from 'react';
 // import { LoadScript, GoogleMap, Marker, Libraries } from '@react-google-maps/api';
 
-// const GOOGLE_MAPS_API_KEY = "AIzaSyB613qjkRHO_l58B_9cF_ja3Tp7DKBT_y4"; // Replace with your actual API key
+// const GOOGLE_MAPS_API_KEY = ""; // Replace with your actual API key
 
 // const libraries: Libraries = ['places', 'geometry'];
 
@@ -143,7 +143,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { LoadScript, GoogleMap, Libraries } from '@react-google-maps/api';
 import markerIcon from '../assets/marker.png';
 
-const GOOGLE_MAPS_API_KEY = "";
+const GOOGLE_MAPS_API_KEY = "AIzaSyB613qjkRHO_l58B_9cF_ja3Tp7DKBT_y4";
 
 // Define libraries array using the 'Libraries' type
 const libraries: Libraries = ['places', 'geometry', 'marker'];

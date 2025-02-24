@@ -7,7 +7,7 @@ const useOrderStore = create((set) => ({
   pickup_coords: null,
   dropoff_address: null,
   dropoff_coords: null,
-  distance: 0,
+  totalDistance: null,
   schedule: new Date("2025-02-20T14:30:00Z"), // Initializing with a sample schedule
   parcelDetails: {},
   total: null,
@@ -50,12 +50,12 @@ const useOrderStore = create((set) => ({
       const newState = { ...state, dropoff_coords: coords };
       console.log(coords,'setDropoffCoords:', newState);
       return newState;
-    });
+    });xw
   },
-  setDistance: (distance) => {
+  setTotalDistance: (distance) => {
     set((state) => {
-      const newState = { ...state, distance };
-      console.log(distance,'setDistance:', newState);
+      const newState = { ...state, totalDistance: distance };
+      console.log(distance,'setTotalDistance:', newState);
       return newState;
     });
   },
