@@ -209,6 +209,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import useOrderStore from '../store/orderStore';
 
 interface Props {
   setPickupCoords: React.Dispatch<React.SetStateAction<google.maps.LatLng | null>>;
@@ -222,6 +223,7 @@ const DestinationBox: React.FC<Props> = ({ setPickupCoords, setDropoffCoords }) 
   const [dropoffCoords, setDropoffLocalCoords] = useState<google.maps.LatLng | null>(null);
   const [loading, setLoading] = useState(false);
   const [distance, setDistance] = useState<number | null>(null); // To store calculated distance
+  const { setPickup, setDropoff, setTotalDistance } = useOrderStore(); // Keep using the store to set pickup/dropoff data
 
   const navigate = useNavigate();
 
@@ -243,17 +245,26 @@ const DestinationBox: React.FC<Props> = ({ setPickupCoords, setDropoffCoords }) 
   useEffect(() => {
     if (pickupCoords && dropoffCoords) {
       const distanceInMeters = google.maps.geometry.spherical.computeDistanceBetween(pickupCoords, dropoffCoords);
-      setDistance(distanceInMeters / 1000); // Convert to kilometers
+      const distanceInKm = distanceInMeters / 1000; // Convert in KM 
+      setDistance(distanceInKm);
+
+      setTotalDistance(distanceInKm); //store in Zustand OrderStore
     }
   }, [pickupCoords, dropoffCoords]);
 
   const handlePickupChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPickupInput(e.target.value);
-    if (e.target.value.trim()) {
+    const value = e.target.value;
+    setPickupInput(value);
+    console.log('Pickup Input Value:', value);
+    if (value.trim()) {
       try {
-        const location = await geocodeAddress(e.target.value);
+        const location = await geocodeAddress(value);
         setPickupLocalCoords(location); // Update local state
         setPickupCoords(location); // Update parent component state
+
+        setPickup(value); //STORE In ORDERSTORE do not value
+        console.log('Pickup Address Set in Store:', value);
+
       } catch (error) {
         console.error('Error geocoding pickup address:', error);
       }
@@ -261,12 +272,17 @@ const DestinationBox: React.FC<Props> = ({ setPickupCoords, setDropoffCoords }) 
   };
 
   const handleDropoffChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDropoffInput(e.target.value);
-    if (e.target.value.trim()) {
+    const value = e.target.value;
+    setDropoffInput(value);
+    console.log('Drop off Input Value:', value);
+    if (value.trim()) {
       try {
         const location = await geocodeAddress(e.target.value);
         setDropoffLocalCoords(location); // Update local state
         setDropoffCoords(location); // Update parent component state
+
+        setDropoff(value);
+
       } catch (error) {
         console.error('Error geocoding dropoff address:', error);
       }

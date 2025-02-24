@@ -128,7 +128,7 @@ const defaultDimensions = {
 const availableVehicles = [
   { id: 1, type: 'Motorcycle', name: 'Motorcycle' },
   { id: 2, type: 'Car', name: 'Car' },
-  { id: 3, type: 'van', name: 'Van' },
+  { id: 3, type: 'Van', name: 'Van' },
   { id: 4, type: 'Truck', name: 'Truck' },
   { id: 5, type: 'Ship', name: 'Ship' }
 ];
