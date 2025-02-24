@@ -35,7 +35,6 @@ const getDriverByAvailability = async (availability) => {
     if (!driver) {
       throw new Error('Driver not found');
     }
-    // Create a new object excluding the password
     return driver; // Return the new object
   } catch (error) {
     throw new Error(error.message);
@@ -53,7 +52,7 @@ const getAllDrivers = async () => {
 };
 
 //Additional option to simply
-//Simply update the driver's availability
+//update the driver's availability
 
 // Update Driver
 const updateDriver = async (id, updateData) => {

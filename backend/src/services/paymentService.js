@@ -1,11 +1,22 @@
 //Vlad to do
 const prisma = require('../../prismaClient');
+const Stripe = require('stripe');
+
+const stripe = require('stripe')('process.env.STRIPE_SECRET_KEY');
+
 
 const createPayment = async (paymentData) =>
 {
     try{
         // Unsure whether or not 'order' is needed here
         const {invoice_no, total, payment_method, status, order_id} = paymentData;
+
+        const paymentIntent = await stripe.paymentIntents.create({
+            amount: total, // Amount should be in the smallest currency unit (e.g., cents)
+            currency: 'aus', // Currency code
+            payment_method: payment_method,
+            confirm: true, // Automatically confirm the payment
+        });
         
         // Potential for setting the values to integers
         const payment_status = 

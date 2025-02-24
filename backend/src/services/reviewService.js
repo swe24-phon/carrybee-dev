@@ -62,6 +62,8 @@ const getReviewById = async (id) =>
     }
 }
 
+// Need to update this to return a list
+// of reviews rather than a single one
 const getReviewByUser = async (userId) => 
     {
         try

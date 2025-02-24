@@ -30,9 +30,9 @@ const DashboardComponent = ({ invoices }: DashboardComponentProps) => {
         {/* Header */}
         <div className="profile-section">
           <div className="profile-avatar">
-            <img 
-              className="profile-image" 
-              src="https://placehold.co/21x31" 
+            <img
+              className="profile-image"
+              src="https://placehold.co/21x31"
               alt="Profile"
             />
           </div>
@@ -40,7 +40,7 @@ const DashboardComponent = ({ invoices }: DashboardComponentProps) => {
 
         {/* Welcome Text */}
         <div id="dashboard-welcome">
-          Welcome to dashboard
+          Welcome to Dashboard
         </div>
 
         {/* Invoice Cards Section */}
@@ -55,12 +55,12 @@ const DashboardComponent = ({ invoices }: DashboardComponentProps) => {
 
         {/* Button Container */}
         <div className="button-container">
-          <button 
+          <button
             onClick={handleHomeClick}
             className="home-button hover:bg-[#FECF30] transition-colors duration-300"
           >
             <span className="home-button-text">
-              home
+              HOME
             </span>
           </button>
         </div>

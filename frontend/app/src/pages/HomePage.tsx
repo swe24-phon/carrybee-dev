@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import MapComponent from '../components/mapComponent';
+import MapComponent from '../components/MapComponent';
 import NavbarComponent from '../components/NavbarComponent';
-import BannerComponent from '../components/bannerComponent';
-import DestinationBoxComponent from '../components/destinationBoxComponent';
+import BannerComponent from '../components/BannerComponent';
+import DestinationBoxComponent from '../components/DestinationBoxComponent';
 import BottomNavComponent from '../components/bottomNavComponent';
 import '../css/homepage.css';
 import '../css/topnav.css'

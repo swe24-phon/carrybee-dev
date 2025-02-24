@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/homepage.css';
+// import '../css/homepage.css'
 import '../css/bottomnav.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouseChimney } from '@fortawesome/free-solid-svg-icons';
@@ -8,7 +8,7 @@ import { faGear } from '@fortawesome/free-solid-svg-icons';
 import {faCircleUser} from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
-const BottomNav: React.FC = () => {
+const BottomNavComponent: React.FC = () => {
   const navigate = useNavigate(); // usage of useNavigate
   return (
     <>
@@ -17,7 +17,7 @@ const BottomNav: React.FC = () => {
           <FontAwesomeIcon icon={faHouseChimney} className='nav-icon' onClick={() => navigate('/')}/>
         </div>
         <div className='nav-icons'>
-        <FontAwesomeIcon icon={faGauge} className='nav-icon' onClick={() => navigate('/dashboard')}/>
+        <FontAwesomeIcon icon={faGauge} className='nav-icon' onClick={() => navigate('/Dashboard')}/>
         </div>
         <div className='nav-icons'>
         <FontAwesomeIcon icon={faGear} className='nav-icon'/>
@@ -30,4 +30,4 @@ const BottomNav: React.FC = () => {
   );
 };
 
-export default BottomNav;
+export default BottomNavComponent;

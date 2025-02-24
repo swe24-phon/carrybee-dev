@@ -1,5 +1,5 @@
 #vehicle-cards {
-  margin: 3rem;
+  margin: 4rem 2rem;
   display: grid;
   gap: 2rem;
   grid-template-columns: 1fr 1fr;
@@ -13,7 +13,58 @@
   justify-items: center;
 }
 
-button {
+/* button {
   width: 165px;
   font-weight: 900;
+} */
+
+.btn-box {
+  margin: 0 2rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+#prev-btn {
+  color: #e1b644;
+  border: 1px solid #ffcf50;
+  border-radius: 5px;
+  background-color: transparent;
+}
+
+#proceed-btn {
+  border-radius: 5px;
+  background-color: #ffcf50;
+}
+
+/* Individual Vehicle Card */
+/* .icon-box {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #fff;
+} */
+
+/* added by angela */
+/* .icon-box.selected {
+  border-color: #FECF30 ;
+  border: 2px solid #2a2a2a;
+} */
+
+.icon-box {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.icon-box.selected {
+  border: 2px solid #2a2a2a; /* You can customize the selected style */
+  background-color: #2a2a2a;
+  color: #ffcf50;
+}
+
+.icon-box.disabled {
+  background-color: #f0f0f0; /* Gray out unselected vehicles */
+  color: #888; /* Adjust text color for disabled state */
 }
