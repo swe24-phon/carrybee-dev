@@ -1,18 +1,27 @@
 import { create } from 'zustand';
-import { createOrder } from '../api/orderAPI'; // Assuming you have this API function
+import { createOrder } from '../api/orderAPI';
+import { v4 as uuidv4 } from 'uuid';
+import { faNetworkWired } from '@fortawesome/free-solid-svg-icons';
 
 const useOrderStore = create((set) => ({
+  user_id: null,
   receiver_name: null,
   pickup_address: null,
-  pickup_coords: null,
   dropoff_address: null,
-  dropoff_coords: null,
   totalDistance: null,
   schedule: new Date("2025-02-20T14:30:00Z"), // Initializing with a sample schedule
-  parcelDetails: {},
+  parcelId: '',
+  parcelDetails: {
+    height: '',
+    length: '',
+    width: '',
+    description: '',
+    item: '',
+    quantity: '',
+    weight: '',
+  },
   total: null,
   selectedVehicle: null,
-  user_id: null,
   status: 'idle',
   error: null,
 
@@ -31,13 +40,20 @@ const useOrderStore = create((set) => ({
       return newState;
     });
   },
-  setPickupCoords: (coords) => {
-    set((state) => {
-      const newState = { ...state, pickup_coords: coords };
-      console.log(coords,'setPickupCoords:', newState);
+  setParcelId: () => {
+    set((state) => { 
+      const newState = { ...state, parcelId: uuidv4() };
+      console.log('setParcelId:', newState );
       return newState;
     });
   },
+  // setPickupCoords: (coords) => {
+  //   set((state) => {
+  //     const newState = { ...state, pickup_coords: coords };
+  //     console.log(coords,'setPickupCoords:', newState);
+  //     return newState;
+  //   });
+  // },
   setDropoff: (dropoff) => {
     set((state) => {
       const newState = { ...state, dropoff_address: dropoff };
@@ -45,13 +61,13 @@ const useOrderStore = create((set) => ({
       return newState;
     });
   },
-  setDropoffCoords: (coords) => {
-    set((state) => {
-      const newState = { ...state, dropoff_coords: coords };
-      console.log(coords,'setDropoffCoords:', newState);
-      return newState;
-    });xw
-  },
+  // setDropoffCoords: (coords) => {
+  //   set((state) => {
+  //     const newState = { ...state, dropoff_coords: coords };
+  //     console.log(coords,'setDropoffCoords:', newState);
+  //     return newState;
+  //   });
+  // },
   setTotalDistance: (distance) => {
     set((state) => {
       const newState = { ...state, totalDistance: distance };
@@ -60,23 +76,25 @@ const useOrderStore = create((set) => ({
     });
   },
   setSchedule: (schedule) => {
+    const parsedDate = new Date(schedule);
     set((state) => {
-      const newState = { ...state, schedule };
-      console.log(schedule,'setSchedule:', newState);
+      const newState = { ...state, schedule: parsedDate };
+      console.log(parsedDate,'setSchedule:', newState);
       return newState;
     });
   },
-  setParcelDetails: (parcelDetails) => {
+  setParcelDetails: (newParcelDetails) => {
     set((state) => {
-      const newState = { ...state, parcelDetails, ...parcelDetails };
+      const newState = { ...state, parcelDetails: { ...state.parcelDetails, ...newParcelDetails} };
       console.log('setParcelDetails:', newState);
       return newState;
     });
   },
   setTotal: (total) => {
+    const numericTotal = parseFloat(total);
     set((state) => {
-      const newState = { ...state, total };
-      console.log('setTotal:', newState);
+      const newState = { ...state, total: numericTotal };
+      console.log(numericTotal, 'setTotal:', newState);
       return newState;
     });
   },
@@ -84,6 +102,13 @@ const useOrderStore = create((set) => ({
     set((state) => {
       const newState = { ...state, selectedVehicle: vehicle };
       console.log(vehicle,'setSelectedVehicle:', newState);
+      return newState;
+    });
+  },
+  setUserID: (userID) => {
+    set((state) => {
+      const newState = {...state, user_id: userID };
+      console.log(userID, 'setUserID:', newState);
       return newState;
     });
   },
@@ -100,17 +125,15 @@ const useOrderStore = create((set) => ({
     set((state) => {
       const newState = {
         ...state,
+        user_id: null,
         receiver_name: null,
         pickup_address: null,
-        pickup_coords: null,
         dropoff_address: null,
-        dropoff_coords: null,
-        distance: 0,
+        totalDistance: 0,
         schedule: new Date("2025-02-20T14:30:00Z"),
         parcelDetails: {},
         total: null,
         selectedVehicle: null,
-        user_id: null,
         status: 'idle',
         error: null,
       };
@@ -120,16 +143,16 @@ const useOrderStore = create((set) => ({
   },
 
   // Async action to submit the order
-  submitOrder: async (orderData) => {
-    set({ status: 'loading', error: null });
-    try {
-      const response = await createOrder(orderData);
-      set({ status: 'succeeded' });
-      // You can handle the response, e.g., storing the order details
-    } catch (error) {
-      set({ status: 'failed', error: error.response?.data || 'Error submitting order' });
-    }
-  },
+    submitOrder: async (orderData) => {
+      set({ status: 'loading', error: null });
+      try {
+        const response = await createOrder(orderData);
+        set({ status: 'succeeded' });
+        // You can handle the response, e.g., storing the order details
+      } catch (error) {
+        set({ status: 'failed', error: error.response?.data || 'Error submitting order' });
+      }
+    },
 }));
 
 export default useOrderStore;

@@ -21,14 +21,24 @@ const registerUser = async (req, res) => {
 //   }
 // };
 
+// const loginUser = async (req, res) => {
+//   try {
+//     const token = await userService.loginUser(req); // Pass only req
+//     res.status(200).json({ token });
+//   } catch (error) {
+//     res.status(401).json({ error: error.message });
+//   }
+// };
+
 const loginUser = async (req, res) => {
   try {
-    const token = await userService.loginUser(req); // Pass only req
-    res.status(200).json({ token });
+    const { token, user } = await userService.loginUser(req); // Assume loginUser returns both
+    res.status(200).json({ token, user });
   } catch (error) {
     res.status(401).json({ error: error.message });
   }
 };
+
 //add by phon end here*************
 
 // Create User

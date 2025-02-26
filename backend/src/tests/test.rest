@@ -11,3 +11,25 @@ Content-Type: application.application/json
     "address": "carry",
     "password": "securepassword"
 }
+
+### Post an order 
+POST http://localhost:4000/api/orders
+Content-Type: application.application/json
+
+{
+  "user_id": "9a26013c-ae5d-4c9d-a2a1-c9e6f59626a2",
+  "receiver_name": "Angela",
+  "pickup_address": "Melbourne Museum",
+  "dropoff_address": "South Yarra",
+  "pickup_date": "2025-02-04T14:00:00Z",
+  "distance": 4.55,
+  "vehicleType": "Truck",
+  "total": "61.58",
+  "parcelData": {
+    "item_name": "Fridge",
+    "category": "LARGE",
+    "quantity": 1,
+    "weight": 500,
+    "description": "Large fridge for transport"
+  }
+}

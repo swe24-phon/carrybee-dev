@@ -51,7 +51,16 @@ const loginUser = async (req) => {
 
   // Generate JWT token with email included in the payload
   const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-  return token; // Return the token instead of sending a response
+  console.log({ token, user });
+  return { 
+    token, 
+    user: {
+      id: user.id,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      email: user.email
+    }
+  };
 };
 //add by phon end here*************
 // Create User

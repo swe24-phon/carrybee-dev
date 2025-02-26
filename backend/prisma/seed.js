@@ -45,14 +45,6 @@ async function main () {
     }
   });
 
-  // Create a driver
-  const driver = await prisma.driver.create({
-    data: {
-      first_name: 'Kendrick',
-      last_name: 'lamar',
-      vehicle_type: VehicleType?.CAR || 'CAR',
-    }
-  });
 
   const payment = await prisma.payment.create({
     data: {
@@ -63,21 +55,6 @@ async function main () {
       order_id: order.id,
     }
   });
-
-  // Create a review for the driver
-  await prisma.review.create({
-    data: {
-      rating: 5,
-      comment: 'Excellent service!',
-      user_id: user.id,
-      driver_id: driver.id,
-      order_id: order.id,
-    }
-  });
-  
-  console.log('Sample data seeded successfully!')
-};
-
 
 main()
   .catch(e => {
