@@ -3,31 +3,57 @@ import { useNavigate } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
 import PayButtonComponent from './PayButtonComponent';
 import ForgotButtonComponent from './ForgotButtonComponent';
+import NavbarComponent from './NavbarComponent';
+import BottomNavComponent from './BottomNavComponent';
 import '../css/paymentform.css';
+// import { apiURL } from "../api/createPayment"
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
-const PaymentComponent = () => {
+// Define the interfaces for our data
+interface DeliveryDetails {
+  itemName: string;
+  size: string;
+  quantity: string;
+  status: string;
+  orderId: string;
+  description: string;
+  vehicle: string;
+}
+
+const PaymentComponent: React.FC = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     invoiceNo: '',
     itemSize: 'medium',
     total: 1500,
-    orderId: '',
-    itemDescription: '',
+    orderId: 'ORD-12345',
+    itemDescription: 'Premium Delivery Package',
     status: 'Pending'
   });
 
-  const [deliveryDetails, setDeliveryDetails] = useState({
-    itemName: "Package XYZ",
-    size: "Medium",
+  // Icon component for the "Change" button
+  const ChevronRightIcon: React.FC = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  );
+
+  const deliveryDetails: DeliveryDetails = {
+    itemName: "Fashion Bundle",
+    size: formData.itemSize,
     quantity: "2",
-    status: "Ready for Delivery",
-    orderId: "ORD-123456",
-    description: "Fragile items - handle with care",
-    vehicle: "Van - Toyota HiAce"
-  });
+    status: formData.status,
+    orderId: formData.orderId,
+    description: formData.itemDescription,
+    vehicle: "Standard Delivery"
+  };
+
+  const shippingAddress = "1234 Foster Rd, Ann Creek, New Mexico 29481";
+  const subtotal = 410;
+  const delivery = 0;
+  const total = subtotal + delivery;
 
   const handleForgot = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -37,14 +63,15 @@ const PaymentComponent = () => {
 
   const createCheckoutSession = async () => {
     try {
-      const sizeMultiplier = {
+      // Adjust total based on item size
+      const sizeMultiplier: Record<string, number> = {
         small: 0.8,
         medium: 1,
         large: 1.2
       };
       
-      const adjustedTotal = Math.round(formData.total * sizeMultiplier[formData.itemSize]);
-
+      const adjustedTotal = Math.round(formData.total * (sizeMultiplier[formData.itemSize] || 1));
+      // Create checkout session via your frontend API
       const response = await fetch('/api/createPayment', {
         method: 'POST',
         headers: {
@@ -69,14 +96,16 @@ const PaymentComponent = () => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-
+      // Get session ID from backend
       const { sessionId } = await response.json();
-      
+      // Redirect to Stripe Checkout
       const stripe = await stripePromise;
-      const { error } = await stripe.redirectToCheckout({ sessionId });
-      
-      if (error) {
-        throw error;
+      if (stripe) {
+        const { error } = await stripe.redirectToCheckout({ sessionId });
+        
+        if (error) {
+          throw error;
+        }
       }
     } catch (error) {
       console.error('Error creating checkout session:', error);
@@ -89,16 +118,17 @@ const PaymentComponent = () => {
     setLoading(true);
 
     try {
+      // Prepare payment data to be send to your backend
       const paymentData = {
         invoice_no: formData.invoiceNo,
         itemSize: formData.itemSize,
         total: formData.total,
         status: formData.status,
         order_id: formData.orderId,
-        item_description: formData.itemDescription,
+        // item_description: formData.itemDescription,
       };
-
-      const response = await fetch('http://localhost:3000/payment', {
+      // Send payment data to local backend (port 4000)
+      const response = await fetch('http://localhost:4000/createPayment', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -109,7 +139,7 @@ const PaymentComponent = () => {
       if (!response.ok) {
         throw new Error('Failed to save payment data');
       }
-
+      // After successful backend save, create Stripe checkout session
       await createCheckoutSession();
     } catch (error) {
       console.error('Error processing payment:', error);
@@ -118,56 +148,135 @@ const PaymentComponent = () => {
   };
 
   return (
-    <div className="pageContainer">
+    <div className="page-wrapper">
+      {/* Fixed Top Navigation */}
+      <div className="fixed-top">
+        <NavbarComponent />
+      </div>
+      
+      {/* Main Scrollable Content */}
       <div className="scrollable-content">
-        <h1 className="pageTitle">Delivery Summary</h1>
-        
-        <div className="summaryContainer">
-          <div className="summaryGrid">
-            <div className="summaryItem">
-              <div className="summaryLabel">Name of Item</div>
-              <div className="summaryValue">{deliveryDetails.itemName}</div>
+        <div className="order-summary-container">
+          {/* Header without back button */}
+          <div className="header">
+            <h1 className="title">Order Summary</h1>
+          </div>
+
+          {/* Delivery Summary Section */}
+          <div className="delivery-summary">
+            <h2 className="section-title">Delivery Summary</h2>
+            <div className="summary-grid">
+              <div className="summary-item">
+                <div className="summary-label">Name of Item</div>
+                <div className="summary-value">{deliveryDetails.itemName}</div>
+              </div>
+              <div className="summary-item">
+                <div className="summary-label">Size of Delivery</div>
+                <div className="summary-value">{deliveryDetails.size}</div>
+              </div>
+              <div className="summary-item">
+                <div className="summary-label">Quantity</div>
+                <div className="summary-value">{deliveryDetails.quantity}</div>
+              </div>
+              <div className="summary-item">
+                <div className="summary-label">Status</div>
+                <div className="summary-value">{deliveryDetails.status}</div>
+              </div>
+              <div className="summary-item">
+                <div className="summary-label">Order ID</div>
+                <div className="summary-value">{deliveryDetails.orderId}</div>
+              </div>
+              <div className="summary-item">
+                <div className="summary-label">Description</div>
+                <div className="summary-value">{deliveryDetails.description}</div>
+              </div>
+              <div className="summary-item">
+                <div className="summary-label">Vehicle Selected</div>
+                <div className="summary-value">{deliveryDetails.vehicle}</div>
+              </div>
             </div>
-            <div className="summaryItem">
-              <div className="summaryLabel">Size of Delivery</div>
-              <div className="summaryValue">{deliveryDetails.size}</div>
+          </div>
+
+          {/* Shipping Information */}
+          <div className="shipping-info">
+            <div className="section-header">
+              <h2 className="section-title">Shipping Information</h2>
+              <button 
+                className="change-button"
+                onClick={() => navigate('/')}
+              >
+                Change <ChevronRightIcon />
+              </button>
             </div>
-            <div className="summaryItem">
-              <div className="summaryLabel">Quantity</div>
-              <div className="summaryValue">{deliveryDetails.quantity}</div>
+
+            <div className="address-container">
+              <div className="address-item">
+                <div className="pin-icon pickup-pin">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#1b1b1b" stroke="none">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                  </svg>
+                </div>
+                <div className="address-details">
+                  <div className="address-label">Pickup</div>
+                  <p className="shipping-address">1234 Foster Rd, Ann Creek, New Mexico 29481</p>
+                </div>
+              </div>
+              
+              <div className="address-item">
+                <div className="pin-icon dropoff-pin">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#FECF30" stroke="none">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                  </svg>
+                </div>
+                <div className="address-details">
+                  <div className="address-label">Dropoff</div>
+                  <p className="shipping-address">{shippingAddress}</p>
+                </div>
+              </div>
             </div>
-            <div className="summaryItem">
-              <div className="summaryLabel">Status</div>
-              <div className="summaryValue">{deliveryDetails.status}</div>
+          </div>
+
+          {/* Payment Method */}
+          <div className="payment-method">
+            <h2 className="section-title">Payment Summary</h2>
+          </div>
+
+          {/* Cost Breakdown */}
+          <div className="cost-breakdown">
+            <div className="cost-row">
+              <span className="cost-label">Subtotal</span>
+              <span>${subtotal}</span>
             </div>
-            <div className="summaryItem">
-              <div className="summaryLabel">Order ID</div>
-              <div className="summaryValue">{deliveryDetails.orderId}</div>
+            <div className="cost-row">
+              <span className="cost-label">Delivery</span>
+              <span>${delivery}</span>
             </div>
-            <div className="summaryItem">
-              <div className="summaryLabel">Description</div>
-              <div className="summaryValue">{deliveryDetails.description}</div>
+            <div className="total-row">
+              <span>Total</span>
+              <span>${total}</span>
             </div>
-            <div className="summaryItem">
-              <div className="summaryLabel">Vehicle Selected</div>
-              <div className="summaryValue">{deliveryDetails.vehicle}</div>
+          </div>
+
+          {/* Button Container */}
+          <div className="button-container">
+            <div className="pay-button-wrapper">
+              <PayButtonComponent 
+                onClick={handlePayment} 
+                loading={loading}
+              />
+            </div>
+            <div className="forgot-button-wrapper">
+              <ForgotButtonComponent 
+                onClick={handleForgot}
+              />
             </div>
           </div>
         </div>
       </div>
-
-      <div className="buttonContainer">
-        <div className="payButtonWrapper">
-          <PayButtonComponent 
-            onClick={handlePayment} 
-            loading={loading}
-          />
-        </div>
-        <div className="forgotButtonWrapper">
-          <ForgotButtonComponent 
-            onClick={handleForgot}
-          />
-        </div>
+      
+      {/* Fixed Bottom Navigation */}
+      <div className="fixed-bottom">
+        <BottomNavComponent />
       </div>
     </div>
   );
