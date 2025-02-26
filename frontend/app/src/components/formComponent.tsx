@@ -126,7 +126,7 @@ import { useNavigate } from 'react-router-dom';
 
 const FormComponent = () => {
   const navigate = useNavigate(); // usage of useNavigate
-  const { setParcelDetails, setReceiverName } = useOrderStore();
+  const { setParcelDetails, setReceiverName, setParcelId } = useOrderStore();
 
   const [formData, setFormData] = useState({
     item: '',
@@ -144,14 +144,38 @@ const FormComponent = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Form submitted with:', formData);
-    setParcelDetails({
+  
+    // Set the parcelId first
+    useOrderStore.getState().setParcelId();
+  
+    // Now that parcelId is set, get the current state
+    const parcelId = useOrderStore.getState().parcelId;
+    console.log('Generated Parcel ID:', parcelId);
+  
+    // Set other parcel details
+    useOrderStore.getState().setParcelDetails({
       item: formData.item,
       quantity: formData.quantity,
       weight: formData.weight,
       description: formData.description,
     });
-    setReceiverName(formData.receiverName);
+    useOrderStore.getState().setReceiverName(formData.receiverName);
+  
+    // Proceed with your navigation or sending data to the database
+    navigate('/Vehicle');
   };
+  
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   console.log('Form submitted with:', formData);
+  //   setParcelDetails({
+  //     item: formData.item,
+  //     quantity: formData.quantity,
+  //     weight: formData.weight,
+  //     description: formData.description,
+  //   });
+  //   setReceiverName(formData.receiverName);
+  // };
 
   return (
     <form onSubmit={handleSubmit} style={{height: '70%'}}>

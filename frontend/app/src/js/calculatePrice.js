@@ -13,6 +13,7 @@ const vehicle_price = {
     Car: 0.8,
     Van: 1.2,
     Truck: 2,
+    Ship: 10,
   };
   
   // Weight surcharge
@@ -21,6 +22,7 @@ const vehicle_price = {
     Car: 0.3,
     Van: 0.4,
     Truck: 0.6,
+    Ship: 1.0,
   };
   
   // Price Calculation Function
