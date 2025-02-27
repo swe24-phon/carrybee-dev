@@ -43,7 +43,7 @@ const useOrderStore = create((set) => ({
   },
   setParcelId: (id) => {
     set((state) => {
-      const parcelId = id || uuidv4(); // Use provided ID or generate one
+      const parcelId = id; // Use provided ID or generate one
       const newState = { ...state, parcelId };
       console.log('setParcelId:', newState);
       return newState;

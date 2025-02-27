@@ -32,7 +32,7 @@
 
 // export default Vehicle;
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import NavbarComponent from '../components/NavbarComponent';
 import BottomNav from '../components/BottomNavComponent';
 import VehicleTypeComponent from '../components/vehicleCardComponent';
@@ -125,11 +125,12 @@ const Vehicle = () => {
   const handleProceed = async () => {
     // Grab the snapshot of the order data from the store
     const orderData = useOrderStore.getState();
-    const { totalDistance, parcelDetails, selectedVehicle, user_id } = orderData;
-  
+    const { totalDistance, parcelDetails, selectedVehicle } = orderData;
+    const [parcelID, setParcelID] = useState(null);
+
     const distance = totalDistance;
     const weight = parcelDetails?.weight;
-    const vehicleType = selectedVehicle?.type;
+    const vehicleType = selectedVehicle;
   
     console.log('Vehicle Type:', vehicleType); // Log vehicle type
     console.log('Weight:', weight); // Log parcel weight
@@ -150,16 +151,17 @@ const Vehicle = () => {
       // Update the store with the calculated total
       useOrderStore.getState().setTotal(totalPrice);
   
-      // ✅ Prepare Partial Data to Send to Backend
+      // Prepare Partial Data to Send to Backend
       const partialData = {
-        receiver_name: orderData.receiverName  || "Default Name",
+        receiver_name: orderData.receiver_name  || "Default Name",
         pickup_address: orderData.pickup_address || "Default Pickup Address",
         dropoff_address: orderData.dropoff_address || "Default Dropoff Address",
         pickup_date: orderData.schedule || new Date().toISOString(),
         total: totalPrice || 0, // Update with calculated total
         distance,
-        user_id,
-        parcel_id: orderData.parcelId,
+        vehicleType: orderData.selectedVehicle || "Default vehicle",
+        user_id: orderData.user_id,
+        parcel_id: orderData.parcelId || "Parcel ID",
       };
   
       console.log('📦 Sending partial order data:', partialData);

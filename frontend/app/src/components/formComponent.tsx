@@ -159,7 +159,7 @@ const FormComponent = () => {
     console.log('Form submitted with:', formData);
     
     // Set the parcelId first
-    setParcelId();
+    //setParcelId();
 
     // Get the updated order data from the store
     const orderData = useOrderStore.getState();
@@ -178,7 +178,7 @@ const FormComponent = () => {
     setReceiverName(formData.receiverName);
 
     const partialData = {
-        parcelId: orderData.parcelId,
+        //parcelId: orderData.parcelId,
         item_name: formData.item,
         category: orderData.parcelDetails?.category ?? 'defaultCategory', // Avoid undefined
         quantity: parseInt(formData.quantity),

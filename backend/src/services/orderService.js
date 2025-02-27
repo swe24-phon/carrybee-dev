@@ -1,6 +1,6 @@
 const prisma = require('../../prismaClient');
-const { createParcel } = require('./parcelService');
 const User = require('../services/userService');
+const parcel = require('../services/parcelService')
 
 
 const createOrder = async (orderData) => {
@@ -14,6 +14,7 @@ const createOrder = async (orderData) => {
       distance,
       vehicleType,
       total,
+      parcel_id,
     } = orderData;
 
     console.log('Received order data:', orderData);
@@ -23,30 +24,6 @@ const createOrder = async (orderData) => {
 
     // Transform total to float
     const formattedTotal = parseFloat(total);
-
-    // Create the parcel first
-    const { parcel } = await createParcel({ ...parcelData, user_id });
-    console.log('Created parcel:', parcel);
-
-
-
-model Order {
-  pickup_date     DateTime?
-  distance        Float?
-  total           Float
-  status          OrderStatus?
-  img_url         String?
-  user_id         String
-  user            User          @relation(fields: [user_id], references: [id])
-  parcel_id       String
-  parcel          Parcel        @relation(fields: [parcel_id], references: [id])
-  payment         Payment?
-  review_id       String?       @unique
-  review          Review?       @relation
-  created_at      DateTime      @default(now())
-  updated_at      DateTime      @updatedAt
-}
-
     // Create the order using the transformed data
     const newOrder = await prisma.order.create({
       data: {
@@ -54,12 +31,12 @@ model Order {
         receiver_name,
         pickup_address,
         dropoff_address,
-        pickup_date: schedule// Use the transformed pickup_date
+        pickup_date: formattedPickupDate, // Use the transformed pickup_date
         distance: parseFloat(distance.toFixed(2)), // Ensure distance is a float with 2 decimals
-        //vehicleType,
+        vehicleType,
         total: formattedTotal, // Use the transformed total
-        //status: 'PICKED_UP', // Default status
-        parcel_id: parcel.id, // Linking parcel to order
+        status: 'PICKED_UP', // Default status
+        parcel_id,
       },
     });
 

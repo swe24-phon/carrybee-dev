@@ -3,6 +3,7 @@ const prisma = require('../prismaClient');
 
 async function main () {
   console.log('Seeding database...');
+  
   // Create user 
   const user = await prisma.user.create ({
     data: {
@@ -14,6 +15,7 @@ async function main () {
         address: '123 Main St, Springfield, USA',
     }
   });
+
   // Create a parcel
   const parcel = await prisma.parcel.create({
     data: {
@@ -28,6 +30,7 @@ async function main () {
     }
   });
 
+  // Create an order
   const order = await prisma.order.create({
     data: {
         receiver_name: 'Daisy Johnson',
@@ -39,29 +42,32 @@ async function main () {
         dropoff_lon: -76.7890,
         total: 100.0,
         distance: 10.5,
-        VehicleType: VehicleType?.Van || 'Van'
+        vehicleType: VehicleType?.Van || 'Van',
         status: OrderStatus?.PICKED_UP || 'PICKED_UP',
         user_id: user.id,
         parcel_id: parcel.id,
     }
   });
 
-
+  // Create a payment
   const payment = await prisma.payment.create({
     data: {
       invoice_no: 1345,
       total: 100.0,
       payment_method: 'Credit Card',
-      status: PaymentStatus.COMPLETED,
+      status: PaymentStatus?.COMPLETED || 'COMPLETED',
       order_id: order.id,
     }
   });
 
+  console.log('Database seeded successfully!');
+} // 👈 Added the missing closing brace here!
+
 main()
   .catch(e => {
-    throw e
+    console.error(e);
+    process.exit(1);
   })
   .finally(async () => {
-    await prisma.$disconnect()
-  })
-
+    await prisma.$disconnect();
+  });
