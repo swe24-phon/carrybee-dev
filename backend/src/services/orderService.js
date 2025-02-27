@@ -2,6 +2,7 @@ const prisma = require('../../prismaClient');
 const { createParcel } = require('./parcelService');
 const User = require('../services/userService');
 
+
 const createOrder = async (orderData) => {
   try {
     const {
@@ -12,7 +13,6 @@ const createOrder = async (orderData) => {
       pickup_date,
       distance,
       vehicleType,
-      parcelData,
       total,
     } = orderData;
 
@@ -28,6 +28,25 @@ const createOrder = async (orderData) => {
     const { parcel } = await createParcel({ ...parcelData, user_id });
     console.log('Created parcel:', parcel);
 
+
+
+model Order {
+  pickup_date     DateTime?
+  distance        Float?
+  total           Float
+  status          OrderStatus?
+  img_url         String?
+  user_id         String
+  user            User          @relation(fields: [user_id], references: [id])
+  parcel_id       String
+  parcel          Parcel        @relation(fields: [parcel_id], references: [id])
+  payment         Payment?
+  review_id       String?       @unique
+  review          Review?       @relation
+  created_at      DateTime      @default(now())
+  updated_at      DateTime      @updatedAt
+}
+
     // Create the order using the transformed data
     const newOrder = await prisma.order.create({
       data: {
@@ -35,11 +54,11 @@ const createOrder = async (orderData) => {
         receiver_name,
         pickup_address,
         dropoff_address,
-        pickup_date: formattedPickupDate, // Use the transformed pickup_date
+        pickup_date: schedule// Use the transformed pickup_date
         distance: parseFloat(distance.toFixed(2)), // Ensure distance is a float with 2 decimals
-        vehicleType,
+        //vehicleType,
         total: formattedTotal, // Use the transformed total
-        status: 'PICKED_UP', // Default status
+        //status: 'PICKED_UP', // Default status
         parcel_id: parcel.id, // Linking parcel to order
       },
     });

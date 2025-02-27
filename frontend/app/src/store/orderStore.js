@@ -1,7 +1,8 @@
 import { create } from 'zustand';
-import { createOrder } from '../api/orderAPI';
 import { v4 as uuidv4 } from 'uuid';
 import { faNetworkWired } from '@fortawesome/free-solid-svg-icons';
+import axios from "axios";
+
 
 const useOrderStore = create((set) => ({
   user_id: null,
@@ -40,13 +41,15 @@ const useOrderStore = create((set) => ({
       return newState;
     });
   },
-  setParcelId: () => {
-    set((state) => { 
-      const newState = { ...state, parcelId: uuidv4() };
-      console.log('setParcelId:', newState );
+  setParcelId: (id) => {
+    set((state) => {
+      const parcelId = id || uuidv4(); // Use provided ID or generate one
+      const newState = { ...state, parcelId };
+      console.log('setParcelId:', newState);
       return newState;
     });
   },
+  
   // setPickupCoords: (coords) => {
   //   set((state) => {
   //     const newState = { ...state, pickup_coords: coords };
@@ -142,17 +145,36 @@ const useOrderStore = create((set) => ({
     });
   },
 
-  // Async action to submit the order
-    submitOrder: async (orderData) => {
-      set({ status: 'loading', error: null });
-      try {
-        const response = await createOrder(orderData);
-        set({ status: 'succeeded' });
-        // You can handle the response, e.g., storing the order details
-      } catch (error) {
-        set({ status: 'failed', error: error.response?.data || 'Error submitting order' });
-      }
-    },
+//   // Async action to submit the order
+//     submitOrder: async (orderData) => {
+//       set({ status: 'loading', error: null });
+//       try {
+//         const response = await createOrder(orderData);
+//         set({ status: 'succeeded' });
+//         // You can handle the response, e.g., storing the order details
+//       } catch (error) {
+//         set({ status: 'failed', error: error.response?.data || 'Error submitting order' });
+//       }
+//     },
+// }));
+
+  // Generalized function for submitting data
+  submitData: async (dataToSend, endpoint) => {
+    set({ status: 'loading', error: null });
+
+    try {
+      const response = await axios.post(endpoint, dataToSend);
+      set({ status: 'succeeded', orderData: response.data });
+
+      // Log response in the store
+      console.log('✅ Data submitted successfully:', response.data);
+      return response.data;  // Return the response to use where needed
+    } catch (error) {
+      console.error('❌ Error sending data:', error);
+      set({ status: 'failed', error: error.response?.data || 'Error submitting data' });
+      throw error;  // Throw error for further handling if needed
+    }
+  },
 }));
 
 export default useOrderStore;

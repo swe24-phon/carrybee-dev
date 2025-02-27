@@ -68,7 +68,7 @@ model Order {
   pickup_date     DateTime?
   distance        Float?
   total           Float
-  status          OrderStatus?
+  VehicleType     VehicleType
   img_url         String?
   user_id         String
   user            User          @relation(fields: [user_id], references: [id])

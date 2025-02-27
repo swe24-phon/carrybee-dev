@@ -39,6 +39,7 @@ async function main () {
         dropoff_lon: -76.7890,
         total: 100.0,
         distance: 10.5,
+        VehicleType: VehicleType?.Van || 'Van'
         status: OrderStatus?.PICKED_UP || 'PICKED_UP',
         user_id: user.id,
         parcel_id: parcel.id,

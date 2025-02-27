@@ -145,6 +145,7 @@ const ParcelCategory = () => {
     const dimensions = defaultDimensions[category];
     
     setParcelDetails({
+        category,
         height: dimensions.height,
         width: dimensions.width,
         length: dimensions.length,
