@@ -145,6 +145,7 @@ const ParcelCategory = () => {
     const dimensions = defaultDimensions[category];
     
     setParcelDetails({
+        category,
         height: dimensions.height,
         width: dimensions.width,
         length: dimensions.length,
@@ -157,8 +158,8 @@ const ParcelCategory = () => {
 
       if (suggested) {
         // Wait until the selected vehicle is updated
-        setSelectedVehicle(suggested);
-        console.log('Suggested Vehicle:', suggested);  // Log to confirm suggestion
+        setSelectedVehicle(suggested.name);
+        console.log('Suggested Vehicle:', suggested.name);  // Log to confirm suggestion
 
         // You can now safely navigate or trigger the next action
         setTimeout(() => {

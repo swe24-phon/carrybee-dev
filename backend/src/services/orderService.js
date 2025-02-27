@@ -1,6 +1,7 @@
 const prisma = require('../../prismaClient');
-const { createParcel } = require('./parcelService');
 const User = require('../services/userService');
+const parcel = require('../services/parcelService')
+
 
 const createOrder = async (orderData) => {
   try {
@@ -12,8 +13,8 @@ const createOrder = async (orderData) => {
       pickup_date,
       distance,
       vehicleType,
-      parcelData,
       total,
+      parcel_id,
     } = orderData;
 
     console.log('Received order data:', orderData);
@@ -23,11 +24,6 @@ const createOrder = async (orderData) => {
 
     // Transform total to float
     const formattedTotal = parseFloat(total);
-
-    // Create the parcel first
-    const { parcel } = await createParcel({ ...parcelData, user_id });
-    console.log('Created parcel:', parcel);
-
     // Create the order using the transformed data
     const newOrder = await prisma.order.create({
       data: {
@@ -40,7 +36,7 @@ const createOrder = async (orderData) => {
         vehicleType,
         total: formattedTotal, // Use the transformed total
         status: 'PICKED_UP', // Default status
-        parcel_id: parcel.id, // Linking parcel to order
+        parcel_id,
       },
     });
 
