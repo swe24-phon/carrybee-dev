@@ -1,4 +1,3 @@
-// ParcelStore.js
 import { create } from 'zustand';
 import axios from 'axios';
 
@@ -14,7 +13,7 @@ const useParcelStore = create((set) => ({
     description: '',
     user_id: null,
   },
-  parcelId: '',
+  parcel_id: '',
 
   setParcelDetails: (newParcelDetails) => {
     set((state) => {
@@ -24,7 +23,7 @@ const useParcelStore = create((set) => ({
     });
   },
 
-  setParcelId: (parcelID) => {
+  setParcelID: (parcelID) => {
     set((state) => ({
       parcelDetails: { ...state.parcelDetails, parcel_id: parcelID }
     }));

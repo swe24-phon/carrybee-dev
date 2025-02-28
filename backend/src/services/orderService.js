@@ -19,6 +19,16 @@ const createOrder = async (orderData) => {
 
     console.log('Received order data:', orderData);
 
+    // Check if user_id exists in the User table
+    const user = await prisma.user.findUnique({
+      where: { id: user_id },
+    });
+
+    if (!user) {
+      throw new Error(`User with ID ${user_id} does not exist`);
+    }
+
+
     // Transform the pickup_date to ISO 8601 format
     const formattedPickupDate = new Date(pickup_date).toISOString();
 
