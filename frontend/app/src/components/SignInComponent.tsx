@@ -151,7 +151,7 @@ import { useNavigate } from 'react-router-dom';
 // import logo from '../assets/logo.png';
 import '../css/SignIn.css';
 import API from "../api/loginApi";
-import useOrderStore from '../store/orderStore';
+import useParcelStore from '../store/parcelStore';
 
 interface Credentials {
   email: string;
@@ -170,7 +170,7 @@ const SignInComponent: React.FC<SignInProps> = ({
   onForgotPassword
 }) => {
 
-  const { setUserID } = useOrderStore();
+  const { setUserID } = useParcelStore();
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState<Credentials>({
     email: '',

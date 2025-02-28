@@ -110,10 +110,14 @@
 
 // export default ParcelType;
 
-import React, { useState } from 'react';
+
+
+
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleInfo, faFile, faBox, faGifts, faCouch, faCubes, faBoxOpen, faMotorcycle, faCarSide, faVanShuttle, faTruckPickup, faShip, faHelicopter } from '@fortawesome/free-solid-svg-icons';
 import useOrderStore from '../store/orderStore';
+import userParcelStore from '../store/parcelStore'
 import { suggestVehicle } from '../js/vehicleSuggestion';
 
 const defaultDimensions = {
@@ -133,44 +137,87 @@ const availableVehicles = [
   { id: 5, type: 'Ship', name: 'Ship' }
 ];
 
+// const ParcelCategory = () => {
+//   const { setParcelDetails, setCategory } = userParcelStore();
+//   const { setSelectedVehicle } = useOrderStore();
+//   const [active, setActive] = useState(null);
+//   const [selectedCard, setSelectedCard] = useState(null); // for selected card
+
+//   const handleCardClick = (index, category) => {
+//     setSelectedCard(index); // set the selected card 
+//     setActive(index === active ? null : index); // Toggle the popup visibility
+  
+//     const dimensions = defaultDimensions[category];
+    
+//     setParcelDetails({
+//         category,
+//         height: dimensions.height,
+//         width: dimensions.width,
+//         length: dimensions.length,
+//     });
+    
+//     // Use the suggestion function to pick a vehicle based on parcel dimensions.
+//     // Make sure the dimensions have non-null values
+//     if (dimensions.length && dimensions.width && dimensions.height) {
+//       const suggested = suggestVehicle(dimensions, availableVehicles);
+
+//       if (suggested.name) {
+//         // Wait until the selected vehicle is updated
+//         setSelectedVehicle(suggested.name);
+//         console.log('Suggested Vehicle:', suggested.name);  // Log to confirm suggestion
+
+//         // You can now safely navigate or trigger the next action
+//         setTimeout(() => {
+//           // Navigate to the next page or trigger the next action
+//           console.log('State updated, proceed to next page');
+//         }, 100); // Give it a short delay
+//       } else {
+//         console.log('No vehicle suggested');
+//       }
+//     }
+//   };
+
+
 const ParcelCategory = () => {
-  const { setParcelDetails, setSelectedVehicle } = useOrderStore();
+  const { setParcelDetails } = userParcelStore();
+  const { setSelectedVehicle } = useOrderStore();
   const [active, setActive] = useState(null);
-  const [selectedCard, setSelectedCard] = useState(null); // for selected card
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [parcelCategory, setParcelCategory] = useState(null); // New state for parcel category
 
   const handleCardClick = (index, category) => {
-    setSelectedCard(index); // set the selected card 
-    setActive(index === active ? null : index); // Toggle the popup visibility
-  
+    setSelectedCard(index);
+    setActive(index === active ? null : index);
+
     const dimensions = defaultDimensions[category];
-    
+
     setParcelDetails({
-        category,
-        height: dimensions.height,
-        width: dimensions.width,
-        length: dimensions.length,
+      category,
+      height: dimensions.height,
+      width: dimensions.width,
+      length: dimensions.length,
     });
-    
-    // Use the suggestion function to pick a vehicle based on parcel dimensions.
-    // Make sure the dimensions have non-null values
-    if (dimensions.length && dimensions.width && dimensions.height) {
-      const suggested = suggestVehicle(dimensions, availableVehicles);
 
-      if (suggested) {
-        // Wait until the selected vehicle is updated
-        setSelectedVehicle(suggested.name);
-        console.log('Suggested Vehicle:', suggested.name);  // Log to confirm suggestion
+    setParcelCategory(category); // Set the selected parcel category
+  };
 
-        // You can now safely navigate or trigger the next action
-        setTimeout(() => {
-          // Navigate to the next page or trigger the next action
-          console.log('State updated, proceed to next page');
-        }, 100); // Give it a short delay
-      } else {
-        console.log('No vehicle suggested');
+  // useEffect hook to update selected vehicle based on parcel dimensions
+  useEffect(() => {
+    if (parcelCategory) {
+      const dimensions = defaultDimensions[parcelCategory];
+      if (dimensions && dimensions.length && dimensions.width && dimensions.height) {
+        const suggested = suggestVehicle(dimensions, availableVehicles);
+
+        if (suggested.name) {
+          setSelectedVehicle(suggested.name);
+          console.log('Suggested Vehicle:', suggested.name);  // Log to confirm suggestion
+        } else {
+          console.log('No vehicle suggested');
+        }
       }
     }
-  };
+  }, [parcelCategory, setSelectedVehicle]); // Watch parcelCategory for changes
+
 
   return (
     <>

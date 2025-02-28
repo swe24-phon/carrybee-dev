@@ -122,6 +122,7 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import useOrderStore from '../store/orderStore';
+import useParcelStore from '../store/parcelStore'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -131,7 +132,6 @@ const FormComponent = () => {
   // Destructure store methods and state once
   const {
     setParcelDetails, 
-    setReceiverName, 
     setParcelId, 
     parcelId, 
     category, 
@@ -139,7 +139,9 @@ const FormComponent = () => {
     height, 
     width, 
     length 
-  } = useOrderStore();
+  } = useParcelStore();
+
+  const { setReceiverName } = useOrderStore();
 
   const [formData, setFormData] = useState({
     item: '',
@@ -158,12 +160,12 @@ const FormComponent = () => {
     e.preventDefault();
     console.log('Form submitted with:', formData);
     
-    // Set the parcelId first
+
     //setParcelId();
 
     // Get the updated order data from the store
-    const orderData = useOrderStore.getState();
-    const userId = orderData.user_id; 
+    const orderData = useParcelStore.getState();
+    const userId = orderData.parcelDetails.user_id; 
     console.log('Order Data:', orderData);
 
     console.log('User ID from store before submitting:', userId); 
@@ -178,7 +180,7 @@ const FormComponent = () => {
     setReceiverName(formData.receiverName);
 
     const partialData = {
-        //parcelId: orderData.parcelId,
+        parcelId: orderData.parcelId,
         item_name: formData.item,
         category: orderData.parcelDetails?.category ?? 'defaultCategory', // Avoid undefined
         quantity: parseInt(formData.quantity),
@@ -195,6 +197,9 @@ const FormComponent = () => {
     try {
         const response = await axios.post('http://localhost:4000/api/parcels', partialData);
         console.log('Data successfully saved:', response.data);
+        // Update the parcelId in the store after successful submission
+        setParcelId(response.data.id)
+        
         navigate('/Vehicle');
     } catch (error: any) {
         console.error('Error saving data to the database:', error.response?.data ?? error.message);

@@ -40,6 +40,7 @@ import PrevButtonComponent from '../components/PreviousButton';
 import ProceedButtonComponent from '../components/ProceedButton';
 import { useNavigate } from 'react-router-dom';
 import useOrderStore from '../store/orderStore';
+import useParcelStore from '../store/parcelStore';
 import { calculatePrice } from '../js/calculatePrice';
 import '../css/topnav.css';
 import '../css/bottomnav.css';
@@ -121,16 +122,16 @@ interface PrevButtonProps {
 
 const Vehicle = () => {
 
-  const navigate = useNavigate(); // usage of useNavigate
+  const navigate = useNavigate();
+  const [parcelID, setParcelID] = useState(null); // usage of useNavigate
   const handleProceed = async () => {
     // Grab the snapshot of the order data from the store
     const orderData = useOrderStore.getState();
-    const { totalDistance, parcelDetails, selectedVehicle } = orderData;
-    const [parcelID, setParcelID] = useState(null);
-
-    const distance = totalDistance;
-    const weight = parcelDetails?.weight;
-    const vehicleType = selectedVehicle;
+    const parcelData = useParcelStore.getState();
+  
+    const distance = orderData.totalDistance;
+    const weight = parcelData.parcelDetails?.weight;
+    const vehicleType = orderData.selectedVehicle;
   
     console.log('Vehicle Type:', vehicleType); // Log vehicle type
     console.log('Weight:', weight); // Log parcel weight

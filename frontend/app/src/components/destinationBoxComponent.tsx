@@ -252,6 +252,13 @@ const DestinationBox: React.FC<Props> = ({ setPickupCoords, setDropoffCoords }) 
     }
   }, [pickupCoords, dropoffCoords]);
 
+  // Add this useEffect to observe the order details changes in the store
+  useEffect(() => {
+    const orderDetails = useOrderStore.getState().orderDetails;
+    console.log('Order Details Updated:', orderDetails);
+  }, [useOrderStore.getState().orderDetails]); // This runs whenever orderDetails in the store changes
+
+
   const handlePickupChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setPickupInput(value);
