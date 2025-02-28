@@ -4,12 +4,10 @@ import BottomNavComponent from '../components/bottomNavComponent';
 import NavbarComponent from '../components/NavbarComponent';
 import CalendarComponent from '../components/CalendarComponent';
 import TimePickerComponent from '../components/TimePickerComponent';
-// import NextButtonComponent from '../components/NextButton';
 import PrevButtonComponent from '../components/previousButton';
-import ProceedButtonComponent from '../components/ProceedButton'
+import ProceedButtonComponent from '../components/ProceedButton';
 import '../css/Schedule.css';
 import useOrderStore from '../store/orderStore'; // Import the order store
-
 
 const Schedule: React.FC = () => {
   const navigate = useNavigate();
@@ -22,7 +20,7 @@ const Schedule: React.FC = () => {
   const setSchedule = useOrderStore((state) => state.setSchedule); // Get setSchedule from the store
 
   const handlePrevMonth = () => {
-    setDisplayDate(prevDate => {
+    setDisplayDate((prevDate) => {
       const newDate = new Date(prevDate);
       newDate.setMonth(prevDate.getMonth() - 1);
       return newDate;
@@ -30,7 +28,7 @@ const Schedule: React.FC = () => {
   };
 
   const handleNextMonth = () => {
-    setDisplayDate(prevDate => {
+    setDisplayDate((prevDate) => {
       const newDate = new Date(prevDate);
       newDate.setMonth(prevDate.getMonth() + 1);
       return newDate;
@@ -49,20 +47,25 @@ const Schedule: React.FC = () => {
     navigate('/form'); // Navigate to form page
   };
 
-  //ombines the selected date and time into a
-// proper Date object and updates the store with setSchedule
-useEffect(() => {
-  if (selectedDate) {
-    console.log(selectedDate, "This is from the useEffect")
-    const hour24 = timeMode === 'PM' && hour !== '12' ? parseInt(hour) + 12 : parseInt(hour);
-    const finalHour = timeMode === 'AM' && hour === '12' ? 0 : hour24;
+  // Combined the selected date and time into a proper Date object and updates the store with setSchedule
+  useEffect(() => {
+    if (selectedDate) {
+      console.log(selectedDate, "This is from the useEffect");
+      const hour24 = timeMode === 'PM' && hour !== '12' ? parseInt(hour) + 12 : parseInt(hour);
+      const finalHour = timeMode === 'AM' && hour === '12' ? 0 : hour24;
 
-    const scheduledDate = new Date(selectedDate);
-    scheduledDate.setHours(finalHour, parseInt(minute), 0, 0);
+      const scheduledDate = new Date(selectedDate);
+      scheduledDate.setHours(finalHour, parseInt(minute), 0, 0);
 
-    setSchedule(scheduledDate); // Update the store with the new schedul
-  }
-}, [selectedDate, hour, minute, timeMode]);
+      setSchedule(scheduledDate); // Update the store with the new schedule
+    }
+  }, [selectedDate, hour, minute, timeMode, setSchedule]);
+
+  // This useEffect runs whenever orderDetails in the store changes
+  useEffect(() => {
+    const orderDetails = useOrderStore.getState().orderDetails;
+    console.log('Order Details Updated:', orderDetails);
+  }, [useOrderStore.getState().orderDetails]); 
 
   return (
     <div className="h-screen flex justify-center bg-gray-50">

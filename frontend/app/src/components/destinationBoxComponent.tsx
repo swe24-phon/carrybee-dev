@@ -246,9 +246,12 @@ const DestinationBox: React.FC<Props> = ({ setPickupCoords, setDropoffCoords }) 
     if (pickupCoords && dropoffCoords) {
       const distanceInMeters = google.maps.geometry.spherical.computeDistanceBetween(pickupCoords, dropoffCoords);
       const distanceInKm = distanceInMeters / 1000; // Convert in KM 
-      setDistance(distanceInKm);
 
       setTotalDistance(distanceInKm); //store in Zustand OrderStore
+      console.log('Calculated Distance:', distanceInKm); // Debug log
+      setTotalDistance(distanceInKm); // Store in Zustand OrderStore
+      console.log('Distance stored in orderStore:', distanceInKm); // Debug log
+  
     }
   }, [pickupCoords, dropoffCoords]);
 
@@ -262,8 +265,9 @@ const DestinationBox: React.FC<Props> = ({ setPickupCoords, setDropoffCoords }) 
         setPickupLocalCoords(location); // Update local state
         setPickupCoords(location); // Update parent component state
 
-        setPickup(value); //STORE In ORDERSTORE do not value
+        setPickup(value); //STORE In ORDERSTORE
         console.log('Pickup Address Set in Store:', value);
+        console.log('Pickup Coordinates:', pickupCoords); // Debug log
 
       } catch (error) {
         console.error('Error geocoding pickup address:', error);
@@ -282,6 +286,7 @@ const DestinationBox: React.FC<Props> = ({ setPickupCoords, setDropoffCoords }) 
         setDropoffCoords(location); // Update parent component state
 
         setDropoff(value);
+        console.log('Dropoff Coordinates:', dropoffCoords); // Debug log
 
       } catch (error) {
         console.error('Error geocoding dropoff address:', error);

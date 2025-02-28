@@ -32,24 +32,7 @@
 
 // export default Vehicle;
 
-import React, { useState, useEffect } from 'react';
-import NavbarComponent from '../components/NavbarComponent';
-import BottomNav from '../components/BottomNavComponent';
-import VehicleTypeComponent from '../components/vehicleCardComponent';
-import PrevButtonComponent from '../components/PreviousButton';
-import ProceedButtonComponent from '../components/ProceedButton';
-import { useNavigate } from 'react-router-dom';
-import useOrderStore from '../store/orderStore';
-import { calculatePrice } from '../js/calculatePrice';
-import '../css/topnav.css';
-import '../css/bottomnav.css';
-import TestCalculationComponent from '../components/TestCalculationComponent';
-import axios from 'axios';
 
-interface PrevButtonProps {
-  onClick: () => void;
-
-}
 
 // const Vehicle = () => {
 
@@ -105,77 +88,78 @@ interface PrevButtonProps {
 //     <>
 //       <NavbarComponent />
 //       <VehicleTypeComponent />
-//       <div id='vehicle-buttons' >
-//         <div id='prev-button'>
-//         <PrevButtonComponent onClick={() => navigate('/Form')}/>
-//         </div>
-//         <ProceedButtonComponent onClick={handleProceed}/>
-//       </div>
-//       <BottomNav />
-//     </>
-//   );
-// };
-
+//       <di
 // export default Vehicle;
 
 
+import React, { useState } from 'react';
+import NavbarComponent from '../components/NavbarComponent';
+import BottomNav from '../components/BottomNavComponent';
+import VehicleTypeComponent from '../components/vehicleCardComponent';
+import PrevButtonComponent from '../components/PreviousButton';
+import ProceedButtonComponent from '../components/ProceedButton';
+import { useNavigate, useLocation } from 'react-router-dom';
+import useOrderStore from '../store/orderStore';
+import useParcelStore from '../store/parcelStore';
+import { calculatePrice } from '../js/calculatePrice';
+import '../css/topnav.css';
+import '../css/bottomnav.css';
+import axios from 'axios';
+
 const Vehicle = () => {
+  
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const navigate = useNavigate(); // usage of useNavigate
   const handleProceed = async () => {
-    // Grab the snapshot of the order data from the store
     const orderData = useOrderStore.getState();
-    const { totalDistance, parcelDetails, selectedVehicle } = orderData;
-    const [parcelID, setParcelID] = useState(null);
+    const parcelData = useParcelStore.getState();
 
-    const distance = totalDistance;
-    const weight = parcelDetails?.weight;
-    const vehicleType = selectedVehicle;
-  
-    console.log('Vehicle Type:', vehicleType); // Log vehicle type
-    console.log('Weight:', weight); // Log parcel weight
-    console.log('Distance:', distance); // Log calculated distance
-  
+  // Get parcel ID from either navigation state or store
+    const parcelID = location.state?.parcelID || parcelData.parcelID;
+
+    const distance = orderData.orderDetails?.totalDistance;
+    const weight = parcelData.parcelDetails?.weight;
+    const vehicleType = orderData.orderDetails?.selectedVehicle?.name;
+
+    console.log('Vehicle Type:', vehicleType);
+    console.log('Weight:', weight);
+    console.log('Distance:', distance);
+
     if (!vehicleType || weight === undefined || distance === undefined) {
       console.error('❌ Missing vehicle, weight, or distance data');
       alert('Missing vehicle, weight, or distance data');
       return;
     }
-  
+
     try {
-      // Calculate total price
       const totalPrice = calculatePrice(vehicleType, distance, weight);
       console.log(`💰 Total Price: ${totalPrice}`);
       alert(`Calculated Price: ${totalPrice}`);
-  
-      // Update the store with the calculated total
+
       useOrderStore.getState().setTotal(totalPrice);
-  
-      // Prepare Partial Data to Send to Backend
+
       const partialData = {
-        receiver_name: orderData.receiver_name  || "Default Name",
-        pickup_address: orderData.pickup_address || "Default Pickup Address",
-        dropoff_address: orderData.dropoff_address || "Default Dropoff Address",
-        pickup_date: orderData.schedule || new Date().toISOString(),
-        total: totalPrice || 0, // Update with calculated total
-        distance,
-        vehicleType: orderData.selectedVehicle || "Default vehicle",
-        user_id: orderData.user_id,
-        parcel_id: orderData.parcelId || "Parcel ID",
+        receiver_name: orderData.orderDetails?.receiver_name || "Default Name",
+        pickup_address: orderData.orderDetails?.pickup_address || "Default Pickup Address",
+        dropoff_address: orderData.orderDetails?.dropoff_address || "Default Dropoff Address",
+        pickup_date: orderData.orderDetails?.schedule || new Date().toISOString(),
+        total: totalPrice || 0,
+        distance: orderData.orderDetails?.totalDistance || "0",
+        vehicleType: orderData.orderDetails?.selectedVehicle?.name || "Default vehicle",
+        user_id: parcelData.parcelDetails?.user_id || "User ID",
+        parcel_id: parcelID || "Parcel ID"
       };
+
+      console.log('Payload being sent:', partialData);
+
+      const response = await axios.post('http://localhost:4000/api/orders', partialData);
+      console.log('Data successfully saved:', response.data);
   
-      console.log('📦 Sending partial order data:', partialData);
-  
-      // ✅ Send Partial Data to Backend
-      const response = await useOrderStore.getState().submitData(partialData, 'http://localhost:4000/api/orders');
-  
-      console.log('✅ Partial order submitted:', response.data);
-  
-      // Proceed to Payment
       navigate('/Payment');
-    } catch (error) {
-      console.error('❌ Error submitting order:', error);
-      alert('Error submitting order: ' + error.message);
+
+    } catch (error: any) {
+      console.error('Error saving data to the database:', error.response?.data ?? error.message);
     }
   };
 
@@ -183,11 +167,11 @@ const Vehicle = () => {
     <>
       <NavbarComponent />
       <VehicleTypeComponent />
-      <div id='vehicle-buttons' >
+      <div id='vehicle-buttons'>
         <div id='prev-button'>
-        <PrevButtonComponent onClick={() => navigate('/Form')}/>
+          <PrevButtonComponent onClick={() => navigate('/Form')} />
         </div>
-        <ProceedButtonComponent onClick={handleProceed}/>
+        <ProceedButtonComponent onClick={handleProceed} />
       </div>
       <BottomNav />
     </>
@@ -195,3 +179,5 @@ const Vehicle = () => {
 };
 
 export default Vehicle;
+
+

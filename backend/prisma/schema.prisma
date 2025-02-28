@@ -73,8 +73,8 @@ model Order {
   img_url         String?
   user_id         String
   user            User          @relation(fields: [user_id], references: [id])
-  parcel_id       String
-  parcel          Parcel        @relation(fields: [parcel_id], references: [id])
+  parcel_id       String?
+  parcel          Parcel?       @relation(fields: [parcel_id], references: [id])
   payment         Payment?
   review_id       String?       @unique
   review          Review?       @relation
