@@ -15,11 +15,11 @@
   .time-picker-container {
     display: flex;
     flex-direction: column;
-    padding: 1.5rem 0.75rem;
     align-items: center;
     justify-content: center;
     gap: 1rem;
     padding: 0.5rem;
+    width: 100%;
   }
   
   .time-selectors {
@@ -91,4 +91,16 @@
   .time-display-value {
     font-weight: 400;
     color: #4b5563;
+  }
+
+  .time-picker-inline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem; /* Space between time selectors and AM/PM buttons */
+    width: 100%;
+  }
+
+  .bottom-nav-wrapper {
+    margin-top: 2rem; /* Creates space between navigation buttons and bottom nav */
   }

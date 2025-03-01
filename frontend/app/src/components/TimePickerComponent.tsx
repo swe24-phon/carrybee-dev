@@ -45,6 +45,7 @@ const TimePickerComponent: React.FC<TimePickerProps> = ({
     <div className="time-section">
       <h2 className="section-heading">Choose time</h2>
       <div className="time-picker-container">
+        <div className="time-picker-inline">
         <div className="time-selectors">
           <select
             value={hour}
@@ -85,6 +86,7 @@ const TimePickerComponent: React.FC<TimePickerProps> = ({
             PM
           </button>
         </div>
+      </div>
       </div>
 
       <div className="time-display">

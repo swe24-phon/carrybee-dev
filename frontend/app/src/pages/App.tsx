@@ -63,9 +63,9 @@ const App: React.FC = () => {
       <Elements stripe={stripePromise}>
         <Router>
           <Routes>
-            <Route path="/" element={<HomePage />} />
             <Route path="/signup" element={<SignupComponent />} />
-            <Route path="/SignIn" element={<SignInComponent />} />
+            <Route path="/" element={<SignInComponent />} />
+            <Route path="/homepage" element={<HomePage />} />
             <Route path="/Schedule" element={<Schedule />} />
             <Route path="/Form" element={<Form />} />
             <Route path="/Vehicle" element={<Vehicle />} />
