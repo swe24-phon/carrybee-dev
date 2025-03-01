@@ -13,7 +13,7 @@ const NavbarComponent: React.FC = () => {
   return (
     <>
       <div className='nav-container wave'>
-        <img src={signout} alt="signout-icon" id='signout-icon' onClick={() => navigate('/SignIn')}/>
+        <img src={signout} alt="signout-icon" id='signout-icon' onClick={() => navigate('/')}/>
         <img id="logo" src={logo} alt="logo" />
         <img id="avatar" src={avatar} alt="avatar" />
       </div>

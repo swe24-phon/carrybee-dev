@@ -1,110 +1,149 @@
 :root {
-    --primary-color: #333333;
-    --accent-color: #d1ff00;
-    --text-color: #ffffff;
-    --input-bg: #ffffff;
-    --font-family: 'Arial', sans-serif;
-  }
-  
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  body {
-    font-family: var(--font-family);
-    background-color: #f5f5f5;
-  }
-  
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-image: url('/path-to-background-pattern.png');
-    background-color: #f5f5f5;
-  }
-  
-  .signup-page {
-    display: flex;
-    max-width: 400px;
-    width: 100%;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Form Section */
-  .form-container {
-    flex: 1;
-    background-color: var(--primary-color);
-    padding: 2rem;
-    color: var(--text-color);
-    border-radius: 4px;
-  }
-  
-  .form-header {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  
-  .form-header h2 {
-    font-size: 1.5rem;
-    letter-spacing: 1px;
-  }
-  
-  .form-header h4 {
-    margin-top: 1rem;
-    color: var(--accent-color);
-    font-size: 1.2rem;
-  }
-  
-  .form-group {
-    margin-bottom: 1rem;
-  }
-  
-  input {
-    width: 100%;
-    padding: 0.8rem;
-    border: none;
-    border-radius: 4px;
-    background-color: var(--input-bg);
-    font-size: 0.9rem;
-  }
-  
-  input::placeholder {
-    color: #aaa;
-  }
-  
-  .signup-btn {
-    display: block;
-    width: 100%;
-    padding: 0.8rem;
-    margin: 1.5rem 0;
-    background-color: var(--accent-color);
-    color: var(--primary-color);
-    border: none;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .signup-btn:hover {
-    background-color: #c0ea00;
-  }
-  
-  .login-link {
-    text-align: center;
-    font-size: 0.85rem;
-  }
-  
-  .login-link a {
-    color: var(--accent-color);
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .login-link a:hover {
-    text-decoration: underline;
-  }
+  --primary-color: #1b1b1b;
+  --accent-color: #d1ff00;
+  --text-color: #ffffff;
+  --input-bg: #ffffff;
+  --font-family: 'Arial', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  font-family: var(--font-family);
+  background-color: #f5f5f5;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: url('/path-to-background-pattern.png');
+  background-color: #f5f5f5;
+}
+
+.signup-page {
+  display: flex;
+  max-width: 400px;
+  width: 100%;
+  height: 100vh;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Section */
+.form-container {
+  flex: 1;
+  background-color: var(--primary-color);
+  padding: 2rem;
+  color: var(--text-color);
+  border-radius: 4px;
+  min-height: 100%;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.form-header h2 {
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+  color: #FECF30;
+}
+
+.logo-image {
+  display: block;
+  margin: 1rem auto;
+  max-width: 120px;
+  height: auto;
+  border: 1px solid red;
+}
+
+.form-header h4 {
+  margin-top: 1.0rem;
+  color: #FECF30;
+  font-size: 2.0rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+input {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--input-bg);
+  font-size: 0.9rem;
+}
+
+input::placeholder {
+  color: #aaa;
+}
+
+/* Renamed from signup-btn to register-btn to avoid conflicts */
+.register-btn {
+  display: block;
+  width: 100%;
+  padding: 0.8rem;
+  margin: 1.5rem 0;
+  background-color: #FECF30;
+  color: #FECF30;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.register-btn:hover {
+  background-color: #FECF30;
+}
+
+.login-link {
+  text-align: center;
+  font-size: 1.0rem;
+  margin-top: 1.0rem;
+}
+
+.login-link a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: bold;
+  color: #FECF30;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+.error-text {
+  color: #ff3333;
+  font-size: 0.8rem;
+  margin-top: 3px;
+  display: block;
+}
+
+.password-input-container {
+  position: relative;
+}
+
+.toggle-password-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #555;
+}

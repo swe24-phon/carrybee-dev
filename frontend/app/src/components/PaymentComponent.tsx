@@ -8,7 +8,7 @@ import BottomNavComponent from './BottomNavComponent';
 import '../css/paymentform.css';
 // import { apiURL } from "../api/createPayment"
 
-const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY);
 
 // Define the interfaces for our data
 interface DeliveryDetails {
@@ -89,7 +89,9 @@ const PaymentComponent: React.FC = () => {
             orderId: formData.orderId,
             itemSize: formData.itemSize,
             status: formData.status
-          }
+          },
+          success_url: window.location.origin + '/PaymentSuccess',
+          cancel_url: window.location.origin + '/PaymentError'
         }),
       });
 
@@ -203,7 +205,7 @@ const PaymentComponent: React.FC = () => {
               <h2 className="section-title">Shipping Information</h2>
               <button 
                 className="change-button"
-                onClick={() => navigate('/')}
+                onClick={() => navigate('/homepage')}
               >
                 Change <ChevronRightIcon />
               </button>

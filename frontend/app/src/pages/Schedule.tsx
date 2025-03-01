@@ -42,7 +42,7 @@ const Schedule: React.FC = () => {
   };
 
   const handlePrevClick = () => {
-    navigate('/'); // Navigate to homepage
+    navigate('/homepage'); // Navigate to homepage
   };
 
   const handleNextClick = () => {
@@ -92,7 +92,7 @@ useEffect(() => {
             </div>
           </div>
         </div>
-        <div className="bottom-nav-wrapper">
+        <div className="bottom-nav-wrapper" style={{ marginTop: "2rem" }}>
           <BottomNavComponent />
         </div>
       </div>

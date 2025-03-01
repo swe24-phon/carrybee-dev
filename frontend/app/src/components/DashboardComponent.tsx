@@ -21,7 +21,7 @@ const DashboardComponent = ({ invoices }: DashboardComponentProps) => {
   const navigate = useNavigate();
 
   const handleHomeClick = () => {
-    navigate('/');
+    navigate('/homepage');
   };
 
   return (
