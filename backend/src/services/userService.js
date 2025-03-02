@@ -95,7 +95,7 @@ const createUser = async (userData) => {
             },
       });
     // Return the result to controller
-    return { message: 'User created successfully', user: newUser };
+    return { message: 'User registered successfully', user: newUser };
     } catch (error) {
         throw new Error(error.message);
     }
