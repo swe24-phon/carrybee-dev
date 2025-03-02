@@ -94,10 +94,10 @@
 
 import React, { useState } from 'react';
 import NavbarComponent from '../components/NavbarComponent';
-import BottomNav from '../components/BottomNavComponent';
-import VehicleTypeComponent from '../components/vehicleCardComponent';
-import PrevButtonComponent from '../components/PreviousButton';
-import ProceedButtonComponent from '../components/ProceedButton';
+import BottomNavComponent from '../components/BottomNavComponent';
+import VehicleCardComponent from '../components/VehicleCardComponent';
+import PreviousButtonComponent from '../components/PreviousButtonComponent';
+import ProceedButtonComponent from '../components/ProceedButtonComponent';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useOrderStore from '../store/orderStore';
 import useParcelStore from '../store/parcelStore';
@@ -166,14 +166,14 @@ const Vehicle = () => {
   return (
     <>
       <NavbarComponent />
-      <VehicleTypeComponent />
+      <VehicleCardComponent />
       <div id='vehicle-buttons'>
         <div id='prev-button'>
-          <PrevButtonComponent onClick={() => navigate('/Form')} />
+          <PreviousButtonComponent onClick={() => navigate('/Form')} />
         </div>
         <ProceedButtonComponent onClick={handleProceed} />
       </div>
-      <BottomNav />
+      <BottomNavComponent />
     </>
   );
 };
