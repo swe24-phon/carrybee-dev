@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import '../css/signup.css';
+import axios from 'axios';
 
 interface FormData {
   firstName: string;
   lastName: string;
   email: string;
+  phone: string,
   address: string;
   password: string;
   confirmPassword: string;
@@ -15,6 +17,7 @@ const SignUp: React.FC = () => {
     firstName: '',
     lastName: '',
     email: '',
+    phone: '',
     address: '',
     password: '',
     confirmPassword: ''
@@ -61,6 +64,14 @@ const SignUp: React.FC = () => {
       newErrors.email = 'Email is invalid';
       isValid = false;
     }
+
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Phone number is required';
+      isValid = false;
+    } else if (!/^\d{10,15}$/.test(formData.phone)) {  // Allows 10 to 15 digits
+      newErrors.phone = 'Phone number is invalid (must be 10-15 digits)';
+      isValid = false;
+    }    
     
     if (!formData.address.trim()) {
       newErrors.address = 'Address is required';
@@ -85,37 +96,57 @@ const SignUp: React.FC = () => {
     return isValid;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (validateForm()) {
-      console.log('Form submitted:', formData);
-      
-      // Here you would send the data to your backend
-      // The backend would be responsible for hashing the password
-      const dataForBackend = {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        address: formData.address,
-        password: formData.password, // Backend will hash this
-      };
-      
-      // Example API call (replace with your actual implementation)
-      // fetch('/api/signup', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(dataForBackend)
-      // })
-      // .then(response => response.json())
-      // .then(data => {
-      //   // Handle success - redirect to login or dashboard
-      // })
-      // .catch(error => {
-      //   // Handle error
-      // });
+      try {
+        const response = await axios.post('http://localhost:4000/api/users', {
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          address: formData.address,
+          password: formData.password, // The backend will hash this
+        });
+  
+        console.log("User registered successfully:", response.data);
+        alert("Signup successful! Please log in.");
+      } catch (error: any) {
+        console.error("Error signing up:", error.response?.data?.error || error.message);
+        alert(error.response?.data?.error || "Signup failed. Please try again.");
+      }
     }
-  };
+};
+    
+  //   if (validateForm()) {
+  //     console.log('Form submitted:', formData);
+      
+  //     // Here you would send the data to your backend
+  //     // The backend would be responsible for hashing the password
+  //     const dataForBackend = {
+  //       firstName: formData.firstName,
+  //       lastName: formData.lastName,
+  //       email: formData.email,
+  //       address: formData.address,
+  //       password: formData.password, // Backend will hash this
+  //     };
+      
+  //     // Example API call (replace with your actual implementation)
+  //     // fetch('/api/signup', {
+  //     //   method: 'POST',
+  //     //   headers: { 'Content-Type': 'application/json' },
+  //     //   body: JSON.stringify(dataForBackend)
+  //     // })
+  //     // .then(response => response.json())
+  //     // .then(data => {
+  //     //   // Handle success - redirect to login or dashboard
+  //     // })
+  //     // .catch(error => {
+  //     //   // Handle error
+  //     // });
+  //   }
+  // };
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -165,6 +196,18 @@ const SignUp: React.FC = () => {
                 required
               />
               {errors.email && <span className="error-text">{errors.email}</span>}
+            </div>
+
+            <div className="form-group">
+              <input
+                type="phone"
+                name="phone"
+                placeholder="Phone number"
+                value={formData.phone}
+                onChange={handleChange}
+                required
+              />
+              {errors.phone && <span className="error-text">{errors.phone}</span>}
             </div>
             
             <div className="form-group">

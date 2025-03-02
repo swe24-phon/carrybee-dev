@@ -94,8 +94,8 @@
 
 import React, { useState } from 'react';
 import NavbarComponent from '../components/NavbarComponent';
-import BottomNavComponent from '../components/BottomNavComponent';
-import VehicleCardComponent from '../components/VehicleCardComponent';
+import BottomNavComponent from '../components/bottomNavComponent';
+import VehicleCardComponent from '../components/vehicleCardComponent';
 import PreviousButtonComponent from '../components/PreviousButtonComponent';
 import ProceedButtonComponent from '../components/ProceedButtonComponent';
 import { useNavigate, useLocation } from 'react-router-dom';

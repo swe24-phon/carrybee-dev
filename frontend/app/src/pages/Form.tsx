@@ -1,8 +1,8 @@
 import React from 'react';
 import NavbarComponent from '../components/NavbarComponent';
-import BottomNavComponent from '../components/BottomNavComponent';
+import BottomNavComponent from '../components/bottomNavComponent';
 import MyCheckboxComponent from '../components/MyCheckboxComponent';
-import FormComponent from '../components/FormComponent';
+import FormComponent from '../components/formComponent';
 import ParcelCardComponent from '../components/ParcelCardComponent';
 // import CameraComponent from '../components/cameraComponent';
 import '../css/form.css';
