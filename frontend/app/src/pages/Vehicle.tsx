@@ -107,7 +107,7 @@ import '../css/bottomnav.css';
 import axios from 'axios';
 
 const Vehicle = () => {
-  
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -155,7 +155,7 @@ const Vehicle = () => {
 
       const response = await axios.post('http://localhost:4000/api/orders', partialData);
       console.log('Data successfully saved:', response.data);
-  
+
       navigate('/Payment');
 
     } catch (error: any) {
@@ -179,5 +179,3 @@ const Vehicle = () => {
 };
 
 export default Vehicle;
-
-
