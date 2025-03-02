@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BottomNavComponent from '../components/bottomNavComponent';
+import BottomNavComponent from '../components/BottomNavComponent';
 import NavbarComponent from '../components/NavbarComponent';
 import CalendarComponent from '../components/CalendarComponent';
 import TimePickerComponent from '../components/TimePickerComponent';
-import PrevButtonComponent from '../components/previousButton';
-import ProceedButtonComponent from '../components/ProceedButton';
+import PreviousButtonComponent from '../components/PreviousButtonComponent';
+import ProceedButtonComponent from '../components/ProceedButtonComponent';
 import '../css/Schedule.css';
 import useOrderStore from '../store/orderStore'; // Import the order store
 
@@ -90,7 +90,7 @@ const Schedule: React.FC = () => {
               onTimeModeChange={setTimeMode}
             />
             <div className="navigation-buttons">
-              <PrevButtonComponent onClick={handlePrevClick} />
+              <PreviousButtonComponent onClick={handlePrevClick} />
               <ProceedButtonComponent onClick={handleNextClick} />
             </div>
           </div>

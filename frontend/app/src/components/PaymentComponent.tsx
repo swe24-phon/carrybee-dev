@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
-import PayButtonComponent from './PayButtonComponent';
-import ForgotButtonComponent from './ForgotButtonComponent';
-import NavbarComponent from './NavbarComponent';
+import PayButtonComponent from '../components/PayButtonComponent';
+import ForgotButtonComponent from '../components/ForgotButtonComponent';
+import NavbarComponent from '../components/NavbarComponent';
 import BottomNavComponent from './BottomNavComponent';
 import '../css/paymentform.css';
 // import { apiURL } from "../api/createPayment"

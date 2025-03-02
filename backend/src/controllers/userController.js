@@ -4,7 +4,7 @@ const userService = require('../services/userService');
 // Register User
 const registerUser = async (req, res) => {
   try {
-    const newUser = await userService.registerUser(req, res);
+    const newUser = await userService.createUser(req.body);
     res.status(201).json(newUser);
   } catch (error) {
     res.status(400).json({ error: error.message });

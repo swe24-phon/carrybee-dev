@@ -1,9 +1,9 @@
 import React from 'react';
 import NavbarComponent from '../components/NavbarComponent';
-import BottomNavComponent from '../components/bottomNavComponent';
-import CheckboxComponent from '../components/CheckboxComponent';
+import BottomNavComponent from '../components/BottomNavComponent';
+import MyCheckboxComponent from '../components/MyCheckboxComponent';
 import FormComponent from '../components/FormComponent';
-import ParcelCardComponent from '../components/parcelCardComponent';
+import ParcelCardComponent from '../components/ParcelCardComponent';
 // import CameraComponent from '../components/cameraComponent';
 import '../css/form.css';
 import '../css/parcelCategory.css';
@@ -18,7 +18,7 @@ const Form = () => {
     <>
       <NavbarComponent />
       <ParcelCardComponent />
-      <CheckboxComponent />
+      <MyCheckboxComponent />
       <FormComponent onSubmit={handleSubmit}  />
       {/* <CameraComponent /> */}
       <div style={{ position: 'sticky', bottom: 0 }}>
