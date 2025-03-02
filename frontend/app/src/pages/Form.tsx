@@ -1,6 +1,6 @@
 import React from 'react';
 import NavbarComponent from '../components/NavbarComponent';
-import BottomNavComponent from '../components/bottomNavComponent';
+import BottomNavComponent from '../components/BottomNavComponent';
 import MyCheckboxComponent from '../components/MyCheckboxComponent';
 import FormComponent from '../components/formComponent';
 import ParcelCardComponent from '../components/ParcelCardComponent';

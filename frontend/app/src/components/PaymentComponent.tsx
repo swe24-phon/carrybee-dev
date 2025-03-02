@@ -4,7 +4,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import PayButtonComponent from '../components/PayButtonComponent';
 import ForgotButtonComponent from '../components/ForgotButtonComponent';
 import NavbarComponent from '../components/NavbarComponent';
-import BottomNavComponent from '../components/bottomNavComponent';
+import BottomNavComponent from './BottomNavComponent';
 import '../css/paymentform.css';
 // import { apiURL } from "../api/createPayment"
 

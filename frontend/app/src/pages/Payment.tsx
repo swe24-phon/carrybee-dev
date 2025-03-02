@@ -3,7 +3,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import PaymentComponent from '../components/PaymentComponent';
 import NavbarComponent from '../components/NavbarComponent';
-import BottomNavComponent from '../components/bottomNavComponent';
+import BottomNavComponent from '../components/BottomNavComponent';
 import '../css/phoneWrapper.css';
 
 const stripePromise = loadStripe('');
