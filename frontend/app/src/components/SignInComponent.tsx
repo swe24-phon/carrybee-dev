@@ -53,7 +53,7 @@ const SignInComponent: React.FC<SignInProps> = ({
       localStorage.setItem("user", JSON.stringify(user));
       setUserID(user.id);
       localStorage.setItem("userID", user.id);
-      navigate("/homepage");
+      navigate("/");
     } catch (error: any) {
       console.error("Login failed:", error.response?.data?.message || error.message);
       alert(error.response?.data?.message || "Invalid credentials. Please try again.");

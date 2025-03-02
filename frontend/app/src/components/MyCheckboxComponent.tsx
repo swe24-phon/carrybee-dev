@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/formControlLabel';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import '../css/checkbox.css';
 
 function OptionCheckbox() {
