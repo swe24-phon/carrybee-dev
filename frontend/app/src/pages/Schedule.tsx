@@ -65,12 +65,12 @@ const Schedule: React.FC = () => {
   useEffect(() => {
     const orderDetails = useOrderStore.getState().orderDetails;
     console.log('Order Details Updated:', orderDetails);
-  }, [useOrderStore.getState().orderDetails]); 
+  }, [useOrderStore.getState().orderDetails]);
 
   return (
     <div className="h-screen flex justify-center bg-gray-50">
       <div className="app-container">
-        <NavbarComponent />
+      <NavbarComponent style={{ position: 'relative' }} />
         <div className="content-wrapper">
           <div className="schedule-container">
             <CalendarComponent

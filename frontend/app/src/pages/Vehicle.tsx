@@ -169,7 +169,8 @@ const Vehicle = () => {
       <VehicleCardComponent />
       <div id='vehicle-buttons'>
         <div id='prev-button'>
-          <PreviousButtonComponent onClick={() => navigate('/Form')} />
+          <PreviousButtonComponent onClick={() => navigate('/Form')}
+            />
         </div>
         <ProceedButtonComponent onClick={handleProceed} />
       </div>
