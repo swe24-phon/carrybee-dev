@@ -23,10 +23,17 @@ const useParcelStore = create((set) => ({
     });
   },
 
+  // setParcelID: (parcelID) => {
+  //   set((state) => ({
+  //     parcelDetails: { ...state.parcelDetails, parcel_id: parcelID }
+  //   }));
+  // },
   setParcelID: (parcelID) => {
     set((state) => ({
-      parcelDetails: { ...state.parcelDetails, parcel_id: parcelID }
+      parcelDetails: { ...state.parcelDetails, parcel_id: parcelID },
+      parcel_id: parcelID // ✅ Ensure parcel_id is set at the root level
     }));
+    console.log("✅ Parcel ID set:", parcelID);
   },
 
   setUserID: (userID) => {
