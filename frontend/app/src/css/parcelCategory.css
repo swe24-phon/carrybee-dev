@@ -109,3 +109,23 @@
 .vehicle-icon {
   font-size: 2rem;
 }
+
+.info-popup .close-popup {
+  position: absolute;
+  top: 5px;
+  left: 5px; /* Move the button to the left */
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.info-popup .close-popup:hover {
+  color: rgb(255, 255, 255);
+}
+
+.info-popup .popup-head {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}

@@ -13,6 +13,7 @@ const PrevButtonComponent: React.FC<PrevButtonProps> = ({ onClick }) => {
       sx={{
         color: '#cc9e00',
         borderColor: '#cc9e00',
+        width: '100%',
         '&:hover': {
           backgroundColor: '#FECF30',
           color: '#000000',

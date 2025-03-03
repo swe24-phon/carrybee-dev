@@ -7,16 +7,16 @@ import axios from 'axios';
 
 const FormComponent = () => {
   const navigate = useNavigate();
-  
+
   const {
-    setParcelDetails, 
-    setParcelID, 
-    parcelId, 
-    category, 
-    userID, 
-    height, 
-    width, 
-    length 
+    setParcelDetails,
+    setParcelID,
+    parcelId,
+    category,
+    userID,
+    height,
+    width,
+    length
   } = useParcelStore();
 
   const { setReceiverName } = useOrderStore();
@@ -41,10 +41,10 @@ const FormComponent = () => {
     // Get the updated order data from the store
     const orderData = useParcelStore.getState();
     const userId = orderData.parcelDetails.user_id;
-    console.log('User ID from store before submitting:', userId); 
+    console.log('User ID from store before submitting:', userId);
     console.log('Order Data:', orderData);
 
-    console.log('User ID from store before submitting:', userId); 
+    console.log('User ID from store before submitting:', userId);
 
     // Set other parcel details
     setParcelDetails({
@@ -56,7 +56,7 @@ const FormComponent = () => {
     setReceiverName(formData.receiverName);
 
     const partialData = {
-  
+
         item_name: formData.item,
         category: orderData.parcelDetails?.category ?? 'defaultCategory', // Avoid undefined
         quantity: parseInt(formData.quantity),
@@ -73,9 +73,9 @@ const FormComponent = () => {
     try {
         const response = await axios.post('http://localhost:4000/api/parcels', partialData);
         console.log('Data successfully saved:', response.data);
-        
+
         setParcelID(response.data.parcel.id)
-        
+
         navigate('/Vehicle', {
           state: { parcelID: response.data.parcel.id }
         });
@@ -95,6 +95,7 @@ const FormComponent = () => {
           value={formData.item}
           onChange={handleChange}
           sx={textFieldStyles}
+          required
         />
         <TextField
           label="Receiver Name"
@@ -103,6 +104,7 @@ const FormComponent = () => {
           value={formData.receiverName}
           onChange={handleChange}
           sx={textFieldStyles}
+          required
         />
         <TextField
           label="Quantity"
@@ -111,6 +113,7 @@ const FormComponent = () => {
           value={formData.quantity}
           onChange={handleChange}
           sx={textFieldStyles}
+          required
         />
         <TextField
           label="Weight"
@@ -119,6 +122,7 @@ const FormComponent = () => {
           value={formData.weight}
           onChange={handleChange}
           sx={textFieldStyles}
+          required
         />
         <TextField
           label="Description"
