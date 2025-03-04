@@ -11,8 +11,9 @@ const PayButtonComponent: React.FC<PayButtonProps> = ({ onClick }) => {
       variant="outlined"
       onClick={onClick}
       sx={{
-        color: '#cc9e00',
-        borderColor: '#cc9e00',
+        backgroundColor: '#FECF30',
+        color: '#000000',
+        borderRadius: '5px',
         '&:hover': {
           backgroundColor: '#FECF30',
           color: '#000000',

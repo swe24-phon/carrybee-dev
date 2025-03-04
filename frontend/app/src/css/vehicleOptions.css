@@ -50,7 +50,7 @@
 
 .icon-box {
   cursor: pointer;
-  transition: all 0.3s ease;
+  /* transition: all 0.3s ease; */
 }
 
 .icon-box.selected {

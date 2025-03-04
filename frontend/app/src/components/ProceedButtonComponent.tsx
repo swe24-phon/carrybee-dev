@@ -14,6 +14,7 @@ const ProceedButtonComponent: React.FC<ProceedButtonProps> = ({ onClick }) => {
         backgroundColor: '#FECF30',
         color: '#000000',
         borderRadius: '5px',
+        width: '100%',
         '&:hover': {
           backgroundColor: '#E6B82A',
         },

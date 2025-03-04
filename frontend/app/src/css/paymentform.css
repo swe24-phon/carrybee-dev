@@ -421,7 +421,9 @@ html, body {
 
 .pay-button-wrapper,
 .forgot-button-wrapper {
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 /* Combining both button styles */
