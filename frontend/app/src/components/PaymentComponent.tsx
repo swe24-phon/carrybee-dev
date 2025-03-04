@@ -41,7 +41,7 @@
 //       <polyline points="9 18 15 12 9 6"></polyline>
 //     </svg>
 //   );
-  
+
 
 //   const deliveryDetails: DeliveryDetails = {
 //     itemName: "Fashion Bundle",
@@ -72,7 +72,7 @@
 //         medium: 1,
 //         large: 1.2
 //       };
-      
+
 //       const adjustedTotal = Math.round(formData.total * (sizeMultiplier[formData.itemSize] || 1));
 //       // Create checkout session via your frontend API
 //       const response = await fetch('/api/createPayment', {
@@ -107,7 +107,7 @@
 //       const stripe = await stripePromise;
 //       if (stripe) {
 //         const { error } = await stripe.redirectToCheckout({ sessionId });
-        
+
 //         if (error) {
 //           throw error;
 //         }
@@ -158,7 +158,7 @@
 //       <div className="fixed-top">
 //         <NavbarComponent />
 //       </div>
-      
+
 //       {/* Main Scrollable Content */}
 //       <div className="scrollable-content">
 //         <div className="order-summary-container">
@@ -206,7 +206,7 @@
 //           <div className="shipping-info">
 //             <div className="section-header">
 //               <h2 className="section-title">Shipping Information</h2>
-//               <button 
+//               <button
 //                 className="change-button"
 //                 onClick={() => navigate('/homepage')}
 //               >
@@ -226,7 +226,7 @@
 //                   <p className="shipping-address">1234 Foster Rd, Ann Creek, New Mexico 29481</p>
 //                 </div>
 //               </div>
-              
+
 //               <div className="address-item">
 //                 <div className="pin-icon dropoff-pin">
 //                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#FECF30" stroke="none">
@@ -265,20 +265,20 @@
 //           {/* Button Container */}
 //           <div className="button-container">
 //             <div className="pay-button-wrapper">
-//               <PayButtonComponent 
-//                 onClick={handlePayment} 
+//               <PayButtonComponent
+//                 onClick={handlePayment}
 //                 loading={loading}
 //               />
 //             </div>
 //             <div className="forgot-button-wrapper">
-//               <ForgotButtonComponent 
+//               <ForgotButtonComponent
 //                 onClick={handleForgot}
 //               />
 //             </div>
 //           </div>
 //         </div>
 //       </div>
-      
+
 //       {/* Fixed Bottom Navigation */}
 //       <div className="fixed-bottom">
 //         <BottomNavComponent />
@@ -329,7 +329,7 @@
 //     // This is a simple example and may need adjustments based on your logic
 //     if (!dimensions) return "Small"; // default
 //     const { length, width, height } = dimensions;
-    
+
 //     // You could define some thresholds here:
 //     if (length <= 50 && width <= 40 && height <= 50) return "SMALL";
 //     if (length <= 210 && width <= 120 && height <= 110) return "MEDIUM";
@@ -378,7 +378,7 @@
 //         medium: 1,
 //         large: 1.2
 //       };
-      
+
 //       const adjustedTotal = Math.round(formData.total * sizeMultiplier[formData.itemSize]);
 
 //       const response = await fetch('/api/createPayment', {
@@ -407,10 +407,10 @@
 //       }
 
 //       const { sessionId } = await response.json();
-      
+
 //       const stripe = await stripePromise;
 //       const { error } = await stripe.redirectToCheckout({ sessionId });
-      
+
 //       if (error) {
 //         throw error;
 //       }
@@ -457,7 +457,7 @@
 //     <div className="pageContainer">
 //       <div className="scrollable-content">
 //         <h1 className="pageTitle">Delivery Summary</h1>
-        
+
 //         <div className="summaryContainer">
 //           <div className="summaryGrid">
 //             <div className="summaryItem">
@@ -494,13 +494,13 @@
 
 //       <div className="buttonContainer">
 //         <div className="payButtonWrapper">
-//           <PayButtonComponent 
-//             onClick={handlePayment} 
+//           <PayButtonComponent
+//             onClick={handlePayment}
 //             loading={loading}
 //           />
 //         </div>
 //         <div className="forgotButtonWrapper">
-//           <ForgotButtonComponent 
+//           <ForgotButtonComponent
 //             onClick={handleForgot}
 //           />
 //         </div>
@@ -573,7 +573,7 @@ const PaymentComponent: React.FC = () => {
     description: parcelDetails.description || "No description",
     vehicle: orderDetails?.selectedVehicle?.name  || "Not Selected"
   };
-  
+
   const pickupAddress = orderDetails.pickup_address || "No address available";
   const dropoffAddress = orderDetails.dropoff_address || "No address available";
   const subtotal = orderDetails.total || 0;
@@ -648,10 +648,10 @@ const PaymentComponent: React.FC = () => {
     try {
       // Use the setPaymentDetails function from the hook
       setPaymentDetails();
-      
+
       // Submit the payment using the function from the hook
       await submitPayment();
-  
+
       setLoading(false);
     } catch (error) {
       console.error('❌ Payment failed:', error);
@@ -665,7 +665,7 @@ const PaymentComponent: React.FC = () => {
       <div className="fixed-top">
         <NavbarComponent />
       </div>
-      
+
       {/* Main Scrollable Content */}
       <div className="scrollable-content">
         <div className="order-summary-container">
@@ -713,7 +713,7 @@ const PaymentComponent: React.FC = () => {
           <div className="shipping-info">
             <div className="section-header">
               <h2 className="section-title">Shipping Information</h2>
-              <button 
+              <button
                 className="change-button"
                 onClick={() => navigate('/homepage')}
               >
@@ -733,7 +733,7 @@ const PaymentComponent: React.FC = () => {
                   <p className="shipping-address">{pickupAddress}</p>
                 </div>
               </div>
-              
+
               <div className="address-item">
                 <div className="pin-icon dropoff-pin">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#FECF30" stroke="none">
@@ -772,20 +772,20 @@ const PaymentComponent: React.FC = () => {
           {/* Button Container */}
           <div className="button-container">
             <div className="pay-button-wrapper">
-              <PayButtonComponent 
-                onClick={createCheckoutSession} 
+              <PayButtonComponent
+                onClick={createCheckoutSession}
                 loading={loading}
               />
             </div>
             <div className="forgot-button-wrapper">
-              <ForgotButtonComponent 
+              <ForgotButtonComponent
                 onClick={handleForgot}
               />
             </div>
           </div>
         </div>
       </div>
-      
+
       {/* Fixed Bottom Navigation */}
       <div className="fixed-bottom">
         <BottomNavComponent />

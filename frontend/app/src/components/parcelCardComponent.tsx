@@ -177,10 +177,11 @@
 // export default ParcelCategory;
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleInfo, faFile, faBox, faGifts, faCouch, faCubes, faBoxOpen, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCircleInfo, faFile, faBox, faGifts, faCouch, faCubes, faBoxOpen, faTimes, faMotorcycle, faCarSide, faVanShuttle, faTruckPickup, faShip, faHelicopter } from '@fortawesome/free-solid-svg-icons';
 import useOrderStore from '../store/orderStore';
 import userParcelStore from '../store/parcelStore';
 import { suggestVehicle } from '../js/vehicleSuggestion';
+import '../css/parcelCategory.css';
 
 const defaultDimensions = {
   DOCUMENT: { length: 35, width: 10, height: 32 },
@@ -196,8 +197,22 @@ const availableVehicles = [
   { id: 2, type: 'Car', name: 'Car' },
   { id: 3, type: 'Van', name: 'Van' },
   { id: 4, type: 'Truck', name: 'Truck' },
-  { id: 5, type: 'Ship', name: 'Ship' }
+  { id: 5, type: 'Ship', name: 'Ship' },
+  { id: 6, type: 'Helicopter', name: 'Helicopter' }
 ];
+
+// Map parcel category to vehicle icon
+const vehicleIcons = {
+  DOCUMENT: faMotorcycle,
+  SMALL: faCarSide,
+  MEDIUM: faVanShuttle,
+  LARGE: faTruckPickup,
+  EXTRA_LARGE: faShip,
+  CUSTOM: faHelicopter
+};
+
+// Helper function to convert category name to valid object key
+const convertToKey = (category) => category.replace(/\s+/g, '_').toUpperCase();
 
 const ParcelCategory = () => {
   const { setParcelDetails } = userParcelStore();
@@ -212,14 +227,15 @@ const ParcelCategory = () => {
       setParcelCategory(null);
     } else {
       setSelectedCard(index);  // Select the card
-      const dimensions = defaultDimensions[category];
+      const key = convertToKey(category);  // Convert category to object key format
+      const dimensions = defaultDimensions[key];
       setParcelDetails({
-        category,
+        category: key,
         height: dimensions.height,
         width: dimensions.width,
         length: dimensions.length,
       });
-      setParcelCategory(category);
+      setParcelCategory(key);
     }
   };
 
@@ -269,8 +285,9 @@ const ParcelCategory = () => {
                     <FontAwesomeIcon icon={faTimes} />
                   </button>
                   <h3 className='popup-head'>{category}</h3>
-                  <p><strong>Weight:</strong> up to {defaultDimensions[category]?.weight || 'contact customer team'} kg</p>
-                  <p><strong>Size limit (L x W x H):</strong> {defaultDimensions[category]?.length || 'contact'} x {defaultDimensions[category]?.width || 'customer'} x {defaultDimensions[category]?.height || 'team'} cm</p>
+                  <FontAwesomeIcon icon={vehicleIcons[convertToKey(category)]} className='vehicle-icon' />
+                  <p><strong>Weight:</strong> up to {defaultDimensions[convertToKey(category)]?.weight || 'contact customer team'} kg</p>
+                  <p><strong>Size limit (L x W x H):</strong> {defaultDimensions[convertToKey(category)]?.length || 'contact'} x {defaultDimensions[convertToKey(category)]?.width || 'customer'} x {defaultDimensions[convertToKey(category)]?.height || 'team'} cm</p>
                 </div>
               )}
             </div>
