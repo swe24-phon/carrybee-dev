@@ -31,7 +31,7 @@ const useParcelStore = create((set) => ({
   setParcelID: (parcelID) => {
     set((state) => ({
       parcelDetails: { ...state.parcelDetails, parcel_id: parcelID },
-      parcel_id: parcelID // ✅ Ensure parcel_id is set at the root level
+      parcel_id: parcelID
     }));
     console.log("✅ Parcel ID set:", parcelID);
   },

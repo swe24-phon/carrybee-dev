@@ -114,6 +114,7 @@ const Vehicle = () => {
   const handleProceed = async () => {
     const orderData = useOrderStore.getState();
     const parcelData = useParcelStore.getState();
+    const { setOrderID } = useOrderStore.getState();
 
   // Get parcel ID from either navigation state or store
     const parcelID = location.state?.parcelID || parcelData.parcelID;
@@ -156,8 +157,11 @@ const Vehicle = () => {
       const response = await axios.post('http://localhost:4000/api/orders', partialData);
       console.log('Data successfully saved:', response.data);
 
-      navigate('/Payment');
+      setOrderID(response.data.order.id)
 
+      navigate('/Payment', {
+        state: { orderID: response.data.order.id }
+      });
     } catch (error: any) {
       console.error('Error saving data to the database:', error.response?.data ?? error.message);
     }

@@ -28,12 +28,13 @@ const useOrderStore = create((set) => ({
       orderDetails: { ...state.orderDetails, receiver_name: recipient }
     }));
   },
-
-  // setOrderID: (id) => {
-  //   set((state) => ({
-  //     orderDetails: { ...state.orderDetails, order_id: id }
-  //   }));
-  // },
+  setOrderID: (orderID) => {
+    set((state) => ({
+      orderDetails: { ...state.orderDetails, order_id: orderID },
+      order_id: orderID
+    }));
+    console.log("✅ Order ID set:", orderID);
+  },
 
   setPickup: (pickup) => {
     set((state) => ({
@@ -103,14 +104,8 @@ const useOrderStore = create((set) => ({
     try {
       const { orderDetails } = useOrderStore.getState();
       const response = await axios.post(endpoint, orderDetails);
-
-      if (response.data && response.data.order_id) {
-        set((state) => ({
-          orderDetails: { ...state.orderDetails, order_id: response.data.order_id }
-        }));
-      }
-
-      console.log('✅ Order created successfully:', response.data.order_id);
+      set({ orderID: response.data.id });
+      console.log('✅ Order created successfully:', response.data);
       return response.data;
     } catch (error) {
       console.error('❌ Error creating order:', error);
@@ -131,8 +126,9 @@ const useOrderStore = create((set) => ({
         status: 'idle',
         user_id: null,
         parcel_id: '',
-        selectedVehicle: '', // Keep this consistent with initial state
-      }
+        selectedVehicle: '', 
+      },
+      order_id:'',
     });
   },
 }));
