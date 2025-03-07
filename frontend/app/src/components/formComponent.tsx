@@ -76,7 +76,7 @@ const FormComponent = () => {
 
         setParcelID(response.data.parcel.id)
 
-        navigate('/Vehicle', {
+        navigate('/vehicle', {
           state: { parcelID: response.data.parcel.id }
         });
     } catch (error: any) {
@@ -136,7 +136,7 @@ const FormComponent = () => {
         />
       </div>
       <div className='btn-box'>
-        <button id="prev-btn" type="button" onClick={() => navigate('/Schedule')}>
+        <button id="prev-btn" type="button" onClick={() => navigate('/schedule')}>
           Previous
         </button>
         <button id="proceed-btn" type="submit">
