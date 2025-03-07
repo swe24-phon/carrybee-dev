@@ -13,7 +13,7 @@ body {
 .signin-container {
     height: 100%;
     margin: 0 auto;
-    /* padding: 20px; */
+    overflow-x: hidden;
     background-image: url('../assets/signin.png');
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -22,10 +22,8 @@ body {
 .signin-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 0 20px;
   align-items: center;
-  min-height: 92vh;
+  min-height: 95vh;
   bottom: 0;
   position: relative;
   justify-content: flex-end;
