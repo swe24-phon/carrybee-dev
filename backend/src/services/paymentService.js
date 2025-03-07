@@ -7,16 +7,19 @@ const createPayment = async (paymentData) =>
 {
     try{
         // Unsure whether or not 'order' is needed here
-        const {invoice_no, total, payment_method, status, order_id} = paymentData;
+        // const {invoice_no, total, payment_method, status, order_id} = paymentData;
+        console.log(paymentData)
+        const {} = paymentData
 
+        console.log(paymentData)
         // Need to create a product and price...
         const product = await stripe.products.create({
-            name: 'T-Shirt'
+            name: 'T-Shirt' // Should be something else
         })
 
         const price = await stripe.prices.create({
-            product: product.id,
-            unit_amount: total,
+            // product: product.id,
+            unit_amount: Math.round(total * 100),
             currency: 'aud'
         })
 
@@ -26,8 +29,12 @@ const createPayment = async (paymentData) =>
                 {
                     price: price.id,
                     quantity: 1
-                }
+                },
+                
             ],
+            metadata: {
+                // product: product.id,
+            },
             mode: 'payment',
             success_url: "http://localhost:4000/success.html",
             cancel_url: "http://localhost:4000/cancel.html"

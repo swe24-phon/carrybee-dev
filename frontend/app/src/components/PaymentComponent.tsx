@@ -527,7 +527,8 @@ import useOrderStore from '../store/orderStore';
 import useParcelStore from '../store/parcelStore';
 import usePaymentStore from '../store/paymentStore';
 
-const stripePublicKey = import.meta.env.VITE_STRIPE_KEY;
+// const stripePublicKey = import.meta.env.VITE_STRIPE_KEY;
+const stripePublicKey = import.meta.env.REACT_APP_STRIPE_KEY;
 
 if (!stripePublicKey) {
   console.error("❌ Stripe API key is missing! Check your .env file.");
@@ -606,24 +607,26 @@ const PaymentComponent: React.FC = () => {
 
       const adjustedTotal = Math.round(total * (sizeMultiplier[deliveryDetails.size] || 1));
 
-      const response = await fetch('/api/payments/createPayment', {
+      const response = await fetch('http://localhost:4000/api/payments/createPayment', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           items: [{
-            name: `Order ${deliveryDetails.orderId}`,
-            description: deliveryDetails.description,
             amount: adjustedTotal,
-            quantity: 1
+            currency: 'aud',
           }],
           metadata: {
             invoiceNo: `INV-${deliveryDetails.orderId}`,
+            name: `Order ${deliveryDetails.orderId}`,
+            description: deliveryDetails.description,
+            quantity: parcelDetails.quantity,
+            // Vlad change quantity
             orderId: deliveryDetails.orderId,
             itemSize: deliveryDetails.size,
             status: deliveryDetails.status
           },
-          success_url: window.location.origin + '/PaymentSuccess',
-          cancel_url: window.location.origin + '/PaymentError'
+          // success_url: window.location.origin + '/PaymentSuccess',
+          // cancel_url: window.location.origin + '/PaymentError'
         }),
       });
 
@@ -632,8 +635,9 @@ const PaymentComponent: React.FC = () => {
       }
 
       const { sessionId } = await response.json();
-      const { error } = await stripe.redirectToCheckout({ sessionId });
-
+      // const { error } = await stripe.redirectToCheckout({ sessionId });
+      //Vlad and Phon change
+      console.log(sessionId)
       if (error) throw error;
     } catch (error) {
       console.error('Error creating checkout session:', error);
