@@ -7,41 +7,9 @@ const registerUser = async (req, res) => {
   return createUser(req, res); // No need to duplicate logic
 };
 
-//cause error by phon
-// const loginUser = async (req, res) => {
-//   try {
-//     const { email, password } = req.body;
-
-//     // Retrieve user by email
-//     const user = await prisma.user.findUnique({ where: { email } });
-//     if (!user || !(await bcrypt.compare(password, user.password))) {
-//       return res.status(401).json({ error: 'Invalid credentials' });
-//     }
-
-//     // Generate JWT token
-//     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-//     res.status(200).json({ token });
-//   } catch (error) {
-//     return res.status(500).json({ error: error.message });
-//   }
-// };
-// end by phon*************
-// const loginUser = async (req) => {
-//   const { email, password } = req.body;
-
-//   // Retrieve user by email
-//   const user = await prisma.user.findUnique({ where: { email } });
-//   if (!user || !(await bcrypt.compare(password, user.password))) {
-//     throw new Error('Invalid credentials');
-//   }
-
-//   // Generate JWT token
-//   const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-//   return token; // Return** the token instead of sending a response
-// };
-
 const loginUser = async (req) => {
   const { email, password } = req.body;
+
 
   // Retrieve user by email
   const user = await prisma.user.findUnique({ where: { email } });
@@ -62,7 +30,7 @@ const loginUser = async (req) => {
     }
   };
 };
-//add by phon end here*************
+
 // Create User
 const createUser = async (userData) => {
   try {
@@ -101,7 +69,6 @@ const createUser = async (userData) => {
     }
 };
 
-//add by  phon
 // Get user by id
 const getUserById = async (id) => {
   try {
@@ -126,7 +93,6 @@ const getUserById = async (id) => {
   }
 };
 
-//add by phon
 // Get All Users
 const getAllUsers = async () => {
   try {

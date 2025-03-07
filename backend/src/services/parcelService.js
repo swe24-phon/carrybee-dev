@@ -16,6 +16,20 @@ const createParcel = async (parcelData) => {
       length 
     } = parcelData;
 
+
+    console.log({
+      data: {
+        item_name,
+        category,
+        quantity,
+        weight,
+        width,
+        length,
+        height,
+        description,
+        user_id,
+      },
+    })
     if (!item_name || !category || !quantity || !weight || !user_id) {
       throw new Error('Required parcel data is missing.');
   }
@@ -91,7 +105,9 @@ const deleteParcel = async (id) => {
   try {
     await prisma.parcel.delete({ where: { id }});
     return { message: 'Parcel deleted succesfully'};
-  } catch (error) {
+  } 
+  catch (error) {
+    
     throw new Error ('Failed to delete parcel');
   }
 };

@@ -16,8 +16,8 @@ const createPayment = async (paymentData) =>
 
         const price = await stripe.prices.create({
             product: product.id,
-            unit_amount: 2000,
-            currency: 'usd'
+            unit_amount: total,
+            currency: 'aud'
         })
 
         // Testing stripe sessions
@@ -33,7 +33,21 @@ const createPayment = async (paymentData) =>
             cancel_url: "http://localhost:4000/cancel.html"
         })
         //   Step 1: Create record in DB
-        await prisma.payment.create(
+        // await prisma.payment.create(
+        //     {
+        //         data: 
+        //         {
+        //             invoice_no,
+        //             total,
+        //             payment_method,
+        //             status,
+        //             order_id
+        //         }
+        //     }
+        // );
+
+        // Step 1: Create record in DB
+        const newPayment = await prisma.payment.create(
             {
                 data: 
                 {
@@ -46,22 +60,12 @@ const createPayment = async (paymentData) =>
             }
         );
 
+        return {
+            Session: session,
+            Payment: newPayment
+        }
 
-        return session
-
-        // Step 1: Create record in DB
-        // const newPayment = await prisma.payment.create(
-        //     {
-        //         data: 
-        //         {
-        //             invoice_no,
-        //             total,
-        //             payment_method,
-        //             status,
-        //             order_id
-        //         }
-        //     }
-        // );
+        
 
         // Step 2: Create Stripe PaymentIntent
         // const {error, confirmationToken} = await stripe.createConformationToken({
