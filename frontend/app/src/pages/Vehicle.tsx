@@ -21,9 +21,9 @@
 //       <VehicleTypeComponent />
 //       <div id='vehicle-buttons' >
 //         <div id='prev-button'>
-//         <PrevButtonComponent onClick={() => navigate('/Form')}/>
+//         <PrevButtonComponent onClick={() => navigate('form')}/>
 //         </div>
-//         <ProceedButtonComponent onClick={() => navigate('/Payment')}/>
+//         <ProceedButtonComponent onClick={() => navigate('/payment')}/>
 //       </div>
 //       <BottomNav />
 //     </>
@@ -75,7 +75,7 @@
 //       console.log('Order submitted successfully');
 
 //      // setTotal(totalPrice);
-//       navigate('/Payment');
+//       navigate('/payment');
 
 //     } catch (error) {
 //       console.error(error);
@@ -156,7 +156,7 @@ const Vehicle = () => {
       const response = await axios.post('http://localhost:4000/api/orders', partialData);
       console.log('Data successfully saved:', response.data);
 
-      navigate('/Payment');
+      navigate('/payment');
 
     } catch (error: any) {
       console.error('Error saving data to the database:', error.response?.data ?? error.message);
@@ -169,7 +169,7 @@ const Vehicle = () => {
       <VehicleCardComponent />
       <div id='vehicle-buttons'>
         <div id='prev-button'>
-          <PreviousButtonComponent onClick={() => navigate('/Form')}
+          <PreviousButtonComponent onClick={() => navigate('/form')}
             />
         </div>
         <ProceedButtonComponent onClick={handleProceed} />
