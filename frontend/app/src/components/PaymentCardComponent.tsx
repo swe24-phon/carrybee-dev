@@ -17,11 +17,11 @@ const PaymentCardComponent = () => {
                 <div id='addresses'>
                   <div id='pickup-adress'>
                     <FontAwesomeIcon icon={faLocationDot} id="location-icon" aria-label="Pick-up Location" />
-                    <span>Pick-up address</span>
+                    <span>Pick-up</span>
                   </div>
                   <div id='dropoff-adress'>
                     <FontAwesomeIcon icon={faLocationDot} id="location-icon" aria-label="Pick-up Location" />
-                    <span>Drop-off address</span>
+                    <span>Drop-off</span>
                   </div>
                 </div>
                 <span>DD/MM/2025</span>

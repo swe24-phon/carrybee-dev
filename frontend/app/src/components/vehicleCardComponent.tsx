@@ -103,11 +103,6 @@ const VehicleType = () => {
 
 export default VehicleType;
 
-
-
-
-
-
 //   return (
 //     <>
 //       <h1 id='type'>Available Vehicles</h1>

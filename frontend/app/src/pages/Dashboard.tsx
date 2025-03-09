@@ -9,10 +9,10 @@ const Dashboard: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       <NavbarComponent />
-      <div className="flex flex-col items-center justify-center pt-4 space-y-4">
-        <DashboardComponent invoices={[]} />
-        <InvoiceCard />
-      </div>
+      {/* <div className="flex flex-col items-center justify-center pt-4 space-y-4"> */}
+        <DashboardComponent />
+        {/* <InvoiceCard /> */}
+      {/* </div> */}
     </div>
   );
 };

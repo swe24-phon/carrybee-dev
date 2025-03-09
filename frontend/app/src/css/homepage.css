@@ -15,17 +15,14 @@ body {
 }
 
 #banner {
-  width: 355px;
-  border-radius: 20px;
-  margin: 1.5rem 1rem;
-  margin-top: 2rem;
+  width: 395px;
   position: relative;
 }
 
 .destination-container {
   display: flex;
   top: 35%;
-  left: 8%;
+  left: 6%;
   box-shadow: 1px 1px 5px 2px #00000029;
   border-radius: 15px;
   background-color: #ffffff;
@@ -62,6 +59,7 @@ body {
 
 #location-icon {
   color: #FECF30;
+  width: 25px;
 }
 
 input {

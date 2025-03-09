@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { LoadScript, GoogleMap, Libraries } from '@react-google-maps/api';
-import markerIcon from '../assets/marker.png';
+import pickupMarkerIcon from '../assets/pickup-marker.png'; // Custom icon for pickup
+import dropoffMarkerIcon from '../assets/dropoff-marker.png'; // Custom icon for dropoff
 
 const GOOGLE_MAPS_API_KEY = "";
 
@@ -23,7 +24,7 @@ const MapComponent: React.FC<Props> = ({ pickupCoords, dropoffCoords }) => {
       map: map,
       title: title,
       icon: {
-        url: markerIcon, // Custom icon URL
+        url: iconUrl, // Custom icon URL
         scaledSize: new google.maps.Size(40, 40), // Size of the icon
       },
     });
@@ -48,12 +49,13 @@ const MapComponent: React.FC<Props> = ({ pickupCoords, dropoffCoords }) => {
 
       mapRef.current.fitBounds(bounds); // Automatically adjusts zoom to fit both markers
 
-      const iconUrl = "https://media.istockphoto.com/id/1148705812/vector/location-icon-vector-pin-sign-isolated-on-white-background-navigation-map-gps-direction.jpg?s=612x612&w=0&k=20&c=lqEIzW3QedZfytsX30NoBJbHxZZbWnlLsvEiwOSbaow=";
-      addMarker(mapRef.current, pickupCoords, "Pick-up Location", iconUrl);
-      addMarker(mapRef.current, dropoffCoords, "Drop-off Location", iconUrl);
+      // Add Pickup Marker
+      addMarker(mapRef.current, pickupCoords, "Pick-up Location", pickupMarkerIcon);
+      // Add Drop-off Marker
+      addMarker(mapRef.current, dropoffCoords, "Drop-off Location", dropoffMarkerIcon);
     }
   }, [pickupCoords, dropoffCoords]);
-  console.log(`pickup-coordinates: ${pickupCoords}, drop-off-coordinates: ${dropoffCoords}`)
+
   return (
     <LoadScript googleMapsApiKey={GOOGLE_MAPS_API_KEY} libraries={libraries}>
       <GoogleMap

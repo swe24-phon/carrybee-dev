@@ -210,6 +210,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import useOrderStore from '../store/orderStore';
+import pickupMarkerIcon from '../assets/pickup-marker.png'; // Custom icon for pickup
+import dropoffMarkerIcon from '../assets/dropoff-marker.png'; // Custom icon for dropoff
 
 interface Props {
   setPickupCoords: React.Dispatch<React.SetStateAction<google.maps.LatLng | null>>;
@@ -302,11 +304,12 @@ const DestinationBox: React.FC<Props> = ({ setPickupCoords, setDropoffCoords }) 
       <form onSubmit={handleSubmit} id="destination-form">
         <div id="first-box">
           <div id="location-icons">
-            <FontAwesomeIcon icon={faLocationDot} id="location-icon" aria-label="Pick-up Location" />
-            <FontAwesomeIcon icon={faLocationDot} id="location-icon" aria-label="Drop-off Location" />
+            <img src={pickupMarkerIcon} id="location-icon" aria-label="Pick-up Location" />
+            <img src={dropoffMarkerIcon}  id="location-icon" aria-label="Drop-off Location" />
           </div>
           <div id="second-box">
             <input
+              // label="Pick-up Location"
               type="text"
               name="pickup"
               id="pickup"

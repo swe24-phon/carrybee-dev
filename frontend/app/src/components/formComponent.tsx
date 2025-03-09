@@ -86,7 +86,7 @@ const FormComponent = () => {
 
 
   return (
-    <form onSubmit={handleSubmit} style={{ height: '70%' }}>
+    <form onSubmit={handleSubmit} style={{ height: '60%' }}>
       <div id='form-box'>
         <TextField
           label="Item"
