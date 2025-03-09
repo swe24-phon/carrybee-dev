@@ -16,6 +16,3 @@ API.interceptors.request.use((req) => {
 
 // Export API as the default export
 export default API;
-
-
-  

@@ -184,12 +184,12 @@ import { suggestVehicle } from '../js/vehicleSuggestion';
 import '../css/parcelCategory.css';
 
 const defaultDimensions = {
-  DOCUMENT: { length: 35, width: 10, height: 32 },
-  SMALL: { length: 50, width: 40, height: 50 },
-  MEDIUM: { length: 210, width: 120, height: 110 },
-  LARGE: { length: 310, width: 180, height: 180 },
-  EXTRA_LARGE: { length: 600, width: 195, height: 195 },
-  CUSTOM: { length: null, width: null, height: null },
+  DOCUMENT: { length: 35, width: 10, height: 32, weight: 'up to 20kg' },
+  SMALL: { length: 50, width: 40, height: 50, weight: 'up to 200kg' },
+  MEDIUM: { length: 210, width: 120, height: 110, weight: 'up to 300kg' },
+  LARGE: { length: 310, width: 180, height: 180, weight: 'up to 800kg' },
+  EXTRA_LARGE: { length: 600, width: 195, height: 195, weight: 'up to 1000kg' },
+  CUSTOM: { length: null, width: null, height: null, weight: 'Contact customer team' },
 };
 
 const availableVehicles = [
@@ -258,8 +258,12 @@ const ParcelCategory = () => {
       const dimensions = defaultDimensions[parcelCategory];
       if (dimensions && dimensions.length && dimensions.width && dimensions.height) {
         const suggested = suggestVehicle(dimensions, availableVehicles);
+
         if (suggested.name) {
           setSelectedVehicle(suggested.name);
+          console.log('Suggested Vehicle:', suggested.name);  // Log to confirm suggestion
+        } else {
+          console.log('No vehicle suggested');
         }
       }
     }
@@ -269,31 +273,107 @@ const ParcelCategory = () => {
     <>
       <h1 id='type'>Parcel Type</h1>
       <div id="parcel-cards">
-        {['DOCUMENT', 'SMALL', 'MEDIUM', 'LARGE', 'EXTRA LARGE', 'CUSTOM'].map((category, index) => (
-          <div
-            key={index}
-            className={`icon-box ${selectedCard === index ? 'selected' : ''}`}
-            onClick={() => handleCardClick(index, category)}
-          >
-            <div className={`info-box ${activeInfo === index ? 'active' : ''}`}>
-              <span className="info-button" onClick={(e) => { e.stopPropagation(); handleInfoClick(index); }}>
-                <FontAwesomeIcon icon={faCircleInfo} />
-              </span>
-              {activeInfo === index && (
-                <div className="info-popup">
-                  <button className="close-popup" onClick={(e) => closePopup(e, index)}>
-                    <FontAwesomeIcon icon={faTimes} />
-                  </button>
-                  <h3 className='popup-head'>{category}</h3>
-                  <FontAwesomeIcon icon={vehicleIcons[convertToKey(category)]} className='vehicle-icon' />
-                  <p><strong>Weight:</strong> up to {defaultDimensions[convertToKey(category)]?.weight || 'contact customer team'} kg</p>
-                  <p><strong>Size limit (L x W x H):</strong> {defaultDimensions[convertToKey(category)]?.length || 'contact'} x {defaultDimensions[convertToKey(category)]?.width || 'customer'} x {defaultDimensions[convertToKey(category)]?.height || 'team'} cm</p>
-                </div>
-              )}
+        <div className={`icon-box ${selectedCard === 0 ? 'selected' : ''}`}
+          onClick={() => handleCardClick(0, 'DOCUMENT')}
+        >
+          <div className={`info-box ${activeInfo === 0 ? 'active' : ''}`} onClick={() => handleInfoClick(0)}>
+            <span className="info-button">
+              <FontAwesomeIcon icon={faCircleInfo} />
+            </span>
+            <div className="info-popup">
+              <h3 className='popup-head'>Document</h3>
+              <FontAwesomeIcon icon={faMotorcycle} className='vehicle-icon'/>
+              <p><strong>Weight:</strong> {defaultDimensions.DOCUMENT.weight}</p>
+              <p><strong>Size limit (L x W x H):</strong> 35 x 32 x 10 cm</p>
             </div>
-            <FontAwesomeIcon icon={index === 0 ? faFile : index === 1 ? faBox : index === 2 ? faGifts : index === 3 ? faCouch : index === 4 ? faCubes : faBoxOpen} className="parcel-icon" /> {category}
           </div>
-        ))}
+          <FontAwesomeIcon icon={faFile} className="parcel-icon" /> Document
+        </div>
+
+        <div className={`icon-box ${selectedCard === 1 ? 'selected' : ''}`}
+          onClick={() => handleCardClick(1, 'SMALL')}
+        >
+          <div className={`info-box ${activeInfo === 1 ? 'active' : ''}`} onClick={() => handleInfoClick(1)}>
+            <span className="info-button">
+              <FontAwesomeIcon icon={faCircleInfo} />
+            </span>
+            <div className="info-popup">
+              <h3 className='popup-head'>Small</h3>
+              <FontAwesomeIcon icon={faCarSide} className='vehicle-icon'/>
+              <p><strong>Weight:</strong> {defaultDimensions.SMALL.weight}</p>
+              <p><strong>Size limit (L x W x H):</strong> 50 x 40 x 50 cm </p>
+            </div>
+          </div>
+          <FontAwesomeIcon icon={faBox} className="parcel-icon" /> Small
+        </div>
+
+        <div className={`icon-box ${selectedCard === 2 ? 'selected' : ''}`}
+          onClick={() => handleCardClick(2, 'MEDIUM')}
+        >
+          <div className={`info-box ${activeInfo === 2 ? 'active' : ''}`} onClick={() => handleInfoClick(2)}>
+            <span className="info-button">
+              <FontAwesomeIcon icon={faCircleInfo} />
+            </span>
+            <div className="info-popup">
+              <h3 className='popup-head'>Medium</h3>
+              <FontAwesomeIcon icon={faVanShuttle} className='vehicle-icon' />
+              <p><strong>Weight:</strong> {defaultDimensions.MEDIUM.weight}</p>
+              <p><strong>Size limit (L x W x H):</strong> 210 x 120 x 110 cm </p>
+            </div>
+          </div>
+          <FontAwesomeIcon icon={faGifts} className="parcel-icon" /> Medium
+        </div>
+
+        <div className={`icon-box ${selectedCard === 3 ? 'selected' : ''}`}
+          onClick={() => handleCardClick(3, 'LARGE')}
+        >
+          <div className={`info-box ${activeInfo === 3 ? 'active' : ''}`} onClick={() => handleInfoClick(3)}>
+            <span className="info-button">
+              <FontAwesomeIcon icon={faCircleInfo} />
+            </span>
+            <div className="info-popup">
+              <h3 className='popup-head'>Large</h3>
+              <FontAwesomeIcon icon={faTruckPickup} className='vehicle-icon' />
+              <p><strong>Weight:</strong> {defaultDimensions.LARGE.weight}</p>
+              <p><strong>Size limit (L x W x H):</strong> 310 x 180 x 180 cm</p>
+            </div>
+          </div>
+          <FontAwesomeIcon icon={faCouch} className="parcel-icon" /> Large
+        </div>
+
+        <div className={`icon-box ${selectedCard === 4 ? 'selected' : ''}`}
+          onClick={() => handleCardClick(4, 'EXTRA_LARGE')}
+        >
+          <div className={`info-box ${activeInfo === 4 ? 'active' : ''}`} onClick={() => handleInfoClick(4)}>
+            <span className="info-button">
+              <FontAwesomeIcon icon={faCircleInfo} />
+            </span>
+            <div className="info-popup">
+              <h3 className='popup-head'>Extra Large</h3>
+              <FontAwesomeIcon icon={faShip} className='vehicle-icon' />
+              <p><strong>Weight:</strong> {defaultDimensions.EXTRA_LARGE.weight}</p>
+              <p><strong>Size limit (L x W x H):</strong> 600 x 195 x 195 cm</p>
+            </div>
+          </div>
+          <FontAwesomeIcon icon={faCubes} className="parcel-icon" /> Extra Large
+        </div>
+
+        <div className={`icon-box ${selectedCard === 5 ? 'selected' : ''}`}
+          onClick={() => handleCardClick(5, 'CUSTOM')}
+        >
+          <div className={`info-box ${activeInfo === 5 ? 'active' : ''}`} onClick={() => handleInfoClick(5)}>
+            <span className="info-button">
+              <FontAwesomeIcon icon={faCircleInfo} />
+            </span>
+            <div className="info-popup">
+              <h3 className='popup-head'>Custom</h3>
+              <FontAwesomeIcon icon={faHelicopter} className='vehicle-icon'/>
+              <p><strong>Weight:</strong> {defaultDimensions.CUSTOM.weight}</p>
+              <p><strong>Size limit:</strong> Please contact customer service for more details</p>
+            </div>
+          </div>
+          <FontAwesomeIcon icon={faBoxOpen} className="parcel-icon" /> Custom
+        </div>
       </div>
     </>
   );

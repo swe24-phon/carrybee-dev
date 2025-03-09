@@ -512,9 +512,6 @@
 // export default PaymentComponent;
 
 
-
-
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
@@ -779,6 +776,7 @@ const PaymentComponent: React.FC = () => {
               <PayButtonComponent
                 onClick={createCheckoutSession}
                 loading={loading}
+                onClick={() => navigate('/payment-form')}
               />
             </div>
             <div className="forgot-button-wrapper">

@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "dotenv": "^16.4.7",
-    "react-webcam": "^7.2.0",
-    "uuid": "^11.1.0"
-  }
-}

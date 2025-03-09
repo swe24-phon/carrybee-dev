@@ -5,6 +5,8 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
+import { Snackbar, Alert } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const PaymentFormComponent = () => {
   const countries = [
@@ -15,6 +17,27 @@ const PaymentFormComponent = () => {
   const [country, setCountry] = useState('');
   const [cardNumberFocused, setCardNumberFocused] = useState(false);
 
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate(); // Initialize useNavigate hook for navigation
+
+  const handleClick = () => {
+    setOpen(true); // Show the Snackbar
+
+    // Wait for the Snackbar to close, then redirect to /dashboard
+    setTimeout(() => {
+      setOpen(false); // Close the Snackbar
+
+      // Redirect to /dashboard after the Snackbar disappears
+      navigate('/dashboard');
+    }, 3000); // Wait for 3000ms (same as autoHideDuration)
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false); // Close the snackbar
+  };
   return (
     <div className='payment-form-container'>
       <form>
@@ -139,9 +162,40 @@ const PaymentFormComponent = () => {
             },
           }}
         />
-        <Button variant="contained" id='pay-button' fullWidth>
-          Pay
-        </Button>
+       <Button
+        id="pay-button"
+        fullWidth
+        onClick={handleClick}
+        sx={{
+          margin: '1rem 0 2rem',
+          backgroundColor: '#FECF30',
+          color: '#000000',
+          fontWeight: 600,
+          '&:hover': {
+            backgroundColor: '#E0B828' // Optional: to change the hover color
+          }
+        }}
+      >
+        Pay
+      </Button>
+      {/* Snackbar for showing "Payment Successful" message */}
+      <Snackbar
+        open={open}
+        autoHideDuration={3000}
+        onClose={() => setOpen(false)}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        sx={{
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '80%',
+        }}
+      >
+        <Alert onClose={() => setOpen(false)} severity="success" sx={{ width: '100%' }}>
+          Payment Successful!
+        </Alert>
+      </Snackbar>
       </form>
     </div>
   );
