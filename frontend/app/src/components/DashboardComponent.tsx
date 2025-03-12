@@ -34,12 +34,12 @@ const OrderCard = ({ order }) => {
         {/* Pickup & Dropoff Details */}
         <Box sx={{ marginTop: '1rem' }}>
           <Typography variant="body1" component="div" fontWeight="bold">
-            Pickup:
+            Pick-up:
           </Typography>
           <Typography variant="body2">{order.pickupLocation}</Typography>
 
           <Typography variant="body1" component="div" fontWeight="bold" sx={{ marginTop: '0.5rem' }}>
-            Dropoff:
+            Drop-off:
           </Typography>
           <Typography variant="body2">{order.dropoffLocation}</Typography>
         </Box>
