@@ -20,8 +20,8 @@ const loginUser = async (req) => {
   // Generate JWT token with email included in the payload
   const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
   console.log({ token, user });
-  return { 
-    token, 
+  return {
+    token,
     user: {
       id: user.id,
       first_name: user.first_name,
@@ -35,7 +35,7 @@ const loginUser = async (req) => {
 const createUser = async (userData) => {
   try {
     const { first_name, last_name, phone, email, password, address } = userData
-    
+
     // Validate email format
     if (!validator.isEmail(email)) {
       throw new Error('Invalid email address');
@@ -108,12 +108,12 @@ const getAllUsers = async () => {
 const updateUser = async (id, updateData) => {
   try {
     const { first_name, last_name, phone, email, address } = updateData;
-    
+
     //Validate email format if it's provided
     if (email && !validator.isEmail(email)) {
         throw new Error('Invalid email address');
     }
-    //Check if email is being updated and if it is already taken 
+    //Check if email is being updated and if it is already taken
     if (email) {
       const existingEmail = await prisma.user.findUnique({ where: { email } });
     if (existingEmail && existingEmail.id !== id) { // Make sure is not the same user
@@ -127,18 +127,18 @@ const updateUser = async (id, updateData) => {
         throw new Error('Phone number already registered');
       }
     }
-    
+
     const updatedUser = await prisma.user.update({
       where: { id },
       data: {
         first_name: first_name || undefined, // If the value is provided, use it, otherwise skip it
         last_name: last_name || undefined,
         phone: phone || undefined,
-        email: email || undefined,            
+        email: email || undefined,
         address: address || undefined,
         },
     });
-    
+
     return updatedUser;
   } catch (error) {
     throw new Error(error.message);
