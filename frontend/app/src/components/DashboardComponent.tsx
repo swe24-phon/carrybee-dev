@@ -1,75 +1,3 @@
-// import React from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import InvoiceCard from './InvoiceCard';
-// import '../css/Dashboard.css';
-// import '../css/Invoice.css';
-
-// interface Invoice {
-//   invoiceNo: string;
-//   status: string;
-//   date: string;
-//   item: string;
-//   pickupAddress: string;
-//   dropoffAddress: string;
-// }
-
-// interface DashboardComponentProps {
-//   invoices: Invoice[];
-// }
-
-// const DashboardComponent = ({ invoices }: DashboardComponentProps) => {
-//   const navigate = useNavigate();
-
-//   const handleHomeClick = () => {
-//     navigate('/homepage');
-//   };
-
-//   return (
-//     <div className="dashboard-container">
-//       <div className="dashboard-panel">
-//         {/* Header */}
-//         <div className="profile-section">
-//           <div className="profile-avatar">
-//             <img
-//               className="profile-image"
-//               src="https://placehold.co/21x31"
-//               alt="Profile"
-//             />
-//           </div>
-//         </div>
-
-//         {/* Welcome Text */}
-//         <div id="dashboard-welcome">
-//           Welcome to Dashboard
-//         </div>
-
-//         {/* Invoice Cards Section */}
-//         <div className="cards-section">
-//           {invoices.map((invoice, index) => (
-//             <InvoiceCard
-//               key={index}
-//               {...invoice}
-//             />
-//           ))}
-//         </div>
-
-//         {/* Button Container */}
-//         <div className="button-container">
-//           <button
-//             onClick={handleHomeClick}
-//             className="home-button hover:bg-[#FECF30] transition-colors duration-300"
-//           >
-//             <span className="home-button-text">
-//               HOME
-//             </span>
-//           </button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default DashboardComponent;
 import React from 'react';
 import { Card, CardContent, CardActions, Button, Typography, Grid, Box, Chip, Divider, LinearProgress, CircularProgress, Avatar } from '@mui/material';
 import { AccessTime, CheckCircle, LocalShipping, Home } from '@mui/icons-material';
@@ -164,18 +92,18 @@ const Dashboard = () => {
   const orders = [
     {
       status: 'In Transit',
-      itemSize: 'Medium',
-      pickupLocation: '123 Far-away Street, Melbourne',
-      dropoffLocation: '456 Green Avenue, Sydney',
-      driverName: 'Dan King',
-      eta: '2 hours',
+      itemSize: 'Large',
+      pickupLocation: '30 Rupert St, Collingwood VIC 3066',
+      dropoffLocation: '454 Collins St, Melbourne VIC 3000',
+      driverName: 'Peter Parker',
+      eta: '20 minutes',
     },
     {
       status: 'Delivered',
-      itemSize: 'Large',
+      itemSize: 'Small',
       pickupLocation: '789 King Lane, Brisbane',
       dropoffLocation: '101 Brown Street, Perth',
-      driverName: 'Jane Smith',
+      driverName: 'Clark Kent',
       eta: 'Delivered',
     },
     // Add more orders here...

@@ -57,7 +57,7 @@ model User {
 }
 
 model Order {
-  id              String        @id @default(uuid())
+  id              String      @id @default(uuid())
   receiver_name   String
   pickup_address  String
   dropoff_address String
@@ -72,14 +72,14 @@ model Order {
   status          OrderStatus
   img_url         String?
   user_id         String
-  user            User          @relation(fields: [user_id], references: [id])
+  user            User        @relation(fields: [user_id], references: [id])
   parcel_id       String?
-  parcel          Parcel?       @relation(fields: [parcel_id], references: [id])
+  parcel          Parcel?     @relation(fields: [parcel_id], references: [id])
   payment         Payment?
-  review_id       String?       @unique
-  review          Review?       @relation
-  created_at      DateTime      @default(now())
-  updated_at      DateTime      @updatedAt
+  review_id       String?     @unique
+  review          Review?     @relation
+  created_at      DateTime    @default(now())
+  updated_at      DateTime    @updatedAt
 }
 
 model Parcel {

@@ -43,12 +43,12 @@ const SignInComponent: React.FC<SignInProps> = ({
     try {
       const response = await API.post("/users/login", credentials);
       console.log("Full login response:", response.data); // Log full response
-  
+
       const { token, user } = response.data;
       if (!user || !user.id) {
         throw new Error("User data is missing or invalid");
       }
-  
+
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
       setUserID(user.id);
