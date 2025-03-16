@@ -135,7 +135,7 @@ const Vehicle = () => {
     try {
       const totalPrice = calculatePrice(vehicleType, distance, weight);
       console.log(`💰 Total Price: ${totalPrice}`);
-      alert(`Calculated Price: ${totalPrice}`);
+      // alert(`Calculated Price: ${totalPrice}`);
 
       useOrderStore.getState().setTotal(totalPrice);
 
