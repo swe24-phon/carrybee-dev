@@ -92,7 +92,7 @@ const SignInComponent: React.FC<SignInProps> = ({
             name="email"
             value={credentials.email}
             onChange={handleChange}
-            autoComplete="email"
+            autoComplete="off"
           />
         </div>
 
@@ -104,7 +104,7 @@ const SignInComponent: React.FC<SignInProps> = ({
             name="password"
             value={credentials.password}
             onChange={handleChange}
-            autoComplete="current-password"
+            autoComplete="off"
           />
         </div>
 
