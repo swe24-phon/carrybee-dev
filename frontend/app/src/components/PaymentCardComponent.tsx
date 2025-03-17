@@ -11,7 +11,7 @@ const PaymentCardComponent = () => {
                 <span>20/03/2025</span>
               </div>
               <div className='parcel-vehicle-type'>
-                <h4>Item size: Small</h4> {/* fetch from database */}
+                <h4>Item size: Document</h4> {/* fetch from database */}
                 <h4>Vehicle: Motorcycle</h4> {/* fetch from database */}
               </div>
               <div className='address-date'>
