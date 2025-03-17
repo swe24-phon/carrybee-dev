@@ -14,6 +14,7 @@ datasource db {
 }
 
 enum ParcelCategory {
+  DOCUMENT
   SMALL
   MEDIUM
   LARGE
