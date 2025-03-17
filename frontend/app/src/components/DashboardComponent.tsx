@@ -92,11 +92,11 @@ const Dashboard = () => {
   const orders = [
     {
       status: 'In Transit',
-      itemSize: 'Large',
-      pickupLocation: '30 Rupert St, Collingwood VIC 3066',
-      dropoffLocation: '454 Collins St, Melbourne VIC 3000',
+      itemSize: 'Document',
+      pickupLocation: '454 Collins St, Melbourne VIC 3000',
+      dropoffLocation: '30 Rupert St, Collingwood VIC 3066',
       driverName: 'Peter Parker',
-      eta: '20 minutes',
+      eta: '18 minutes',
     },
     {
       status: 'Delivered',

@@ -61,8 +61,8 @@ const PaymentComponent: React.FC = () => {
   const pickupAddress = orderDetails.pickup_address || "No address available";
   const dropoffAddress = orderDetails.dropoff_address || "No address available";
   const subtotal = orderDetails.total || 0;
-  const tax = 0;
-  const total = subtotal + tax;
+  const extraservice = 10;
+  const total = subtotal + extraservice;
 
   const handleForgot = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -247,8 +247,8 @@ const PaymentComponent: React.FC = () => {
               <span>${subtotal.toFixed(2)}</span>
             </div>
             <div className="cost-row">
-              <span className="cost-label">Tax</span>
-              <span>${tax.toFixed(2)}</span>
+              <span className="cost-label">Additional Fee</span>
+              <span>${extraservice.toFixed(2)}</span>
             </div>
             <div className="total-row">
               <span>Total</span>

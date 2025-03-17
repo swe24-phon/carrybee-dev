@@ -96,6 +96,7 @@ const FormComponent = () => {
           onChange={handleChange}
           sx={textFieldStyles}
           required
+          autoComplete="off"
         />
         <TextField
           label="Receiver Name"
@@ -105,6 +106,7 @@ const FormComponent = () => {
           onChange={handleChange}
           sx={textFieldStyles}
           required
+          autoComplete="off"
         />
         <TextField
           label="Quantity"
@@ -114,6 +116,7 @@ const FormComponent = () => {
           onChange={handleChange}
           sx={textFieldStyles}
           required
+          autoComplete="off"
         />
         <TextField
           label="Weight"
@@ -123,6 +126,7 @@ const FormComponent = () => {
           onChange={handleChange}
           sx={textFieldStyles}
           required
+          autoComplete="off"
         />
         <TextField
           label="Description"
@@ -133,6 +137,7 @@ const FormComponent = () => {
           value={formData.description}
           onChange={handleChange}
           sx={textFieldStyles}
+          autoComplete="off"
         />
       </div>
       <div className='btn-box'>
