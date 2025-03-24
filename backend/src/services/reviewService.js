@@ -106,7 +106,7 @@ const updateReview = async (id, updateData) =>
     }
 }
 
-const deleteReview = async () =>
+const deleteReview = async (id) =>
 {
     try
     {
@@ -115,6 +115,7 @@ const deleteReview = async () =>
     }
     catch(error)
     {
+        console.log(error)
         throw new Error ('Failed to delete review');
     }
 }

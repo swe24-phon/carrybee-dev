@@ -15,32 +15,29 @@ body {
 }
 
 #banner {
-  width: 355px;
-  border-radius: 20px;
-  margin: 1.5rem 1rem;
-  margin-top: 2rem;
+  width: 395px;
   position: relative;
 }
 
 .destination-container {
-  top: 32%;
-  padding: 0.2rem 1.2rem;
+  display: flex;
+  top: 35%;
+  left: 6%;
   box-shadow: 1px 1px 5px 2px #00000029;
-  margin: 1rem 2rem;
   border-radius: 15px;
   background-color: #ffffff;
   z-index: 3;
   position: fixed;
   opacity: 0.9;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: baseline;
 }
 
-.destination-container p {
-  margin: 0 0 5px;
-}
-
-form {
+#destination-form{
   display: flex;
   flex-direction: column;
+  margin: 0.5rem 1.5rem;
 }
 
 #first-box {
@@ -62,6 +59,7 @@ form {
 
 #location-icon {
   color: #FECF30;
+  width: 25px;
 }
 
 input {
@@ -90,13 +88,13 @@ input {
 }
 
 div#map {
-  /* width: 400px;
-  height: 600px; */
+  width: 92%;
+  height: 400px;
   position: relative;
   overflow: hidden;
-  top: -25%;
-  z-index: 1;
-  left: 15px;
-  border-radius: 20px;
-  /* margin-left: 5px; */
+  top: 40px;
+}
+
+#distance {
+  text-align: center;
 }

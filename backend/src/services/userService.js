@@ -7,41 +7,9 @@ const registerUser = async (req, res) => {
   return createUser(req, res); // No need to duplicate logic
 };
 
-//cause error by phon
-// const loginUser = async (req, res) => {
-//   try {
-//     const { email, password } = req.body;
-
-//     // Retrieve user by email
-//     const user = await prisma.user.findUnique({ where: { email } });
-//     if (!user || !(await bcrypt.compare(password, user.password))) {
-//       return res.status(401).json({ error: 'Invalid credentials' });
-//     }
-
-//     // Generate JWT token
-//     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-//     res.status(200).json({ token });
-//   } catch (error) {
-//     return res.status(500).json({ error: error.message });
-//   }
-// };
-// end by phon*************
-// const loginUser = async (req) => {
-//   const { email, password } = req.body;
-
-//   // Retrieve user by email
-//   const user = await prisma.user.findUnique({ where: { email } });
-//   if (!user || !(await bcrypt.compare(password, user.password))) {
-//     throw new Error('Invalid credentials');
-//   }
-
-//   // Generate JWT token
-//   const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-//   return token; // Return** the token instead of sending a response
-// };
-
 const loginUser = async (req) => {
   const { email, password } = req.body;
+
 
   // Retrieve user by email
   const user = await prisma.user.findUnique({ where: { email } });
@@ -51,14 +19,23 @@ const loginUser = async (req) => {
 
   // Generate JWT token with email included in the payload
   const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-  return token; // Return the token instead of sending a response
+  console.log({ token, user });
+  return {
+    token,
+    user: {
+      id: user.id,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      email: user.email
+    }
+  };
 };
-//add by phon end here*************
+
 // Create User
 const createUser = async (userData) => {
   try {
     const { first_name, last_name, phone, email, password, address } = userData
-    
+
     // Validate email format
     if (!validator.isEmail(email)) {
       throw new Error('Invalid email address');
@@ -86,13 +63,12 @@ const createUser = async (userData) => {
             },
       });
     // Return the result to controller
-    return { message: 'User created successfully', user: newUser };
+    return { message: 'User registered successfully', user: newUser };
     } catch (error) {
         throw new Error(error.message);
     }
 };
 
-//add by  phon
 // Get user by id
 const getUserById = async (id) => {
   try {
@@ -117,7 +93,6 @@ const getUserById = async (id) => {
   }
 };
 
-//add by phon
 // Get All Users
 const getAllUsers = async () => {
   try {
@@ -133,12 +108,12 @@ const getAllUsers = async () => {
 const updateUser = async (id, updateData) => {
   try {
     const { first_name, last_name, phone, email, address } = updateData;
-    
+
     //Validate email format if it's provided
     if (email && !validator.isEmail(email)) {
         throw new Error('Invalid email address');
     }
-    //Check if email is being updated and if it is already taken 
+    //Check if email is being updated and if it is already taken
     if (email) {
       const existingEmail = await prisma.user.findUnique({ where: { email } });
     if (existingEmail && existingEmail.id !== id) { // Make sure is not the same user
@@ -152,18 +127,18 @@ const updateUser = async (id, updateData) => {
         throw new Error('Phone number already registered');
       }
     }
-    
+
     const updatedUser = await prisma.user.update({
       where: { id },
       data: {
         first_name: first_name || undefined, // If the value is provided, use it, otherwise skip it
         last_name: last_name || undefined,
         phone: phone || undefined,
-        email: email || undefined,            
+        email: email || undefined,
         address: address || undefined,
         },
     });
-    
+
     return updatedUser;
   } catch (error) {
     throw new Error(error.message);

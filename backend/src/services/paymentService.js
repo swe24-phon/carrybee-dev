@@ -1,35 +1,59 @@
 //Vlad to do
 const prisma = require('../../prismaClient');
-const Stripe = require('stripe');
-
-const stripe = require('stripe')('process.env.STRIPE_SECRET_KEY');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 
 const createPayment = async (paymentData) =>
 {
     try{
         // Unsure whether or not 'order' is needed here
-        const {invoice_no, total, payment_method, status, order_id} = paymentData;
+        // const {invoice_no, total, payment_method, status, order_id} = paymentData;
+        console.log(paymentData)
+        const {} = paymentData
 
-        const paymentIntent = await stripe.paymentIntents.create({
-            amount: total, // Amount should be in the smallest currency unit (e.g., cents)
-            currency: 'aus', // Currency code
-            payment_method: payment_method,
-            confirm: true, // Automatically confirm the payment
-        });
-        
-        // Potential for setting the values to integers
-        const payment_status = 
-        {
-            PENDING: "Pending",
-            COMPLETED: "Completed",
-            CANCELLED: "Cancelled"
-        };
+        console.log(paymentData)
+        // Need to create a product and price...
+        const product = await stripe.products.create({
+            name: 'T-Shirt' // Should be something else
+        })
 
-        // Some kind of validation checks?
-        // Maybe total or invoice no.
+        const price = await stripe.prices.create({
+            // product: product.id,
+            unit_amount: Math.round(total * 100),
+            currency: 'aud'
+        })
 
-        //Create the payment record
+        // Testing stripe sessions
+        const session = await stripe.checkout.sessions.create({
+            line_items: [
+                {
+                    price: price.id,
+                    quantity: 1
+                },
+                
+            ],
+            metadata: {
+                // product: product.id,
+            },
+            mode: 'payment',
+            success_url: "http://localhost:4000/success.html",
+            cancel_url: "http://localhost:4000/cancel.html"
+        })
+        //   Step 1: Create record in DB
+        // await prisma.payment.create(
+        //     {
+        //         data: 
+        //         {
+        //             invoice_no,
+        //             total,
+        //             payment_method,
+        //             status,
+        //             order_id
+        //         }
+        //     }
+        // );
+
+        // Step 1: Create record in DB
         const newPayment = await prisma.payment.create(
             {
                 data: 
@@ -42,11 +66,60 @@ const createPayment = async (paymentData) =>
                 }
             }
         );
-        return {message: 'Payment Record created successfully', payment: newPayment};
+
+        return {
+            Session: session,
+            Payment: newPayment
+        }
+
+        
+
+        // Step 2: Create Stripe PaymentIntent
+        // const {error, confirmationToken} = await stripe.createConformationToken({
+            
+        // })
+        // Step 3: Update order with stripe ID??
+
+        // const paymentIntent = await stripe.paymentIntents.create({
+        //     amount: total, // Amount should be in the smallest currency unit (e.g., cents)
+        //     currency: 'aus', // Currency code
+        //     payment_method: payment_method,
+        //     confirm: true, // Automatically confirm the payment
+        // });
+        
+        // Potential for setting the values to integers
+        // const payment_status = 
+        // {
+        //     PENDING: "Pending",
+        //     COMPLETED: "Completed",
+        //     CANCELLED: "Cancelled"
+        // };
+
+        // return await stripe.sessions.create(
+        //     {
+        //         line_items: [
+        //             {
+        //                 price: "1234",
+        //                 quantity: 1,
+        //             },
+        //         ],
+        //         mode: "payment",
+        //         success_url:"http://localhost:4000/success.html",
+        //         cancel_url:"http://localhost:4000/cancel.html"
+        //     }
+        // )
+        
+
+        // Some kind of validation checks?
+        // Maybe total or invoice no.
+
+        // Create the payment record
+        
+        // return {message: 'Payment Record created successfully', payment: newPayment};
     }
     catch (error)
     {
-        throw new Error('Failed to create parcel: ' + error.message);
+        throw new Error('Failed to create payment: ' + error.message);
     }
 };
 

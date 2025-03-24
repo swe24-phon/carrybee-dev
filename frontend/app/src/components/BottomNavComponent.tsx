@@ -14,10 +14,10 @@ const BottomNavComponent: React.FC = () => {
     <>
       <div id='bottom-nav'>
         <div className='nav-icons'>
-          <FontAwesomeIcon icon={faHouseChimney} className='nav-icon' onClick={() => navigate('/')}/>
+          <FontAwesomeIcon icon={faHouseChimney} className='nav-icon' onClick={() => navigate('/homepage')}/>
         </div>
         <div className='nav-icons'>
-        <FontAwesomeIcon icon={faGauge} className='nav-icon' onClick={() => navigate('/Dashboard')}/>
+        <FontAwesomeIcon icon={faGauge} className='nav-icon' onClick={() => navigate('/dashboard')}/>
         </div>
         <div className='nav-icons'>
         <FontAwesomeIcon icon={faGear} className='nav-icon'/>

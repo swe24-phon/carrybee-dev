@@ -71,15 +71,15 @@ const VehicleType = () => {
       setSelectedVehicle(vehicle); // Only allow setting vehicle if none is selected
       console.log('Vehicle selected:', vehicle);
     }
-  }
+  };
 
   return (
     <>
       <h1 id="type" className="text-xl font-bold text-center">Available Vehicles</h1>
       <div id="vehicle-cards" className="grid grid-cols-2 gap-4 p-4">
         {availableVehicles.map((vehicle) => {
-          const isSelected = selectedVehicle && selectedVehicle.id === vehicle.id;
-          const isDisabled = selectedVehicle && selectedVehicle.id !== vehicle.id; // Disable if another vehicle is selected
+          const isSelected = vehicle.type === 'motorcycle'; // Always select motorcycle
+          const isDisabled = vehicle.type !== 'motorcycle'; // Disable other vehicles
 
           return (
             <div
@@ -89,6 +89,9 @@ const VehicleType = () => {
               style={{
                 pointerEvents: isDisabled ? 'none' : 'auto', // Disable interaction on other vehicles
                 opacity: isDisabled ? 0.5 : 1, // Make disabled cards gray (lower opacity)
+                border: isSelected ? '3px solid black' : '1px solid #ccc', // Highlight selected card with blue border
+                boxShadow: isSelected ? '0px 0px 15px rgba(255, 208, 0, 0.72)' : 'none', // Add shadow for selected card
+                transition: 'all 0.3s ease', // Smooth transition between states
               }}
             >
               <FontAwesomeIcon icon={vehicle.icon} className="vehicle-icon" />
@@ -102,48 +105,3 @@ const VehicleType = () => {
 };
 
 export default VehicleType;
-
-
-
-
-
-
-//   return (
-//     <>
-//       <h1 id='type'>Available Vehicles</h1>
-//       <div id="vehicle-cards">
-//         <div className="icon-box">
-//           <FontAwesomeIcon icon={faMotorcycle} className='vehicle-icon'/>
-//           <p>Motorcycle</p>
-//         </div>
-
-//         <div className="icon-box">
-//           <FontAwesomeIcon icon={faCarSide} className='vehicle-icon'/>
-//           <p>Car</p>
-//         </div>
-
-//         <div className="icon-box">
-//           <FontAwesomeIcon icon={faVanShuttle} className='vehicle-icon'/>
-//           <p>Van</p>
-//         </div>
-
-//         <div className="icon-box">
-//           <FontAwesomeIcon icon={faTruckPickup} className='vehicle-icon'/>
-//           <p>Truck</p>
-//         </div>
-
-//         <div className="icon-box">
-//           <FontAwesomeIcon icon={faShip} className='vehicle-icon'/>
-//           <p>Ship</p>
-//         </div>
-
-//         <div className="icon-box">
-//           <FontAwesomeIcon icon={faHelicopter} className='vehicle-icon'/>
-//           <p>Helicopter</p>
-//         </div>
-//       </div>
-//     </>
-//   );
-// };
-
-// export default VehicleType;

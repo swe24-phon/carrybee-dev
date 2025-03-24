@@ -25,9 +25,10 @@
 
 .navigation-buttons {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   gap: 1rem;
   padding: 1rem 0;
+  margin-bottom: 3rem;
 }
 
 /* Fix for bottom navigation */

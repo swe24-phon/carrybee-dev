@@ -1,134 +1,125 @@
 import { create } from 'zustand';
-import { createOrder } from '../api/orderAPI'; // Assuming you have this API function
+import axios from 'axios';
+import useParcelStore from './parcelStore';  // import parcel store
+
 
 const useOrderStore = create((set) => ({
-  receiver_name: null,
-  pickup_address: null,
-  pickup_coords: null,
-  dropoff_address: null,
-  dropoff_coords: null,
-  totalDistance: null,
-  schedule: new Date("2025-02-20T14:30:00Z"), // Initializing with a sample schedule
-  parcelDetails: {},
-  total: null,
-  selectedVehicle: null,
-  user_id: null,
-  status: 'idle',
-  error: null,
+  orderDetails: {
+    receiver_name: '',
+    pickup_address: '',
+    dropoff_address: '',
+    pickup_date: new Date(),
+    distance: 0,
+    total: 0,
+    vehicleType: '',
+    status: 'idle',
+    user_id: null,
+    parcel_id: '',
+    vehicleType: '',
+    weight: 0,
+    width: 0,
+    length: 0,
+    height: 0,
+  },
 
-  // Sync actions
   setReceiverName: (recipient) => {
-    set((state) => {
-      const newState = { ...state, receiver_name: recipient };
-      console.log(recipient,'setReceiverName:', newState);
-      return newState;
-    });
-  },
-  setPickup: (pickup) => {
-    set((state) => {
-      const newState = { ...state, pickup_address: pickup };
-      console.log(pickup,'setPickup:', newState);
-      return newState;
-    });
-  },
-  setPickupCoords: (coords) => {
-    set((state) => {
-      const newState = { ...state, pickup_coords: coords };
-      console.log(coords,'setPickupCoords:', newState);
-      return newState;
-    });
-  },
-  setDropoff: (dropoff) => {
-    set((state) => {
-      const newState = { ...state, dropoff_address: dropoff };
-      console.log(dropoff,'setDropoff:', newState);
-      return newState;
-    });
-  },
-  setDropoffCoords: (coords) => {
-    set((state) => {
-      const newState = { ...state, dropoff_coords: coords };
-      console.log(coords,'setDropoffCoords:', newState);
-      return newState;
-    });xw
-  },
-  setTotalDistance: (distance) => {
-    set((state) => {
-      const newState = { ...state, totalDistance: distance };
-      console.log(distance,'setTotalDistance:', newState);
-      return newState;
-    });
-  },
-  setSchedule: (schedule) => {
-    set((state) => {
-      const newState = { ...state, schedule };
-      console.log(schedule,'setSchedule:', newState);
-      return newState;
-    });
-  },
-  setParcelDetails: (parcelDetails) => {
-    set((state) => {
-      const newState = { ...state, parcelDetails, ...parcelDetails };
-      console.log('setParcelDetails:', newState);
-      return newState;
-    });
-  },
-  setTotal: (total) => {
-    set((state) => {
-      const newState = { ...state, total };
-      console.log('setTotal:', newState);
-      return newState;
-    });
-  },
-  setSelectedVehicle: (vehicle) => {
-    set((state) => {
-      const newState = { ...state, selectedVehicle: vehicle };
-      console.log(vehicle,'setSelectedVehicle:', newState);
-      return newState;
-    });
+    set((state) => ({
+      orderDetails: { ...state.orderDetails, receiver_name: recipient }
+    }));
   },
 
-  // updateOrderDetails: (details) => {
-  //   set((state) => {
-  //     const newState = { ...state, ...details };
-  //     console.log(details,'updateOrderDetails:', newState);
-  //     return newState;
-  //   });
-  // },
+  setPickup: (pickup) => {
+    set((state) => ({
+      orderDetails: { ...state.orderDetails, pickup_address: pickup }
+    }));
+  },
+
+  setParcelId: (id) => {
+    set((state) => ({
+      orderDetails: { ...state.orderDetails, parcel_id: id }
+    }));
+  },
+
+  setDropoff: (dropoff) => {
+    set((state) => ({
+      orderDetails: { ...state.orderDetails, dropoff_address: dropoff }
+    }));
+  },
+
+  setTotalDistance: (distance) => {
+    set((state) => ({
+      orderDetails: { ...state.orderDetails, totalDistance: distance }
+    }));
+  },
+
+  setSchedule: (schedule) => {
+    const parsedDate = new Date(schedule);
+    set((state) => ({
+      orderDetails: { ...state.orderDetails, pickup_date: parsedDate }
+    }));
+  },
+
+  setUserID: (userID) => {
+    set((state) => ({
+      orderDetails: { ...state.orderDetails, user_id: userID }
+    }));
+  },
+
+  setTotal: (total) => {
+    const numericTotal = parseFloat(total);
+    set((state) => ({
+      orderDetails: { ...state.orderDetails, total: numericTotal }
+    }));
+  },
+
+  setSelectedVehicle: (vehicleType) => {
+    set((state) => ({
+      orderDetails: { ...state.orderDetails, selectedVehicle: vehicleType }
+    }));
+  },
+
+  // Method to sync parcel details from parcelStore
+  setParcelDetails: () => {
+    const { weight, width, length, height } = useParcelStore.getState();  // Assuming parcel store has these
+    set((state) => ({
+      orderDetails: {
+        ...state.orderDetails,
+        weight, // Set the weight from parcelStore to orderDetails
+        width,
+        length,
+        height,
+      }
+    }));
+  },
+
+  submitOrder: async (endpoint) => {
+    try {
+      const { orderDetails } = useOrderStore.getState();
+      const response = await axios.post(endpoint, orderDetails);
+      console.log('✅ Order created successfully:', response.data);
+      return response.data;
+    } catch (error) {
+      console.error('❌ Error creating order:', error);
+      throw error;
+    }
+  },
 
   resetOrder: () => {
-    set((state) => {
-      const newState = {
-        ...state,
-        receiver_name: null,
-        pickup_address: null,
-        pickup_coords: null,
-        dropoff_address: null,
-        dropoff_coords: null,
+    set({
+      orderDetails: {
+        receiver_name: '',
+        pickup_address: '',
+        dropoff_address: '',
+        pickup_date: new Date(),
         distance: 0,
-        schedule: new Date("2025-02-20T14:30:00Z"),
-        parcelDetails: {},
-        total: null,
-        selectedVehicle: null,
-        user_id: null,
+        total: 0,
+        vehicleType: '',
         status: 'idle',
-        error: null,
-      };
-      console.log('resetOrder:', newState);
-      return newState;
+        user_id: null,
+        parcel_id: '',
+        selectedVehicle: '', // Keep this consistent with initial state
+      }
     });
-  },
-
-  // Async action to submit the order
-  submitOrder: async (orderData) => {
-    set({ status: 'loading', error: null });
-    try {
-      const response = await createOrder(orderData);
-      set({ status: 'succeeded' });
-      // You can handle the response, e.g., storing the order details
-    } catch (error) {
-      set({ status: 'failed', error: error.response?.data || 'Error submitting order' });
-    }
   },
 }));
 

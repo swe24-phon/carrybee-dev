@@ -205,11 +205,13 @@
 // };
 
 // export default DestinationBox;
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import useOrderStore from '../store/orderStore';
+import pickupMarkerIcon from '../assets/pickup-marker.png'; // Custom icon for pickup
+import dropoffMarkerIcon from '../assets/dropoff-marker.png'; // Custom icon for dropoff
 
 interface Props {
   setPickupCoords: React.Dispatch<React.SetStateAction<google.maps.LatLng | null>>;
@@ -223,8 +225,7 @@ const DestinationBox: React.FC<Props> = ({ setPickupCoords, setDropoffCoords }) 
   const [dropoffCoords, setDropoffLocalCoords] = useState<google.maps.LatLng | null>(null);
   const [loading, setLoading] = useState(false);
   const [distance, setDistance] = useState<number | null>(null); // To store calculated distance
-  const { setPickup, setDropoff, setTotalDistance } = useOrderStore(); // Keep using the store to set pickup/dropoff data
-
+  const { setPickup, setDropoff, setTotalDistance } = useOrderStore(); // Zustand Store
   const navigate = useNavigate();
 
   // Geocoding function to convert address into LatLng
@@ -245,26 +246,22 @@ const DestinationBox: React.FC<Props> = ({ setPickupCoords, setDropoffCoords }) 
   useEffect(() => {
     if (pickupCoords && dropoffCoords) {
       const distanceInMeters = google.maps.geometry.spherical.computeDistanceBetween(pickupCoords, dropoffCoords);
-      const distanceInKm = distanceInMeters / 1000; // Convert in KM 
-      setDistance(distanceInKm);
+      const distanceInKm = distanceInMeters / 1000; // Convert in KM
 
-      setTotalDistance(distanceInKm); //store in Zustand OrderStore
+      setTotalDistance(distanceInKm); // Store in Zustand OrderStore
+      setDistance(distanceInKm); // Update the local state with the calculated distance
     }
-  }, [pickupCoords, dropoffCoords]);
+  }, [pickupCoords, dropoffCoords, setTotalDistance]);
 
   const handlePickupChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setPickupInput(value);
-    console.log('Pickup Input Value:', value);
     if (value.trim()) {
       try {
         const location = await geocodeAddress(value);
         setPickupLocalCoords(location); // Update local state
         setPickupCoords(location); // Update parent component state
-
-        setPickup(value); //STORE In ORDERSTORE do not value
-        console.log('Pickup Address Set in Store:', value);
-
+        setPickup(value); // Store in Zustand
       } catch (error) {
         console.error('Error geocoding pickup address:', error);
       }
@@ -274,15 +271,12 @@ const DestinationBox: React.FC<Props> = ({ setPickupCoords, setDropoffCoords }) 
   const handleDropoffChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setDropoffInput(value);
-    console.log('Drop off Input Value:', value);
     if (value.trim()) {
       try {
-        const location = await geocodeAddress(e.target.value);
+        const location = await geocodeAddress(value);
         setDropoffLocalCoords(location); // Update local state
         setDropoffCoords(location); // Update parent component state
-
-        setDropoff(value);
-
+        setDropoff(value); // Store in Zustand
       } catch (error) {
         console.error('Error geocoding dropoff address:', error);
       }
@@ -295,34 +289,32 @@ const DestinationBox: React.FC<Props> = ({ setPickupCoords, setDropoffCoords }) 
     try {
       const pickupLocation = await geocodeAddress(pickupInput);
       const dropoffLocation = await geocodeAddress(dropoffInput);
-
-      setPickupLocalCoords(pickupLocation); // Set pickup coordinates
-      setDropoffLocalCoords(dropoffLocation); // Set dropoff coordinates
-
-      console.log("Locations added");
+      setPickupLocalCoords(pickupLocation);
+      setDropoffLocalCoords(dropoffLocation);
       navigate("/schedule"); // Navigate to the next page after successful form submission
     } catch (error) {
       console.error('Error geocoding addresses:', error);
     } finally {
-      setLoading(false); // Reset loading state after geocoding
+      setLoading(false);
     }
   };
 
   return (
     <div className="destination-container">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} id="destination-form">
         <div id="first-box">
           <div id="location-icons">
-            <FontAwesomeIcon icon={faLocationDot} id="location-icon" aria-label="Pick-up Location" />
-            <FontAwesomeIcon icon={faLocationDot} id="location-icon" aria-label="Drop-off Location" />
+            <img src={pickupMarkerIcon} id="location-icon" aria-label="Pick-up Location" />
+            <img src={dropoffMarkerIcon}  id="location-icon" aria-label="Drop-off Location" />
           </div>
           <div id="second-box">
             <input
+              // label="Pick-up Location"
               type="text"
               name="pickup"
               id="pickup"
               value={pickupInput}
-              onChange={handlePickupChange} // Updates the pickup marker immediately
+              onChange={handlePickupChange}
               placeholder="Pick-up"
             />
             <input
@@ -330,22 +322,24 @@ const DestinationBox: React.FC<Props> = ({ setPickupCoords, setDropoffCoords }) 
               name="dropoff"
               id="dropoff"
               value={dropoffInput}
-              onChange={handleDropoffChange} // Updates the dropoff marker immediately
+              onChange={handleDropoffChange}
               placeholder="Drop-off"
             />
           </div>
           <button
             id="next-btn"
             type="submit"
-            disabled={loading || !pickupInput || !dropoffInput} // Button disabled until both fields are filled and not loading
+            disabled={loading || !pickupInput || !dropoffInput}
           >
             {loading ? 'Loading...' : <FontAwesomeIcon icon={faArrowRightLong} id="next-icon" />}
           </button>
         </div>
       </form>
-      {distance !== null && (
-        <p style={{color: '#d0a816', fontWeight: '500'}}>Distance: {distance.toFixed(2)} km</p> // Display the calculated distance in kilometers
-      )}
+      {/* {distance !== null && (
+        <p id='distance'>
+          Distance: {distance.toFixed(2)} km
+        </p> // Display the calculated distance in kilometers
+      )} */}
     </div>
   );
 };

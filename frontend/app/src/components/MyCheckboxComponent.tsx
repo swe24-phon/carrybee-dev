@@ -8,12 +8,24 @@ function OptionCheckbox() {
   const [urgentChecked, setUrgentChecked] = useState(false);
   const [roundTripChecked, setRoundTripChecked] = useState(false);
 
+  // Prices for each option
+  const insurancePrice = 20;
+  const urgentPrice = 10;
+  const roundTripPrice = 15;
+
+  // Calculate the total price based on checked options
+  const totalPrice = (insuranceChecked ? insurancePrice : 0) +
+                     (urgentChecked ? urgentPrice : 0) +
+                     (roundTripChecked ? roundTripPrice : 0);
+
   const handleInsuranceChange = (event) => {
     setInsuranceChecked(event.target.checked);
   };
+
   const handleUrgentChange = (event) => {
     setUrgentChecked(event.target.checked);
   };
+
   const handleRoundTripChange = (event) => {
     setRoundTripChecked(event.target.checked);
   };
@@ -35,11 +47,11 @@ function OptionCheckbox() {
                 }}
               />
             }
-            label="Insurance"
+            label={`Insurance (+$${insurancePrice})`}
             sx={{
-              '& .MuiTypography-root': { // sx Prop with Typography Target
-                color: '#000000',  // Label color
-                fontSize: '14px',  // Change font size
+              '& .MuiTypography-root': {
+                color: '#000000',
+                fontSize: '14px',
               },
             }}
           />
@@ -56,11 +68,11 @@ function OptionCheckbox() {
                 }}
               />
             }
-            label="Urgent"
+            label={`Urgent (+$${urgentPrice})`}
             sx={{
-              '& .MuiTypography-root': { // sx Prop with Typography Target
-                color: '#000000',  // Label color
-                fontSize: '14px',  // Change font size
+              '& .MuiTypography-root': {
+                color: '#000000',
+                fontSize: '14px',
               },
             }}
           />
@@ -77,14 +89,19 @@ function OptionCheckbox() {
                 }}
               />
             }
-            label="Round-trip"
+            label={`Round-trip (+$${roundTripPrice})`}
             sx={{
-              '& .MuiTypography-root': { // sx Prop with Typography Target
-                color: '#000000',  // Label color
-                fontSize: '14px',  // Change font size
+              '& .MuiTypography-root': {
+                color: '#000000',
+                fontSize: '14px',
               },
             }}
           />
+        </div>
+
+        {/* Display the total price dynamically */}
+        <div id="total-price">
+          <h3>Total Price: ${totalPrice}</h3>
         </div>
       </div>
     </>

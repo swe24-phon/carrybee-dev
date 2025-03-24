@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 // import logo from '../assets/logo.png';
 import '../css/SignIn.css';
 import API from "../api/loginApi";
+import useParcelStore from '../store/parcelStore';
 
 interface Credentials {
   email: string;
@@ -20,6 +21,8 @@ const SignInComponent: React.FC<SignInProps> = ({
   onSignUp,
   onForgotPassword
 }) => {
+
+  const { setUserID } = useParcelStore();
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState<Credentials>({
     email: '',
@@ -38,45 +41,32 @@ const SignInComponent: React.FC<SignInProps> = ({
     e.preventDefault();
 
     try {
-      const response = await API.post("/users/login", {
-        email: credentials.email,
-        password: credentials.password
-      });
+      const response = await API.post("/users/login", credentials);
+      console.log("Full login response:", response.data); // Log full response
 
-      // Assuming the backend sends back a JWT token
-      const { token } = response.data;
+      const { token, user } = response.data;
+      if (!user || !user.id) {
+        throw new Error("User data is missing or invalid");
+      }
 
-      // Save token in localStorage
       localStorage.setItem("token", token);
-
-      // Optionally, store user info if backend sends it
-      localStorage.setItem("user", JSON.stringify(response.data.user));
-
-      // Navigate to homepage
-      navigate("/");
-    } catch (error) {
+      localStorage.setItem("user", JSON.stringify(user));
+      setUserID(user.id);
+      localStorage.setItem("userID", user.id);
+      navigate("/homepage");
+    } catch (error: any) {
       console.error("Login failed:", error.response?.data?.message || error.message);
       alert(error.response?.data?.message || "Invalid credentials. Please try again.");
     }
   };
 
-  // const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
-  //   e.preventDefault();
-  //   // Call the provided onSignIn prop if it exists
-  //   onSignIn?.(credentials);
-  //   // Navigate to homepage after sign in
-  //   navigate('/home');
-  // };
-
   const handleSignUp = (): void => {
     onSignUp?.();
-    // Add navigation to sign up page if needed
     navigate('/signup');
   };
 
   const handleForgotPassword = (): void => {
     onForgotPassword?.();
-    // Add navigation to forgot password page if needed
     navigate('/forgot-password');
   };
 
@@ -98,11 +88,11 @@ const SignInComponent: React.FC<SignInProps> = ({
           <label htmlFor="email">Email:</label>
           <input
             id="email"
-            type="text"
+            type="email"  // Changed from 'text' to 'email'
             name="email"
             value={credentials.email}
             onChange={handleChange}
-            autoComplete="email"
+            autoComplete="off"
           />
         </div>
 
@@ -114,7 +104,7 @@ const SignInComponent: React.FC<SignInProps> = ({
             name="password"
             value={credentials.password}
             onChange={handleChange}
-            autoComplete="current-password"
+            autoComplete="off"
           />
         </div>
 

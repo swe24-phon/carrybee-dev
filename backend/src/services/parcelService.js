@@ -4,42 +4,50 @@ const prisma = require('../../prismaClient');
 // Create Parcel
 const createParcel = async (parcelData) => {
   try {
-    const { item_name, category, quantity, weight, description, user_id } = parcelData;
+    const { 
+      item_name, 
+      category, 
+      quantity, 
+      weight, 
+      description, 
+      user_id, 
+      height, 
+      width, 
+      length 
+    } = parcelData;
 
-    const categoryDimensions = {
-      SMALL: { length: 50, width: 40, height: 50, maxWeight: 20 }, // NSC110 Dio
-      MEDIUM: { length: 210, width: 120, height: 110, maxWeight: 600 }, // Renault Kangoo
-      LARGE: { length: 310, width: 180, height: 180, maxWeight: 1000 }, // Kia K2700
-      EXTRA_LARGE: {length:600 , width:195 , height: 195, maxWeight: 4000 } // Isuzu npr
-    };
-    // Assign default dimensions and max weight based on category
-    const defaultDim  = categoryDimensions[category]
-    if (!defaultDim) {
-      throw new Error('Invalid category selected')
-    }
-    // Check if the provided weight exceeds the maximum weight for this category
-    if (weight > defaultDim.maxWeight) {
-      throw new Error(`Weight exceeds the maximum limit for the ${category} category. Max weight: ${defaultDim.maxWeight} kg`);
-    }
-    // Assign default dimensions depending on the category
-    parcelData.width = defaultDim.width;
-    parcelData.length = defaultDim.length;
-    parcelData.height = defaultDim.height;
 
-    // Create the parcel
+    console.log({
+      data: {
+        item_name,
+        category,
+        quantity,
+        weight,
+        width,
+        length,
+        height,
+        description,
+        user_id,
+      },
+    })
+    if (!item_name || !category || !quantity || !weight || !user_id) {
+      throw new Error('Required parcel data is missing.');
+  }
+
     const newParcel = await prisma.parcel.create({
       data: {
         item_name,
         category,
         quantity,
         weight,
-        width: parcelData.width,
-        length: parcelData.length,
-        height: parcelData.height,
+        width,
+        length,
+        height,
         description,
         user_id,
       },
     });
+
     return { message: 'Parcel created successfully', parcel: newParcel };
   } catch (error) {
     throw new Error('Failed to create parcel: ' + error.message);
@@ -97,7 +105,9 @@ const deleteParcel = async (id) => {
   try {
     await prisma.parcel.delete({ where: { id }});
     return { message: 'Parcel deleted succesfully'};
-  } catch (error) {
+  } 
+  catch (error) {
+    
     throw new Error ('Failed to delete parcel');
   }
 };

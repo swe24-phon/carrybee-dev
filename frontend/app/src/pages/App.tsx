@@ -48,10 +48,12 @@ import SignInComponent from '../components/SignInComponent';
 import Schedule from './Schedule';
 import Form from './Form';
 import Vehicle from './Vehicle';
-import Payment from './Payment';
+import PaymentComponent from '../components/PaymentComponent';
 import Dashboard from './Dashboard';
 import PaymentSuccess from './PaymentSuccess';
 import PaymentError from './PaymentError';
+import SignupComponent from '../components/SignupComponent';
+import PaymentForm from './PaymentForm';
 
 const stripePromise = loadStripe('process.env.STRIPE_PUBLISHABLE_KEY');
 
@@ -62,15 +64,17 @@ const App: React.FC = () => {
       <Elements stripe={stripePromise}>
         <Router>
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/SignIn" element={<SignInComponent />} />
-            <Route path="/Schedule" element={<Schedule />} />
-            <Route path="/Form" element={<Form />} />
-            <Route path="/Vehicle" element={<Vehicle />} />
-            <Route path="/Payment" element={<Payment />} />
-            <Route path="/Dashboard" element={<Dashboard />} />
+            <Route path="/signup" element={<SignupComponent />} />
+            <Route path="/" element={<SignInComponent />} />
+            <Route path="/homepage" element={<HomePage />} />
+            <Route path="/schedule" element={<Schedule />} />
+            <Route path="/form" element={<Form />} />
+            <Route path="/vehicle" element={<Vehicle />} />
+            <Route path="/payment" element={<PaymentComponent />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="/payment-error" element={<PaymentError />} />
+            <Route path="/payment-form" element={<PaymentForm />} />
           </Routes>
         </Router>
       </Elements>
